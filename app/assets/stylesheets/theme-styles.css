@@ -680,10 +680,10 @@ input[type="date"] {
 	cursor: pointer;
 }
 .icheckbox {
-	background: url(forms/checkbox.png) no-repeat 0px 0px;
+	background: url(/images/forms/checkbox.png) no-repeat 0px 0px;
 }
 .iradio {
-	background: url(forms/radio.png) no-repeat 0px 0px;
+	background: url(/images/forms/radio.png) no-repeat 0px 0px;
 }
 .icheckbox.checked,
 .iradio.checked {
@@ -1847,7 +1847,7 @@ img {
 ---------------------------------------------------------*/
 .hero {
 	width: 100%;
-	background: #ff6f69 url(bg-art.png) no-repeat center top;
+	background: #ff6f69 url(/images/bg-art.png) no-repeat center top;
 	padding: 35px 0 0 0;
 }
 .top-navi a {
@@ -2233,7 +2233,7 @@ h3.cs-heading {
 }
 .middle-block {
 	width: 100%;
-	background: #ff6f69 url(bg-art.png) no-repeat top center;
+	background: #ff6f69 url(/images/bg-art.png) no-repeat top center;
 	padding-top: 30px;
 	padding-bottom: 80px;
 }
@@ -2549,7 +2549,7 @@ div.line {
 	top: 50%;
 	left: 50%;
 	margin: -40px 0 0 -40px;
-	background: url(spinner.GIF) no-repeat;
+	background: url(/images/spinner.GIF) no-repeat;
 }
 
 /*Colors Switcher
