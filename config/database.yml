@@ -82,7 +82,10 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
-  database: nanacolumns_production
-  username: nanacolumns
-  password: <%= ENV['NANACOLUMNS_DATABASE_PASSWORD'] %>
+    adapter: postgresql
+    encoding: unicode
+    database: dcta579bk2ou7i
+    username: ghwpmnliuryez
+    password: 5EbEK_07_oBycT0-OqWwvQoqFS
+    host: ec2-23-21-73-32.compute-1.amazonaws.com
+
