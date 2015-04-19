@@ -15,3 +15,7 @@
 //= require turbolinks
 //= require libs/modernizr.custom 
 //= require_tree .
+
+$(function(){
+
+});
