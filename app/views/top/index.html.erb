@@ -1,7 +1,6 @@
 
 <!--Page Preloading-->
 <div id="preloader"><div id="spinner"></div></div>
-
 <!--Navigation-->
 <nav class="side-navi animated">
 	<ul>
@@ -20,57 +19,82 @@
   </ul>
 </nav>
 
-<!--Header (Hero Unit with Slider)-->
-<header class="hero">
-	<div class="container">
-  
-  	<!--Top Navi-->
-  	<div id="top-navi" class="row animated">
-      <div class="col-lg-12">
-        <nav class="top-navi pull-right">
-          <a href="coming-soon.html"><i class="icon-stopwatch"></i>Coming soon</a>
-          <a href="#" data-toggle="modal" data-target="#loginModal"><i class="icon-user"></i>Login</a>
-          <a href="cs-page.html"><i class="icon-paint-format"></i>Components &amp; Styles</a>
-        </nav>
+
+<!--Login Modal-->
+<div class="light-skin modal fade" id="loginModal" tabindex="-1" role="form" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Login here</h4>
       </div>
+      <div class="modal-body">
+        <form class="login-form" role="form">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" placeholder="Enter Username" required>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Enter Password" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!--Header-->
+<header class="stiky-header">
+	<div class="container group">
+  	<a class="logo" href="index.html"><img src="images/logo-dark.png" alt="Ultima"/></a>
+    <a class="logo-mobile" href="index.html"><img src="images/logo-mobile.png" alt="Ultima"/></a>
+    <div class="navi-toggle group">
+    	<span class="dot"></span><span class="line"></span>
+      <span class="dot"></span><span class="line"></span>
+      <span class="dot"></span><span class="line"></span>
+      <span class="dot"></span><span class="line"></span>
     </div>
+    <a class="btn btn-primary btn-login" href="#" data-toggle="modal" data-target="#loginModal"><i class="icon-user"></i>Login</a>
+    <nav class="main-navi">
+    	<ul>
+      	<li class="active"><a class="scroll-up" href="#">Home</a></li>
+        <li class="has-dropdown"><a class="scroll" href="#features">Features<i class="fa fa-caret-down"></i></a>
+        	<ul class="dropdown">
+          	<li><a href="#">Submenu Item</a></li>
+            <li><a href="#">Submenu Item</a></li>
+            <li><a href="#">Submenu Item</a></li>
+            <li><a href="#">Submenu Item</a></li>
+          </ul>
+        </li>
+        <li class="has-dropdown"><a href="coming-soon.html">Coming soon<i class="fa fa-caret-down"></i></a>
+        	<ul class="dropdown">
+          	<li><a href="#">Submenu Item</a></li>
+            <li><a href="#">Submenu Item</a></li>
+            <li><a href="#">Submenu Item</a></li>
+          </ul>
+        </li>
+        <li><a href="cs-page.html">Components &amp; Styles</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
     
-    <!--Login Modal-->
-    <div class="light-skin modal fade" id="loginModal" tabindex="-1" role="form" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Login here</h4>
-          </div>
-          <div class="modal-body">
-            <form class="login-form" role="form">
-              <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" class="form-control" id="username" placeholder="Enter Username" required>
-              </div>
-              <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" placeholder="Enter Password" required>
-              </div>
-              <button type="submit" class="btn btn-primary">Login</button>
-            </form>
-          </div>
-        </div><!-- /.modal-content -->
-      </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-    
-    <!--Hero Slider-->
+
+ <!--Hero Unit with Slider-->
+ <section class="hero">
+ 	<div class="container">
+	<!--Hero Slider-->
     <div class="row">
       <div class="hero-slider">
         <div class="slide first-slide">
-          <div class="col-lg-5 col-md-5 col-sm-5 animated">
-            <img style="margin-top:30px;" class="logo-image" src="/images/logo.png" width="208" height="71" alt="Ultima"/>
-            <p>気持ちや感情はかえなくていい。柔軟な思考だけを手に入れよう。</p>
+          <div class="col-lg-6 col-md-6 col-sm-6 animated">
+            <h3 style="margin-top:50px;" class="text-light text-left">気持ちや感情はかえなくていい。<br />柔軟な思考だけを手に入れよう。</h3>
 
             <a class="btn btn-primary" href="cs-page.html">思考の歪みを診断する</a>
           </div>
-          <div class="col-lg-7 col-md-7 col-sm-7 animated">
+          <div class="col-lg-6 col-md-6 col-sm-6 animated">
             <img class="pull-right" src="/images/hero-slider/baby.png" width="631" height="800" alt="Components and Styles"/>
           </div>
         </div>
@@ -78,8 +102,10 @@
       </div>
     </div><!--Close Hero Slider-->
     
-  </div>    	
-</header><!--Close Header-->
+  </div>  
+ </section>  
+   	
+
 
 <!--Features-->
 <section class="page-block" id="features">
