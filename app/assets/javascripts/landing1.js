@@ -22,7 +22,6 @@ $(document).ready(function(e) {
 	
 	/********Responsive Navigation**********/
 	$('.navi-toggle').on('click',function(){
-		alert("aaaaa");
 		$('.main-navi').toggleClass('open');
 	});
 	
