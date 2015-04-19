@@ -27,7 +27,7 @@ $(document).ready(function(e) {
 		adaptiveHeight: true,
 		controls: false,
 		video: true,
-		touchEnabled: true
+		touchEnabled: false
 	});
 	
 	/*Vertically Center Side Navigation*/
