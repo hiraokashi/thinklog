@@ -1,0 +1,27 @@
+p#notice
+  = notice
+h1
+  | 認知の歪み一覧
+table
+  thead
+    tr
+      th
+        | 質問
+      th
+        | 歪み名
+      th[colspan="3"]
+  tbody
+    - @cognitive_distortions.each do |cognitive_distortion|
+      tr
+        td
+          = cognitive_distortion.question
+        td
+          = cognitive_distortion.name
+        td
+          = link_to 'Show', cognitive_distortion
+        td
+          = link_to 'Edit', edit_cognitive_distortion_path(cognitive_distortion)
+        td
+          = link_to 'Destroy', cognitive_distortion, method: :delete, data: { confirm: 'Are you sure?' }
+br
+= link_to 'New Cognitive distortion', new_cognitive_distortion_path

@@ -1,0 +1,2 @@
+module CognitiveDistortionsHelper
+end

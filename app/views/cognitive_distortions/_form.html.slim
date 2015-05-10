@@ -1,0 +1,20 @@
+= form_for(@cognitive_distortion) do |f|
+  - if @cognitive_distortion.errors.any?
+    #error_explanation
+      h2
+        = pluralize(@cognitive_distortion.errors.count, "error")
+        |  prohibited this cognitive_distortion from being saved:
+      ul
+        - @cognitive_distortion.errors.full_messages.each do |message|
+          li
+            = message
+  .field
+    = f.label :question
+    br
+    = f.text_area :question
+  .field
+    = f.label :name
+    br
+    = f.text_area :name
+  .actions
+    = f.submit

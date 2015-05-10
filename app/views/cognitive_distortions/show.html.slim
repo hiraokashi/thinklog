@@ -1,0 +1,13 @@
+p#notice
+  = notice
+p
+  strong
+    | 質問:
+  = @cognitive_distortion.question
+p
+  strong
+    | 歪み名:
+  = @cognitive_distortion.name
+= link_to 'Edit', edit_cognitive_distortion_path(@cognitive_distortion)
+|  | 
+= link_to 'Back', cognitive_distortions_path

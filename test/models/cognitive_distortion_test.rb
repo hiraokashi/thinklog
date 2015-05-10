@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class CognitiveDiagnosisTest < ActiveSupport::TestCase
+class CognitiveDistortionTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
