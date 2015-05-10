@@ -1,0 +1,2 @@
+class CognitiveDiagnosesController < ApplicationController
+end

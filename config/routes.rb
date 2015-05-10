@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :cognitive_diagnoses
   get 'top/index'
 
   # The priority is based upon order of creation: first created -> highest priority.

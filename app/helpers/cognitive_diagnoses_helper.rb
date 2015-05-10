@@ -1,0 +1,2 @@
+module CognitiveDiagnosesHelper
+end
