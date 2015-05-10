@@ -115,7 +115,7 @@ section.hero
                   | 気持ちや感情はかえなくていい
                 h2.text-light.text-left[style="margin-top:20px;"]
                   | 柔軟な思考だけを手に入れよう
-                a.btn.btn-primary[href="cs-page.html"]
+                a.btn.btn-primary[href="#diagnosis"]
                   i.icon-aid
                   | 思考の歪みを診断する（無料）
                 br
@@ -128,15 +128,18 @@ section.hero
 section#features.page-block
   .container
     - if @cognitive_distortions.size > 0
-      h4
-        | うい
 
-      a.btn.btn-danger[href="#"]
+      blockquote
+        p
+          | 全てが完璧にできないと、私はダメな人間だと思うことがある
+        footer
+          |あ
+      a.btn.btn-default[href="#"]
         i.icon-cancel-circle
-        |違う
-      a.btn.btn-success[href="#"]
+        |いいえ
+      a.btn.btn-default[href="#"]
         i.icon-checkmark
-        |そう思う
+        |はい　
     - else
       h1
         | そんざいしません
