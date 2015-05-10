@@ -124,11 +124,27 @@ section.hero
                   | 柔軟な思考を手に入れる
           .col-lg-6.col-md-6.col-sm-6.animated
             img.pull-right[src="/images/hero-slider/baby.png" width="631" height="800" alt="Components and Styles"]
+/! ここは診断
+section#features.page-block
+  .container
+    - if @cognitive_distortions.size > 0
+      h4
+        | うい
+
+      a.btn.btn-danger[href="#"]
+        i.icon-cancel-circle
+        |違う
+      a.btn.btn-success[href="#"]
+        i.icon-checkmark
+        |そう思う
+    - else
+      h1
+        | そんざいしません
 section#features.page-block
   .container
     .row.page-header
       h3
-        | 生きづらさを感じるすべての人に贈る、メンタルトレーニング・プログラム
+        | 生きづらさを感じるすべての人に贈る、思考トレーニング・プログラム
       span
         | いますぐ体験する（ここはボタンにする）
     .row.features
