@@ -11,23 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150510042012) do
+ActiveRecord::Schema.define(version: 20150516041030) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "coginitive_distortions", force: :cascade do |t|
-    t.text     "question"
-    t.text     "name"
+  create_table "adult_children_traits", force: :cascade do |t|
+    t.text     "contents"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "cognitive_diagnoses", force: :cascade do |t|
-    t.string   "question",        null: false
-    t.string   "distortion_name", null: false
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+  create_table "co_independent_traits", force: :cascade do |t|
+    t.text     "contents"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "cognitive_distortions", force: :cascade do |t|

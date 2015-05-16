@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :co_independent_traits
+  resources :adult_children_traits
   resources :cognitive_distortions
   resources :users
   get 'top/index'

@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Co Independent Traits</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Contents</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @co_independent_traits.each do |co_independent_trait| %>
+      <tr>
+        <td><%= co_independent_trait.contents %></td>
+        <td><%= link_to 'Show', co_independent_trait %></td>
+        <td><%= link_to 'Edit', edit_co_independent_trait_path(co_independent_trait) %></td>
+        <td><%= link_to 'Destroy', co_independent_trait, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Co independent trait', new_co_independent_trait_path %>
