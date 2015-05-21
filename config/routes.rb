@@ -3,13 +3,23 @@ Rails.application.routes.draw do
   resources :adult_children_traits
   resources :cognitive_distortions
   resources :users
-  get 'top/index'
 
+  resource :top do
+    get 'diagnosis_start' => 'top#diagnosis_start'
+    get 'diagnosis/:id/:yes_no' => 'top#diagnosis'
+    #get 'user_policy' => 'top#user_policy'
+    #get 'privacy_policy' => 'top#privacy_policy'
+    #get 'developer_info' => 'top#developer_info'
+    #get 'news' => 'top#news'
+    #get 'about' => 'top#about'
+    #get 'contact' => 'top#contact'
+    #get 'news_by_mail' => 'top#news_by_mail'
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-   root 'top#index'
+  root 'top#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

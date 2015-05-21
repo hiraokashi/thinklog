@@ -38,4 +38,7 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+  #config.log_formatter = ::Logger::Formatter.new
+  Rails.logger = Logger.new(STDOUT)
+  #config.log_level = :debug  # logger.info と logger.debugの内容は出力されない
 end

@@ -4,6 +4,7 @@ class AdultChildrenTraitsController < ApplicationController
   # GET /adult_children_traits
   # GET /adult_children_traits.json
   def index
+    logger.debug("ようこそ！")
     @adult_children_traits = AdultChildrenTrait.all
   end
 
@@ -60,6 +61,7 @@ class AdultChildrenTraitsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

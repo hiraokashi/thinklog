@@ -1,0 +1,20 @@
+= javascript_include_tag 'diagnosis'
+
+.col-lg-12.col-md-12.col-sm-12.animated
+
+  /- if @cognitive_distortions.size > 0
+  .next_question_block
+    blockquote[style="margin-top:50px;"]
+      p
+        = @adult_children_trait.contents
+    a.btn.btn-default.diagnosis_next_question.question_no[href="#" style="margin-top:50px;"]
+      i.icon-cancel-circle
+      |いいえ
+    a.btn.btn-default.diagnosis_next_question.question_yes[href="#" style="margin-top:50px;"]
+      i.icon-checkmark
+      |はい　
+    input#trait_id[type="hidden" value="#{@adult_children_trait.id}"]
+
+  /- else
+  /  h1
+  /    | そんざいしません
