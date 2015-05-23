@@ -1,0 +1,15 @@
+= javascript_include_tag 'diagnosis'
+
+.col-lg-12.col-md-12.col-sm-12.animated
+
+  /- if @cognitive_distortions.size > 0
+  .next_question_block
+    blockquote[style="margin-top:50px;"]
+      p
+        | あなたは思考の歪みをもっていて、生きづらさを感じている可能性があります。
+    a.btn.btn-primary.diagnosis_start[href="#"]
+      i.icon-aid
+      | もう一度診断する
+    a.btn.btn-primary[href="#"]
+      i.icon-warning
+      | 思考の歪みを修正する（工事中）

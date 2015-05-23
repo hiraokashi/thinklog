@@ -1,0 +1,12 @@
+= javascript_include_tag 'diagnosis'
+
+.col-lg-12.col-md-12.col-sm-12.animated
+
+  /- if @cognitive_distortions.size > 0
+  .next_question_block
+    blockquote[style="margin-top:50px;"]
+      p
+        | あなたは生きづらさを感じていないようです。
+    a.btn.btn-primary.diagnosis_start[href="#"]
+      i.icon-aid
+      | もう一度診断する

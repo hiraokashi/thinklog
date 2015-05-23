@@ -25,7 +25,7 @@ $(function(){
       $(".diagnosis_next_question").click(function(){
         //alert("診断しまーす");
         var no_yes = 0
-        if ($(this).attr("class").match(/.+question_yes/)) {
+        if ($(this).hasClass("question_yes")) {
           no_yes = 1
         }
         $("#diagnosis_load").load("top/diagnosis/" + $('#trait_id').val() + "/" + no_yes, function(data) {
