@@ -38,16 +38,16 @@ $(function(){
 
       $(".diagnosis_next_question").click(function(){
         //alert("診断しまーす");
-        $("#diagnosis_load").empty();
-        $("#ajax_preloader").removeClass("fadeInRight").show();
+        var id = $('#trait_id').val();
 
         var no_yes = 0
         if ($(this).hasClass("question_yes")) {
           no_yes = 1
         }
-
+        $("#diagnosis_load").empty();
+        $("#ajax_preloader").removeClass("fadeInRight").show();
         $.ajax({
-          url: "top/diagnosis/" + $('#trait_id').val() + "/" + no_yes,
+          url: "top/diagnosis/" + id + "/" + no_yes,
           type:'GET',
           dataType: 'html',
           timeout:10000,

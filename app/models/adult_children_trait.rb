@@ -8,7 +8,7 @@ class AdultChildrenTrait < ActiveRecord::Base
     candidates.delete_if { |x| question_list.include?(x) }
     logger.debug("候補:" + candidates.to_s)
     next_id = candidates.sample
-    logger.debug("次の質問:" + question_list.to_s)
+    logger.debug("次の質問:" + next_id.to_s)
     find(next_id)
   end
 

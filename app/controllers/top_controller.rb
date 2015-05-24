@@ -11,10 +11,7 @@ class TopController < ApplicationController
     session[remote_ip] = {}
     session[remote_ip]['question_list'] = []
 
-    logger.debug('nilではありまえん') unless session[remote_ip]['question_list'].nil?
-
     @adult_children_trait = AdultChildrenTrait.next_question(session[remote_ip]['question_list'])
-    session[remote_ip]['question_list'].push(@adult_children_trait.id)
     render 'diagnosis', layout: false # レイアウトをなしにする場合
   end
 
@@ -33,14 +30,15 @@ class TopController < ApplicationController
 
       if params[:yes_no].to_i == 1
         logger.debug('yeボタンがおされました')
-        session[remote_ip]['question_yes_ids'].push(params[:id])
+        session[remote_ip]['question_yes_ids'].push(params[:id].to_i)
       end
 
+      session[remote_ip]['question_list'].push(params[:id].to_i)
+
       # 終了判断による分岐
-      if AdultChildrenTrait.is_finish_diagnosis(session[remote_ip]['question_list'], session[remote_ip]['question_yes_ids']) == false
-        # 次の質問
+      if AdultChildrenTrait.is_finish_diagnosis(session[remote_ip]['question_list'], session[remote_ip]['question_yes_ids']) == false        # 次の質問
         @adult_children_trait = AdultChildrenTrait.next_question(session[remote_ip]['question_list'])
-        session[remote_ip]['question_list'].push(params[:id])
+
         logger.debug('質問実行数：' + session[remote_ip]['question_list'].size.to_s)
         # TODO: 診断がおわったらセッションを消す
         render 'diagnosis', layout: false # レイアウトをなしにする場合
