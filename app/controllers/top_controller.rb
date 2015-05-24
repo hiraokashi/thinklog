@@ -14,7 +14,7 @@ class TopController < ApplicationController
 
     logger.debug('nilではありまえん') unless session[remote_ip]['question_list'].nil?
 
-    @adult_children_trait = AdultChildrenTrait.find(1)
+    @adult_children_trait = AdultChildrenTrait.next_question(session[remote_ip]['question_list'])
     session[remote_ip]['question_list'].push(@adult_children_trait.id)
     render 'diagnosis', layout: false # レイアウトをなしにする場合
   end

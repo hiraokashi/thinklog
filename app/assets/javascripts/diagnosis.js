@@ -15,22 +15,54 @@ $(function(){
 
       $(".diagnosis_start").click(function(){
         //alert("診断しまーす");
-        $("#diagnosis_load").load("top/diagnosis_start", function(data) {
-          //code something proc after complete
-          //alert(data)
+        $("#diagnosis_load").html('<div class="col-lg-12 col-md-12 col-sm-12 animated"><blockquote style="margin-top:50px;"><img src="images/ajax-preloader.gif"/></blockquote></div>');
+
+        $.ajax({
+          url: 'top/diagnosis_start',
+          type:'GET',
+          dataType: 'html',
+          timeout:10000,
+          success: function(data) {
+                       //alert("ok");
+                       $("#diagnosis_load").html(data);
+                   },
+          error: function(data) {
+                       alert("診断画面のロードに失敗しました");
+                 },
+          complete : function(data) {
+
+                      //$("#loading").html("<p>通信終了</p>");
+                 }
         });
         return false;
       });
 
       $(".diagnosis_next_question").click(function(){
         //alert("診断しまーす");
+
+        $("#diagnosis_load").html('<div class="col-lg-12 col-md-12 col-sm-12 animated"><blockquote style="margin-top:50px;"><img src="images/ajax-preloader.gif"/></blockquote></div>');
+
         var no_yes = 0
         if ($(this).hasClass("question_yes")) {
           no_yes = 1
         }
-        $("#diagnosis_load").load("top/diagnosis/" + $('#trait_id').val() + "/" + no_yes, function(data) {
-          //code something proc after complete
-          //alert(data)
+
+        $.ajax({
+          url: "top/diagnosis/" + $('#trait_id').val() + "/" + no_yes,
+          type:'GET',
+          dataType: 'html',
+          timeout:10000,
+          success: function(data) {
+                       //alert("ok");
+                       $("#diagnosis_load").html(data);
+                   },
+          error: function(data) {
+                       alert("診断画面のロードに失敗しました");
+                 },
+          complete : function(data) {
+
+                      //$("#loading").html("<p>通信終了</p>");
+                 }
         });
         return false;
       });
