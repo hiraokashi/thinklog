@@ -13,9 +13,13 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require libs/modernizr.custom 
+//= require libs/modernizr.custom
 //= require_tree .
 
-$(function(){
-
+$(function() {
+  //type="range"要素に対して適応
+  $('input[type="range"]').rangeslider();
+  $('#unko').click(function(){
+    alert($(this).val())
+  });
 });

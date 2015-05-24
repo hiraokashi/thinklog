@@ -131,22 +131,7 @@ section.hero
 /! ここは診断
 section#features.page-block
   .container
-    - if @cognitive_distortions.size > 0
-
-      blockquote
-        p
-          | 全てが完璧にできないと、私はダメな人間だと思うことがある
-        footer
-          |あ
-      a.btn.btn-default[href="#"]
-        i.icon-cancel-circle
-        |いいえ
-      a.btn.btn-default[href="#"]
-        i.icon-checkmark
-        |はい　
-    - else
-      h1
-        | そんざいしません
+    input#unko[type="range" min="10" max="1000" step="10" value="300"]
 section#features.page-block
   .container
     .link_resorces
