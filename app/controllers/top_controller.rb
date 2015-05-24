@@ -6,7 +6,6 @@ class TopController < ApplicationController
 
   def diagnosis_start
     logger.debug('診断しまーす')
-
     # TODO: ランダムな質問にする　でX 門答えたら回答を出すようにする。
     remote_ip = request.env['HTTP_X_FORWARDED_FOR'] || request.remote_ip
     session[remote_ip] = {}

@@ -14,8 +14,9 @@
 $(function(){
 
       $(".diagnosis_start").click(function(){
-        //alert("診断しまーす");
-        $("#diagnosis_load").html('<div class="col-lg-12 col-md-12 col-sm-12 animated"><blockquote style="margin-top:50px;"><img src="images/ajax-preloader.gif"/></blockquote></div>');
+        //alert("診断しまーす")
+        $("#diagnosis_load").empty();
+        $("#ajax_preloader").removeClass("fadeInRight").show();
 
         $.ajax({
           url: 'top/diagnosis_start',
@@ -23,15 +24,13 @@ $(function(){
           dataType: 'html',
           timeout:10000,
           success: function(data) {
-                       //alert("ok");
                        $("#diagnosis_load").html(data);
                    },
           error: function(data) {
                        alert("診断画面のロードに失敗しました");
                  },
           complete : function(data) {
-
-                      //$("#loading").html("<p>通信終了</p>");
+                      $("#ajax_preloader").hide();
                  }
         });
         return false;
@@ -39,8 +38,8 @@ $(function(){
 
       $(".diagnosis_next_question").click(function(){
         //alert("診断しまーす");
-
-        $("#diagnosis_load").html('<div class="col-lg-12 col-md-12 col-sm-12 animated"><blockquote style="margin-top:50px;"><img src="images/ajax-preloader.gif"/></blockquote></div>');
+        $("#diagnosis_load").empty();
+        $("#ajax_preloader").removeClass("fadeInRight").show();
 
         var no_yes = 0
         if ($(this).hasClass("question_yes")) {
@@ -53,15 +52,13 @@ $(function(){
           dataType: 'html',
           timeout:10000,
           success: function(data) {
-                       //alert("ok");
                        $("#diagnosis_load").html(data);
                    },
           error: function(data) {
                        alert("診断画面のロードに失敗しました");
                  },
           complete : function(data) {
-
-                      //$("#loading").html("<p>通信終了</p>");
+                      $("#ajax_preloader").hide();
                  }
         });
         return false;
