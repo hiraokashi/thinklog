@@ -1,5 +1,4 @@
 #conding: utf-8
-puts "create CoIndependentTrait"
 
 
 CoIndependentTrait.create(:contents=>"自らを犠牲にして、相手を助けたり世話をしたりする") unless CoIndependentTrait.exists?(:id =>1)

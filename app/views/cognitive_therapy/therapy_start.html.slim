@@ -1,0 +1,181 @@
+section#wizard.page-block
+  .container
+
+    .row
+      .col-lg-12
+        .wizard
+          .header
+            h3
+              | ステップ1:自動思考に気づこう
+            .progress-bar.group
+              .overlay
+              .line
+              a.step-link.left.current[href="#step01" data-toggle="tab"]
+                span.status
+              a.step-link.middle[href="#step02" data-toggle="tab"]
+                span.status
+              a.step-link.right[href="#step03" data-toggle="tab"]
+                span.status
+          form#wizard-form.wizard-form.body[method="post" role="form"]
+            #step01.wizard-step.fade.in.active
+              .tab-links-wrap
+                .overlay
+                .row.tab-links
+                  .tab-link.active.col-lg-4.col-md-4.col-sm-4.col-xs-4
+                    a[href="#contact" data-toggle="tab"]
+                      i.fa.fa-user
+                      span
+                        | 状況
+                  .tab-link.col-lg-4.col-md-4.col-sm-4.col-xs-4
+                    a[href="#background" data-toggle="tab"]
+                      i.fa.fa-suitcase
+                      span
+                        | 気分
+                  .tab-link.col-lg-4.col-md-4.col-sm-4.col-xs-4
+                    a[href="#id" data-toggle="tab"]
+                      i.fa.fa-check-circle-o
+                      span
+                        | 自動思考
+              .tabs
+                #contact.tab.row.fade.in.active
+                  .col-lg-12
+                    .row
+                      col-lg-12.col-md-12.col-sm-12
+                        p
+                          | 気持ちがつらくなった時の状況を書き込もう
+                    .row
+                      .col-lg-6.col-md-6.col-sm-6.form-group
+                        label[for="name"]
+                          | いつ？
+                        input#name.form-control[type="text" name="name" placeholder="Enter your name" required]
+                      .col-lg-6.col-md-6.col-sm-6.form-group
+                        label[for="email"]
+                          | どこで？
+                        input#email.form-control[type="text" name="email" placeholder="Enter your email" required]
+                    .row
+                      .col-lg-6.col-md-6.col-sm-6.form-group
+                        label[for="adress"]
+                          | だれと？
+                        input#adress.form-control[type="text" name="adress" placeholder="Enter your adress"]
+                      .col-lg-6.col-md-6.col-sm-6.form-group
+                        label[for="phone"]
+                          | 何をしていたとき？
+                        input#phone.form-control[type="text" name="name" placeholder="Enter your phone"]
+                #background.tab.row.fade
+                  .col-lg-12
+                    .row
+                      .col-lg-6.col-md-6.col-sm-6.form-group
+                        label[for="education"]
+                          | Educational background
+                        textarea#education.form-control[name="education" rows="8" placeholder="Describe your educational background"]
+                      .col-lg-6.col-md-6.col-sm-6.form-group
+                        label[for="profession"]
+                          | Professional background
+                        textarea#profession.form-control[name="profession" rows="8" placeholder="Describe your professional background"]
+                #id.tab.row.fade
+                  .col-lg-12
+                    .row
+                      .col-lg-6.col-md-6.col-sm-6.form-group
+                        label[for="security"]
+                          | Social security no (required numbers only)
+                        input#security.form-control[type="text" name="security" placeholder="Enter social security no" required]
+                    .row
+                      .col-lg-6.col-md-6.col-sm-6.form-group
+                        label[for="exp_date"]
+                          | ID expiry date
+                        input#exp_date.form-control[type="text" name="exp_date" placeholder="Enter ID expiry date"]
+            #step02.wizard-step.fade
+              .tab-links-wrap
+                .overlay
+                .row.tab-links
+                  .tab-link.active.col-lg-6.col-md-6.col-sm-6.col-xs-6
+                    a[href="#tab01" data-toggle="tab"]
+                      i.fa.fa-anchor
+                      | Tab 01
+                  .tab-link.col-lg-6.col-md-6.col-sm-6.col-xs-6
+                    a[href="#tab02" data-toggle="tab"]
+                      i.fa.fa-anchor
+                      | Tab 02
+              .tabs
+                #tab01.tab.row.fade.in.active
+                  .col-lg-12
+                    .row
+                      .form-group.col-lg-6.col-md-6.col-sm-6
+                        label[for="field01"]
+                          | Field 01
+                        input#field01.form-control[type="text" name="field01" placeholder="Placeholder"]
+                      .form-group.col-lg-6.col-md-6.col-sm-6
+                        label[for="field02"]
+                          | Field 02
+                        input#field02.form-control[type="text" name="field02" placeholder="Placeholder"]
+                    .row
+                      .col-lg-12.col-md-12.col-sm-12.form-group
+                        label[for="textarea01"]
+                          | Textarea (required)
+                        textarea#textarea01.form-control[name="textarea01" rows="8" placeholder="Placeholder" required]
+                #tab02.tab.row.fade
+                  .col-lg-12
+                    .row
+                      .col-lg-6.col-md-6.col-sm-6
+                        .form-group
+                          label[for="field03"]
+                            | Field 03
+                          input#field03.form-control[type="text" name="field03" placeholder="Placeholder"]
+                        .form-group
+                          label[for="field04"]
+                            | Field 04
+                          input#field04.form-control[type="text" name="field04" placeholder="Placeholder"]
+                      .row
+                        .col-lg-6.col-md-6.col-sm-6.form-group
+                          label[for="textarea02"]
+                            | Textarea
+                          textarea#textarea02.form-control[name="textarea02" rows="8" placeholder="Placeholder"]
+            #step03.wizard-step.fade
+              .tab-links-wrap
+                .overlay
+                .row.tab-links
+                  .tab-link.active.col-lg-6.col-md-6.col-sm-6.col-xs-6
+                    a[href="#tab03" data-toggle="tab"]
+                      i.fa.fa-anchor
+                      | Tab 03
+                  .tab-link.col-lg-6.col-md-6.col-sm-6.col-xs-6
+                    a[href="#tab04" data-toggle="tab"]
+                      i.fa.fa-anchor
+                      | Tab 04
+              .tabs
+                #tab03.tab.row.fade.in.active
+                  .col-lg-12
+                    .row
+                      .col-lg-6.col-md-6.col-sm-6
+                        .form-group
+                          label[for="field05"]
+                            | Field 05
+                          input#field05.form-control[type="text" name="field05" placeholder="Placeholder"]
+                        .form-group
+                          label[for="field06"]
+                            | Field 06
+                          input#field06.form-control[type="text" name="field06" placeholder="Placeholder"]
+                #tab04.tab.row.fade
+                  .col-lg-12
+                    .row
+                      .col-lg-6.col-md-6.col-sm-6
+                        .form-group
+                          label[for="field07"]
+                            | Field 07
+                          input#field07.form-control[type="text" name="field07" placeholder="Placeholder"]
+                        .form-group
+                          label[for="field08"]
+                            | Field 08
+                          input#field08.form-control[type="text" name="field08" placeholder="Placeholder"]
+                      .row
+                        .col-lg-6.col-md-6.col-sm-6.form-group
+                          label[for="textarea03"]
+                            | Textarea03
+                          textarea#textarea03.form-control[name="textarea03" rows="8" placeholder="Placeholder"]
+            .wizard-footer.group
+              .buttons
+                a.btn.btn-primary.prev-tab.hidden[href="#"]
+                  | Back
+                a.btn.btn-primary.next-tab[href="#"]
+                  | Continue
+                input#submit-wizard.btn.btn-primary.hidden[type="submit" value="Submit form"]

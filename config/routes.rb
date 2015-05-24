@@ -1,8 +1,14 @@
 Rails.application.routes.draw do
+  resources :feelings
+  resources :feelings
   resources :co_independent_traits
   resources :adult_children_traits
   resources :cognitive_distortions
   resources :users
+
+  resource :cognitive_therapy do
+    get 'therapy_start/:id' => 'cognitive_therapy#therapy_start'
+  end
 
   resource :top do
     get 'diagnosis_start' => 'top#diagnosis_start'

@@ -11,26 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150516041030) do
+ActiveRecord::Schema.define(version: 20150524081417) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "adult_children_traits", force: :cascade do |t|
-    t.text     "contents"
+    t.text     "contents",   null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "co_independent_traits", force: :cascade do |t|
-    t.text     "contents"
+    t.text     "contents",   null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "cognitive_distortions", force: :cascade do |t|
     t.text     "question"
-    t.text     "name"
+    t.text     "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -40,6 +40,12 @@ ActiveRecord::Schema.define(version: 20150516041030) do
     t.string   "example_contents",       null: false
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+  end
+
+  create_table "feelings", force: :cascade do |t|
+    t.text     "contents",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
