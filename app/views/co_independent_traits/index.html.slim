@@ -1,0 +1,23 @@
+p#notice
+  = notice
+h1
+  | Listing Co Independent Traits
+table
+  thead
+    tr
+      th
+        | Contents
+      th[colspan="3"]
+  tbody
+    - @co_independent_traits.each do |co_independent_trait|
+      tr
+        td
+          = co_independent_trait.contents
+        td
+          = link_to 'Show', co_independent_trait
+        td
+          = link_to 'Edit', edit_co_independent_trait_path(co_independent_trait)
+        td
+          = link_to 'Destroy', co_independent_trait, method: :delete, data: { confirm: 'Are you sure?' }
+br
+= link_to 'New Co independent trait', new_co_independent_trait_path

@@ -1,0 +1,9 @@
+p#notice
+  = notice
+p
+  strong
+    | Contents:
+  = @adult_children_trait.contents
+= link_to 'Edit', edit_adult_children_trait_path(@adult_children_trait)
+|  | 
+= link_to 'Back', adult_children_traits_path

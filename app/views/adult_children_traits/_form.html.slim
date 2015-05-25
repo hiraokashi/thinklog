@@ -1,0 +1,16 @@
+= form_for(@adult_children_trait) do |f|
+  - if @adult_children_trait.errors.any?
+    #error_explanation
+      h2
+        = pluralize(@adult_children_trait.errors.count, "error")
+        |  prohibited this adult_children_trait from being saved:
+      ul
+        - @adult_children_trait.errors.full_messages.each do |message|
+          li
+            = message
+  .field
+    = f.label :contents
+    br
+    = f.text_area :contents
+  .actions
+    = f.submit

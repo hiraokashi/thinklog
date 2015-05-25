@@ -1,0 +1,23 @@
+p#notice
+  = notice
+h1
+  | Listing Adult Children Traits
+table
+  thead
+    tr
+      th
+        | Contents
+      th[colspan="3"]
+  tbody
+    - @adult_children_traits.each do |adult_children_trait|
+      tr
+        td
+          = adult_children_trait.contents
+        td
+          = link_to 'Show', adult_children_trait
+        td
+          = link_to 'Edit', edit_adult_children_trait_path(adult_children_trait)
+        td
+          = link_to 'Destroy', adult_children_trait, method: :delete, data: { confirm: 'Are you sure?' }
+br
+= link_to 'New Adult children trait', new_adult_children_trait_path
