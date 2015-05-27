@@ -71,11 +71,14 @@ section#wizard.page-block
                       .col-lg-12.col-md-12.col-sm-12.form-group
                         - @feelings.each do |feeling|
                           .row
+                            .col-lg-6.col-md-6.col-sm-6.feeling_name
+                              span
+                                label[for="education"]
+                                  = feeling.contents
+                              span.feeling_percentage
+                                | unko
                             .col-lg-6.col-md-6.col-sm-6
-                              label[for="education"]
-                                = feeling.contents
-                            .col-lg-6.col-md-6.col-sm-6
-                              input#unko[type="range" min="0" max="100" step="1" value="0"]
+                              input.feeling[type="range" min="0" max="100" step="1" value="0"]
 
                 #id.tab.row.fade
                   .col-lg-12
