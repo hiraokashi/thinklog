@@ -1,0 +1,27 @@
+p#notice
+  = notice
+h1
+  | Listing Distortion Patterns
+table
+  thead
+    tr
+      th
+        | Cognitive distortion
+      th
+        | Distortion pattern
+      th[colspan="3"]
+  tbody
+    - @distortion_patterns.each do |distortion_pattern|
+      tr
+        td
+          = distortion_pattern.cognitive_distortion
+        td
+          = distortion_pattern.distortion_pattern
+        td
+          = link_to 'Show', distortion_pattern
+        td
+          = link_to 'Edit', edit_distortion_pattern_path(distortion_pattern)
+        td
+          = link_to 'Destroy', distortion_pattern, method: :delete, data: { confirm: 'Are you sure?' }
+br
+= link_to 'New Distortion pattern', new_distortion_pattern_path

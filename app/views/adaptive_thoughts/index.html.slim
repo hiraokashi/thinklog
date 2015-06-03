@@ -1,0 +1,27 @@
+p#notice
+  = notice
+h1
+  | Listing Adaptive Thoughts
+table
+  thead
+    tr
+      th
+        | Contents
+      th
+        | Automatic thought
+      th[colspan="3"]
+  tbody
+    - @adaptive_thoughts.each do |adaptive_thought|
+      tr
+        td
+          = adaptive_thought.contents
+        td
+          = adaptive_thought.automatic_thought
+        td
+          = link_to 'Show', adaptive_thought
+        td
+          = link_to 'Edit', edit_adaptive_thought_path(adaptive_thought)
+        td
+          = link_to 'Destroy', adaptive_thought, method: :delete, data: { confirm: 'Are you sure?' }
+br
+= link_to 'New Adaptive thought', new_adaptive_thought_path

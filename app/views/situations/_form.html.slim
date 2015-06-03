@@ -1,0 +1,32 @@
+= form_for(@situation) do |f|
+  - if @situation.errors.any?
+    #error_explanation
+      h2
+        = pluralize(@situation.errors.count, "error")
+        |  prohibited this situation from being saved:
+      ul
+        - @situation.errors.full_messages.each do |message|
+          li
+            = message
+  .field
+    = f.label :when
+    br
+    = f.text_area :when
+  .field
+    = f.label :where
+    br
+    = f.text_area :where
+  .field
+    = f.label :with_whom
+    br
+    = f.text_field :with_whom
+  .field
+    = f.label :what_have_you_been_doing
+    br
+    = f.text_area :what_have_you_been_doing
+  .field
+    = f.label :user_id
+    br
+    = f.text_field :user_id
+  .actions
+    = f.submit

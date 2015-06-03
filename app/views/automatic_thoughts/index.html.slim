@@ -1,0 +1,27 @@
+p#notice
+  = notice
+h1
+  | Listing Automatic Thoughts
+table
+  thead
+    tr
+      th
+        | Contents
+      th
+        | Given time feeling
+      th[colspan="3"]
+  tbody
+    - @automatic_thoughts.each do |automatic_thought|
+      tr
+        td
+          = automatic_thought.contents
+        td
+          = automatic_thought.given_time_feeling
+        td
+          = link_to 'Show', automatic_thought
+        td
+          = link_to 'Edit', edit_automatic_thought_path(automatic_thought)
+        td
+          = link_to 'Destroy', automatic_thought, method: :delete, data: { confirm: 'Are you sure?' }
+br
+= link_to 'New Automatic thought', new_automatic_thought_path

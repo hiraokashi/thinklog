@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  when: MyText
+  where: MyText
+  with_whom: MyString
+  what_have_you_been_doing: MyText
+  user_id: 
+
+two:
+  when: MyText
+  where: MyText
+  with_whom: MyString
+  what_have_you_been_doing: MyText
+  user_id: 

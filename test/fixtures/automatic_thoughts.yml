@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  contents: MyText
+  given_time_feeling_id: 
+
+two:
+  contents: MyText
+  given_time_feeling_id: 

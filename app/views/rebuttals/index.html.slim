@@ -1,0 +1,27 @@
+p#notice
+  = notice
+h1
+  | Listing Rebuttals
+table
+  thead
+    tr
+      th
+        | Contents
+      th
+        | Automatic thought
+      th[colspan="3"]
+  tbody
+    - @rebuttals.each do |rebuttal|
+      tr
+        td
+          = rebuttal.contents
+        td
+          = rebuttal.automatic_thought
+        td
+          = link_to 'Show', rebuttal
+        td
+          = link_to 'Edit', edit_rebuttal_path(rebuttal)
+        td
+          = link_to 'Destroy', rebuttal, method: :delete, data: { confirm: 'Are you sure?' }
+br
+= link_to 'New Rebuttal', new_rebuttal_path

@@ -1,0 +1,13 @@
+p#notice
+  = notice
+p
+  strong
+    | Contents:
+  = @adaptive_thought.contents
+p
+  strong
+    | Automatic thought:
+  = @adaptive_thought.automatic_thought
+= link_to 'Edit', edit_adaptive_thought_path(@adaptive_thought)
+|  | 
+= link_to 'Back', adaptive_thoughts_path

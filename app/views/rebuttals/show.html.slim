@@ -1,0 +1,13 @@
+p#notice
+  = notice
+p
+  strong
+    | Contents:
+  = @rebuttal.contents
+p
+  strong
+    | Automatic thought:
+  = @rebuttal.automatic_thought
+= link_to 'Edit', edit_rebuttal_path(@rebuttal)
+|  | 
+= link_to 'Back', rebuttals_path

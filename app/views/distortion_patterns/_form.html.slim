@@ -1,0 +1,20 @@
+= form_for(@distortion_pattern) do |f|
+  - if @distortion_pattern.errors.any?
+    #error_explanation
+      h2
+        = pluralize(@distortion_pattern.errors.count, "error")
+        |  prohibited this distortion_pattern from being saved:
+      ul
+        - @distortion_pattern.errors.full_messages.each do |message|
+          li
+            = message
+  .field
+    = f.label :cognitive_distortion_id
+    br
+    = f.text_field :cognitive_distortion_id
+  .field
+    = f.label :distortion_pattern
+    br
+    = f.text_field :distortion_pattern
+  .actions
+    = f.submit

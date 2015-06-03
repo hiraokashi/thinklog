@@ -1,0 +1,13 @@
+p#notice
+  = notice
+p
+  strong
+    | Contents:
+  = @automatic_thought.contents
+p
+  strong
+    | Given time feeling:
+  = @automatic_thought.given_time_feeling
+= link_to 'Edit', edit_automatic_thought_path(@automatic_thought)
+|  | 
+= link_to 'Back', automatic_thoughts_path

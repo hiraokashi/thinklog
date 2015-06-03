@@ -1,0 +1,13 @@
+p#notice
+  = notice
+p
+  strong
+    | Feeling:
+  = @given_time_feeling.feeling
+p
+  strong
+    | Situation:
+  = @given_time_feeling.situation
+= link_to 'Edit', edit_given_time_feeling_path(@given_time_feeling)
+|  | 
+= link_to 'Back', given_time_feelings_path

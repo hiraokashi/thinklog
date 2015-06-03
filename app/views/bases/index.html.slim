@@ -1,0 +1,27 @@
+p#notice
+  = notice
+h1
+  | Listing Bases
+table
+  thead
+    tr
+      th
+        | Contents
+      th
+        | Automatic thought
+      th[colspan="3"]
+  tbody
+    - @bases.each do |basis|
+      tr
+        td
+          = basis.contents
+        td
+          = basis.automatic_thought
+        td
+          = link_to 'Show', basis
+        td
+          = link_to 'Edit', edit_basis_path(basis)
+        td
+          = link_to 'Destroy', basis, method: :delete, data: { confirm: 'Are you sure?' }
+br
+= link_to 'New Basis', new_basis_path

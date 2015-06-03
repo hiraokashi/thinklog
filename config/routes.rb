@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  resources :adaptive_thoughts
+  resources :rebuttals
+  resources :rebuttals
+  resources :bases
+  resources :automatic_thoughts
+  resources :distortion_patterns
+  resources :given_time_feelings
+  resources :situations
   resources :feelings
   resources :feelings
   resources :co_independent_traits
