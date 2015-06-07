@@ -19,7 +19,7 @@ p
 p
   strong
     | User:
-  = @situation.user
+  = @situation.user.name
 = link_to 'Edit', edit_situation_path(@situation)
-|  | 
+|  |
 = link_to 'Back', situations_path

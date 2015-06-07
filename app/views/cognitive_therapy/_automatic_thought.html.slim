@@ -1,0 +1,6 @@
+.row
+  .col-lg-12.col-md-12.col-sm-12.feeling_name
+    .form-group
+      a.btn.btn-danger
+        = given_time_feeling.feeling.contents
+      input.automatic_thought.form-control[type="text" name="automatic_thought[#{given_time_feeling.id}]" value=given_time_feeling.automatic_thought.contents]

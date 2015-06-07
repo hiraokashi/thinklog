@@ -3,11 +3,11 @@ p#notice
 p
   strong
     | Cognitive distortion:
-  = @distortion_pattern.cognitive_distortion
+  = @distortion_pattern.cognitive_distortion.name
 p
   strong
-    | Distortion pattern:
-  = @distortion_pattern.distortion_pattern
+    |  Automatic Thought:
+  = @distortion_pattern.automatic_thought.contents
 = link_to 'Edit', edit_distortion_pattern_path(@distortion_pattern)
-|  | 
+|  |
 = link_to 'Back', distortion_patterns_path

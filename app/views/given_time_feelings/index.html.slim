@@ -14,9 +14,9 @@ table
     - @given_time_feelings.each do |given_time_feeling|
       tr
         td
-          = given_time_feeling.feeling
+          = given_time_feeling.feeling.contents
         td
-          = given_time_feeling.situation
+          = given_time_feeling.situation.when
         td
           = link_to 'Show', given_time_feeling
         td

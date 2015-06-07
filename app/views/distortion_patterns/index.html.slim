@@ -14,9 +14,9 @@ table
     - @distortion_patterns.each do |distortion_pattern|
       tr
         td
-          = distortion_pattern.cognitive_distortion
+          = distortion_pattern.cognitive_distortion.name
         td
-          = distortion_pattern.distortion_pattern
+          = distortion_pattern.automatic_thought.contents
         td
           = link_to 'Show', distortion_pattern
         td

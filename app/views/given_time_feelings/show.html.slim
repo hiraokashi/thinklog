@@ -1,13 +1,24 @@
 p#notice
   = notice
+
+p
+  strong
+    | Before Percentage:
+  = @given_time_feeling.before_percentage
+
+p
+  strong
+    | After Percentage:
+  = @given_time_feeling.after_percentage
+
 p
   strong
     | Feeling:
-  = @given_time_feeling.feeling
+  = @given_time_feeling.feeling.contents
 p
   strong
     | Situation:
-  = @given_time_feeling.situation
+  = @given_time_feeling.situation.when
 = link_to 'Edit', edit_given_time_feeling_path(@given_time_feeling)
-|  | 
+|  |
 = link_to 'Back', given_time_feelings_path

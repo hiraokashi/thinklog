@@ -1,0 +1,7 @@
+.row
+  .col-lg-12.col-md-12.col-sm-12.feeling_name
+    .form-group
+      a.btn.btn-danger.btn-lg.btn-block
+        = given_time_feeling.feeling.contents
+        input.feeling[type="range" name="feelings_before[#{given_time_feeling.feeling.id}]" min="0" max="100" step="1" value="0"]
+        input[type="hidden" name="given_time_feeling_id" value=given_time_feeling.id]

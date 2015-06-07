@@ -3,7 +3,7 @@ class CreateSituations < ActiveRecord::Migration
     create_table :situations do |t|
       t.text :when
       t.text :where
-      t.string :with_whom
+      t.text :with_whom
       t.text :what_have_you_been_doing
       t.references :user, index: true, foreign_key: true
 

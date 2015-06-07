@@ -7,7 +7,7 @@ p
 p
   strong
     | Given time feeling:
-  = @automatic_thought.given_time_feeling
+  = @automatic_thought.given_time_feeling.feeling.contents
 = link_to 'Edit', edit_automatic_thought_path(@automatic_thought)
-|  | 
+|  |
 = link_to 'Back', automatic_thoughts_path

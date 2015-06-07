@@ -19,13 +19,5 @@
 $(function() {
   //type="range"要素に対して適応
   //alert('unko')
-  $('.feeling').each(function() {
-    $(this).parent().parent().children().eq(0).children().eq(1).text($(this).val() + ' %')
-    //$(this).parent().children().eq(1).text($(this).val() + ' %')
-  });
 
-  $('input[type="range"]').rangeslider();
-  $('.feeling').click(function() {
-    $(this).parent().parent().children().eq(0).children().eq(1).text($(this).val() + ' %')
-  });
 });

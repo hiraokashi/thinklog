@@ -57,9 +57,11 @@ ActiveRecord::Schema.define(version: 20150603144746) do
 
   create_table "cognitive_distortions", force: :cascade do |t|
     t.text     "question"
-    t.text     "name",       null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.text     "name",        null: false
+    t.text     "discription"
+    t.text     "example"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "distortion_examples", force: :cascade do |t|
@@ -71,11 +73,12 @@ ActiveRecord::Schema.define(version: 20150603144746) do
 
   create_table "distortion_patterns", force: :cascade do |t|
     t.integer  "cognitive_distortion_id"
-    t.string   "distortion_pattern"
+    t.integer  "automatic_thought_id"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end
 
+  add_index "distortion_patterns", ["automatic_thought_id"], name: "index_distortion_patterns_on_automatic_thought_id", using: :btree
   add_index "distortion_patterns", ["cognitive_distortion_id"], name: "index_distortion_patterns_on_cognitive_distortion_id", using: :btree
 
   create_table "feelings", force: :cascade do |t|
@@ -87,8 +90,10 @@ ActiveRecord::Schema.define(version: 20150603144746) do
   create_table "given_time_feelings", force: :cascade do |t|
     t.integer  "feeling_id"
     t.integer  "situation_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.integer  "before_percentage"
+    t.integer  "after_percentage"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
   end
 
   add_index "given_time_feelings", ["feeling_id"], name: "index_given_time_feelings_on_feeling_id", using: :btree
@@ -106,7 +111,7 @@ ActiveRecord::Schema.define(version: 20150603144746) do
   create_table "situations", force: :cascade do |t|
     t.text     "when"
     t.text     "where"
-    t.string   "with_whom"
+    t.text     "with_whom"
     t.text     "what_have_you_been_doing"
     t.integer  "user_id"
     t.datetime "created_at",               null: false
@@ -116,6 +121,7 @@ ActiveRecord::Schema.define(version: 20150603144746) do
   add_index "situations", ["user_id"], name: "index_situations_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
+    t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -123,6 +129,7 @@ ActiveRecord::Schema.define(version: 20150603144746) do
   add_foreign_key "adaptive_thoughts", "automatic_thoughts"
   add_foreign_key "automatic_thoughts", "given_time_feelings"
   add_foreign_key "bases", "automatic_thoughts"
+  add_foreign_key "distortion_patterns", "automatic_thoughts"
   add_foreign_key "distortion_patterns", "cognitive_distortions"
   add_foreign_key "given_time_feelings", "feelings"
   add_foreign_key "given_time_feelings", "situations"

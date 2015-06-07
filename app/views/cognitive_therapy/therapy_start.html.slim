@@ -16,7 +16,7 @@ section#wizard.page-block
                 span.status
               a.step-link.right[href="#step03" data-toggle="tab"]
                 span.status
-          form#wizard-form.wizard-form.body[method="post" role="form"]
+          = form_tag({controller: 'cognitive_therapy', action: 'save_data', method: 'post'}, class: 'wizard-form body', id: 'wizard-form') do
             #step01.wizard-step.fade.in.active
               .tab-links-wrap
                 .overlay
@@ -45,22 +45,23 @@ section#wizard.page-block
                           | 気持ちがつらくなった時の状況を書き込もう
                     .row
                       .col-lg-6.col-md-6.col-sm-6.form-group
-                        label[for="name"]
+                        label[for="situation[when]"]
                           | いつ？
-                        input#name.form-control[type="text" name="name" placeholder="Enter your name" required]
+                        /required
+                        input#name.form-control[type="text" name="situation[when]" placeholder="Enter your name" required value=@situation.when]
                       .col-lg-6.col-md-6.col-sm-6.form-group
-                        label[for="email"]
+                        label[for="situation[where]"]
                           | どこで？
-                        input#email.form-control[type="text" name="email" placeholder="Enter your email" required]
+                        input#email.form-control[type="text" name="situation[where]" placeholder="Enter your email" required value=@situation.where]
                     .row
                       .col-lg-6.col-md-6.col-sm-6.form-group
-                        label[for="adress"]
+                        label[for="situation[with_whom]"]
                           | だれと？
-                        input#adress.form-control[type="text" name="adress" placeholder="Enter your adress"]
+                        input#adress.form-control[type="text" name="situation[with_whom]" placeholder="Enter your adress" value=@situation.with_whom]
                       .col-lg-6.col-md-6.col-sm-6.form-group
-                        label[for="phone"]
+                        label[for="situation[what_have_you_been_doing]"]
                           | 何をしていたとき？
-                        input#phone.form-control[type="text" name="name" placeholder="Enter your phone"]
+                        input#phone.form-control[type="text" name="situation[what_have_you_been_doing]" placeholder="Enter your phone" value=@situation.what_have_you_been_doing]
                 #background.tab.row.fade
                   .col-lg-12
                     .row
@@ -70,28 +71,22 @@ section#wizard.page-block
                     .row
                       .col-lg-12.col-md-12.col-sm-12.form-group
                         - @feelings.each do |feeling|
-                          .row
-                            .col-lg-6.col-md-6.col-sm-6.feeling_name
-                              span
-                                label[for="education"]
-                                  = feeling.contents
-                              span.feeling_percentage
-                                | unko
-                            .col-lg-6.col-md-6.col-sm-6
-                              input.feeling[type="range" min="0" max="100" step="1" value="0"]
-
+                          - if disabled(feeling.id, @feeling_ids)
+                            a.btn.btn-primary.btn-xs.feeling_selecter[id="feeling_id_#{feeling.id}" disabled="disabled"]
+                              = feeling.contents
+                          - else
+                            a.btn.btn-primary.btn-xs.feeling_selecter[id="feeling_id_#{feeling.id}"]
+                              = feeling.contents
+                        #feeling_select
+                          - @situation.given_time_feelings.each do |given_time_feeling|
+                            = render partial: "feeling", locals: {given_time_feeling: given_time_feeling}
                 #id.tab.row.fade
                   .col-lg-12
                     .row
-                      .col-lg-6.col-md-6.col-sm-6.form-group
-                        label[for="security"]
-                          | Social security no (required numbers only)
-                        input#security.form-control[type="text" name="security" placeholder="Enter social security no" required]
-                    .row
-                      .col-lg-6.col-md-6.col-sm-6.form-group
-                        label[for="exp_date"]
-                          | ID expiry date
-                        input#exp_date.form-control[type="text" name="exp_date" placeholder="Enter ID expiry date"]
+                      .col-lg-12.col-md-12.col-sm-12.form-group
+                        #automatic_thought_select
+                          - @situation.given_time_feelings.each do |given_time_feeling|
+                            = render partial: "automatic_thought", locals: {given_time_feeling: given_time_feeling}
             #step02.wizard-step.fade
               .tab-links-wrap
                 .overlay
@@ -120,7 +115,8 @@ section#wizard.page-block
                       .col-lg-12.col-md-12.col-sm-12.form-group
                         label[for="textarea01"]
                           | Textarea (required)
-                        textarea#textarea01.form-control[name="textarea01" rows="8" placeholder="Placeholder" required]
+                        /required
+                        textarea#textarea01.form-control[name="textarea01" rows="8" placeholder="Placeholder" ]
                 #tab02.tab.row.fade
                   .col-lg-12
                     .row
@@ -182,8 +178,10 @@ section#wizard.page-block
                           textarea#textarea03.form-control[name="textarea03" rows="8" placeholder="Placeholder"]
             .wizard-footer.group
               .buttons
+                input#submit-wizard.btn.btn-primary[type="submit" value="保存する"]
                 a.btn.btn-primary.prev-tab.hidden[href="#"]
                   | Back
                 a.btn.btn-primary.next-tab[href="#"]
                   | Continue
                 input#submit-wizard.btn.btn-primary.hidden[type="submit" value="Submit form"]
+            input[type="hidden" name="situation_id" value=@situation.id]
