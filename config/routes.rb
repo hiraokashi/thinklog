@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'users/dashboard/:id' => 'users#dashboard'
+  get 'situations/edit_modal/:id' => 'situations#edit_modal'
+
   resources :adaptive_thoughts
   resources :rebuttals
   resources :rebuttals
@@ -8,7 +11,6 @@ Rails.application.routes.draw do
   resources :given_time_feelings
   resources :situations
   resources :feelings
-  resources :feelings
   resources :co_independent_traits
   resources :adult_children_traits
   resources :cognitive_distortions
@@ -16,7 +18,7 @@ Rails.application.routes.draw do
 
   resource :cognitive_therapy do
     get 'therapy_start/:id' => 'cognitive_therapy#therapy_start'
-    get 'add_feeling/:situation_id/:feeling_id' => 'cognitive_therapy#add_feeling'
+    get 'add_feeling/:id' => 'cognitive_therapy#add_feeling'
     get 'add_automatic_thought/:given_time_feeling_id' => 'cognitive_therapy#add_automatic_thought'
     post 'save_data' => 'cognitive_therapy#save_data'
   end
@@ -24,13 +26,13 @@ Rails.application.routes.draw do
   resource :top do
     get 'diagnosis_start' => 'top#diagnosis_start'
     get 'diagnosis/:id/:yes_no' => 'top#diagnosis'
-    #get 'user_policy' => 'top#user_policy'
-    #get 'privacy_policy' => 'top#privacy_policy'
-    #get 'developer_info' => 'top#developer_info'
-    #get 'news' => 'top#news'
-    #get 'about' => 'top#about'
-    #get 'contact' => 'top#contact'
-    #get 'news_by_mail' => 'top#news_by_mail'
+    # get 'user_policy' => 'top#user_policy'
+    # get 'privacy_policy' => 'top#privacy_policy'
+    # get 'developer_info' => 'top#developer_info'
+    # get 'news' => 'top#news'
+    # get 'about' => 'top#about'
+    # get 'contact' => 'top#contact'
+    # get 'news_by_mail' => 'top#news_by_mail'
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

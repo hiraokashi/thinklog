@@ -2,6 +2,11 @@ class TopController < ApplicationController
   def index
     logger.debug('ようこそ！')
     @cognitive_distortions = CognitiveDistortion.all
+    @feelings = Feeling.all
+
+    @situation = Situation.new
+    @feeling_ids = @situation.given_time_feelings.map { |given_time_feeling| given_time_feeling.feeling.id }
+
   end
 
   def diagnosis_start

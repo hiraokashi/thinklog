@@ -1,0 +1,38 @@
+light-skin.modal.fade[id="#{modal_id}" tabindex="-1" role="form" aria-hidden="true"]
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close[type="button" data-dismiss="modal" aria-hidden="true"]
+          | ×
+        h4.modal-title
+          | つらかったときの状況を記録しよう
+      .modal-body
+        = form_tag(path_for_modal_form(method, situation), :role=> 'form', :method => method, :id =>"#{modal_id}Form") do
+          .form-group
+            input.form-control[type="text" name="situation[when]" placeholder="いつ？" required value=situation.when]
+          .form-group
+            input.form-control[type="text" name="situation[where]" placeholder="だれと？" required value=situation.where]
+          .form-group
+            input.form-control[type="text" name="situation[with_whom]" placeholder="だれと？" value=situation.with_whom]
+          .form-group
+            input.form-control[type="text" name="situation[what_have_you_been_doing]" placeholder="何をしていたとき？" value=situation.what_have_you_been_doing]
+          h5
+            |そのときの気持ちと程度（0-100%）を選択してください
+          - @feelings.each do |feeling|
+            - if disabled(feeling.id, @feeling_ids)
+              a.btn.btn-default.btn-xs.feeling_selecter[id="feeling_id_#{feeling.id}"]
+                = feeling.contents
+            - else
+              a.btn.btn-primary.btn-xs.feeling_selecter[id="feeling_id_#{feeling.id}"]
+                = feeling.contents
+          .feeling_select
+            - unless situation.given_time_feelings.nil?
+              - situation.given_time_feelings.each do |given_time_feeling|
+                = render partial: "shared/feeling", locals: {feeling: given_time_feeling.feeling, percentage: given_time_feeling.before_percentage}
+
+          hr
+          button.btn.btn-default[type="button" data-dismiss="modal" aria-hidden="true"]
+            | キャンセル
+          button.btn.btn-primary[type="submit"]
+            | 記録する
+          input[type="hidden" name="situation[user_id]" value=user.id]

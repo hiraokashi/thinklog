@@ -1,0 +1,6 @@
+.row[id="selected_feeling#{feeling.id}"]
+  .col-lg-12.col-md-12.col-sm-12.feeling_name
+    .form-group
+      a.btn.btn-danger.btn-lg.btn-block
+        = feeling.contents
+        input.feeling[type="range" name="feelings_before[#{feeling.id}]" min="0" max="100" step="1" value=percentage]

@@ -4,29 +4,30 @@
 
 $ ->
     $('input[type="range"]').rangeslider();
-    $(".feeling_selecter").click ->
 
-      feeling_id = $(this).attr('id').replace('feeling_id_', '')
-      situation_id = $("input[name~='situation_id']").val()
-      button = $(this)
+    #新規作成モーダルの内容の初期化
+    $('#addSituation').click ->
+        $("#situationNewModalForm .feeling_select").empty()
+        $("#situationNewModalForm div input[type='text']").val('')
+        $("#situationNewModalForm a.btn.btn-xs.btn-default").removeClass('btn-default')
+        $("#situationNewModalForm a.btn.btn-xs").addClass('btn-primary')
+
+    #編集用フォームをロードする
+    $('.edit_situation').click ->
+
+      #複数回実行時のためにいったん空にしておく
+      $("#edit_form_pos").empty()
+      situation_id   = $(this).attr('id').replace('situation_id_', '')
+
       $.ajax
-        url: '/cognitive_therapy/add_feeling/' + situation_id + '/'+ feeling_id
+        url: '/situations/edit_modal/' + situation_id
         type:'GET'
         dataType: 'html'
         timeout:10000
         success: (data) ->
-          $(data).prependTo("#feeling_select")
-          button.addClass('disabled')
-
-          #自動思考のビューを更新する。
-          $.ajax
-            url: '/cognitive_therapy/add_automatic_thought/' + $(data).find('input[name="given_time_feeling_id"]').val()
-            dataType: 'html'
-            timeout:10000
-            success: (data) ->
-              #成功時の処理
-              $(data).prependTo("#automatic_thought_select")
-            error: (data) ->
-              alert("感情の選択に失敗しました")
+          $(data).prependTo("#edit_form_pos")
+          $('#situationEditModal').modal('show')
         error: (data) ->
-          alert("感情の選択に失敗しました")
+          alert("編集画面のロードに失敗しました")
+
+      false

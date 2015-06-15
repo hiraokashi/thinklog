@@ -1,0 +1,22 @@
+
+/ 新規作成用モーダル
+= render partial: 'shared/situation_modal_form', locals: {situation: @situation, user: @user, modal_id: 'situationNewModal', method: 'post'}
+
+/　編集用モーダルロード位置
+#edit_form_pos
+
+section#pricing.page-block
+  .container
+    .row.page-header
+      h2
+        | つらいこと一覧
+      span
+        a#addSituation.btn.btn-primary[href="#" data-toggle="modal" data-target="#situationNewModal"]
+          i.icon-cancel-circle
+          | つらかったことを追加する
+    - arranged_by_columns(@situations, 3).each do |row, cols|
+      .row
+        - cols.each do |col_num, col|
+          .col-lg-4.col-md-4.col-sm-4
+            /= row.to_s + " " + col_num.to_s + " " + col.id.to_s
+            = render partial: "shared/situation_unit", locals: {situation: col}

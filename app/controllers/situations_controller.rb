@@ -1,5 +1,5 @@
 class SituationsController < ApplicationController
-  before_action :set_situation, only: [:show, :edit, :update, :destroy]
+  before_action :set_situation, only: [:show, :edit, :update, :destroy, :edit_modal]
 
   # GET /situations
   # GET /situations.json
@@ -28,7 +28,14 @@ class SituationsController < ApplicationController
 
     respond_to do |format|
       if @situation.save
-        format.html { redirect_to @situation, notice: 'Situation was successfully created.' }
+
+        params[:feelings_before].each do |id, percentage|
+          #logger.debug("id= #{id}, percentage=#{percentage}")
+          given_time_feeling = @situation.given_time_feelings.build(before_percentage: percentage, feeling: Feeling.find(id))
+          @situation.given_time_feelings << given_time_feeling
+        end
+        #format.html { redirect_to @situation, notice: 'Situation was successfully created.' }
+        format.html { redirect_to '/users/dashboard/1', notice: 'Situation was successfully created.' }
         format.json { render :show, status: :created, location: @situation }
       else
         format.html { render :new }
@@ -37,12 +44,21 @@ class SituationsController < ApplicationController
     end
   end
 
+  def edit_modal
+    #ajaxでモーダルフォームをロードする
+    @feelings = Feeling.all
+    @feeling_ids = @situation.given_time_feelings.map { |given_time_feeling| given_time_feeling.feeling.id }
+    render layout: false # レイアウトをなしにする場合
+  end
+
   # PATCH/PUT /situations/1
   # PATCH/PUT /situations/1.json
   def update
     respond_to do |format|
       if @situation.update(situation_params)
-        format.html { redirect_to @situation, notice: 'Situation was successfully updated.' }
+        @situation.update_feeling_before(params[:feelings_before])
+        format.html { redirect_to '/users/dashboard/1', notice: 'Situation was successfully created.' }
+        #format.html { redirect_to @situation, notice: 'Situation was successfully updated.' }
         format.json { render :show, status: :ok, location: @situation }
       else
         format.html { render :edit }
@@ -71,4 +87,6 @@ class SituationsController < ApplicationController
     def situation_params
       params.require(:situation).permit(:when, :where, :with_whom, :what_have_you_been_doing, :user_id)
     end
+
+
 end

@@ -12,13 +12,15 @@ class CognitiveTherapyController < ApplicationController
   # 今の感情の入力テンプレートを取得する
   def add_feeling
     #situationに紐づける
-    @situation = Situation.find(params[:situation_id])
-    @given_time_feeling = GivenTimeFeeling.new
-    @automatic_thought = AutomaticThought.new
+    #@situation = Situation.find(params[:situation_id])
+    #@given_time_feeling = GivenTimeFeeling.new
+    #@automatic_thought = AutomaticThought.new
+#
+    #@given_time_feeling.feeling =  Feeling.find(params[:feeling_id])
+    #@given_time_feeling.automatic_thought = @automatic_thought
+    #@situation.given_time_feelings << @given_time_feeling
 
-    @given_time_feeling.feeling =  Feeling.find(params[:feeling_id])
-    @given_time_feeling.automatic_thought = @automatic_thought
-    @situation.given_time_feelings << @given_time_feeling
+    @feeling =  Feeling.find(params[:id])
 
     render layout: false # レイアウトをなしにする場合
   end
