@@ -61,6 +61,11 @@ class AutomaticThoughtsController < ApplicationController
     end
   end
 
+  # GET
+  def think
+    @automatic_thought = AutomaticThought.find(params[:id])
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_automatic_thought

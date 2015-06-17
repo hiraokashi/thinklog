@@ -5,7 +5,7 @@ light-skin.modal.fade[id="#{modal_id}" tabindex="-1" role="form" aria-hidden="tr
         button.close[type="button" data-dismiss="modal" aria-hidden="true"]
           | ×
         h4.modal-title
-          | つらかったときの状況を記録しよう
+          | Step1: 状況を記録しよう
       .modal-body
         = form_tag(path_for_modal_form(method, situation), :role=> 'form', :method => method, :id =>"#{modal_id}Form") do
           .form-group

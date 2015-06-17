@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'users/dashboard/:id' => 'users#dashboard'
   get 'situations/edit_modal/:id' => 'situations#edit_modal'
+  get 'automatic_thoughts/think/:id' => 'automatic_thoughts#think'
 
   resources :adaptive_thoughts
   resources :rebuttals

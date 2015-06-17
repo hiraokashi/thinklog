@@ -30,11 +30,11 @@ class SituationsController < ApplicationController
       if @situation.save
 
         params[:feelings_before].each do |id, percentage|
-          #logger.debug("id= #{id}, percentage=#{percentage}")
+          # logger.debug("id= #{id}, percentage=#{percentage}")
           given_time_feeling = @situation.given_time_feelings.build(before_percentage: percentage, feeling: Feeling.find(id))
           @situation.given_time_feelings << given_time_feeling
         end
-        #format.html { redirect_to @situation, notice: 'Situation was successfully created.' }
+        # format.html { redirect_to @situation, notice: 'Situation was successfully created.' }
         format.html { redirect_to '/users/dashboard/1', notice: 'Situation was successfully created.' }
         format.json { render :show, status: :created, location: @situation }
       else
@@ -45,7 +45,7 @@ class SituationsController < ApplicationController
   end
 
   def edit_modal
-    #ajaxでモーダルフォームをロードする
+    # ajaxでモーダルフォームをロードする
     @feelings = Feeling.all
     @feeling_ids = @situation.given_time_feelings.map { |given_time_feeling| given_time_feeling.feeling.id }
     render layout: false # レイアウトをなしにする場合
@@ -58,7 +58,7 @@ class SituationsController < ApplicationController
       if @situation.update(situation_params)
         @situation.update_feeling_before(params[:feelings_before])
         format.html { redirect_to '/users/dashboard/1', notice: 'Situation was successfully created.' }
-        #format.html { redirect_to @situation, notice: 'Situation was successfully updated.' }
+        # format.html { redirect_to @situation, notice: 'Situation was successfully updated.' }
         format.json { render :show, status: :ok, location: @situation }
       else
         format.html { render :edit }
@@ -78,15 +78,14 @@ class SituationsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_situation
-      @situation = Situation.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def situation_params
-      params.require(:situation).permit(:when, :where, :with_whom, :what_have_you_been_doing, :user_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_situation
+    @situation = Situation.find(params[:id])
+  end
 
-
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def situation_params
+    params.require(:situation).permit(:when, :where, :with_whom, :what_have_you_been_doing, :user_id)
+  end
 end
