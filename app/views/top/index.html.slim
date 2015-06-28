@@ -132,9 +132,7 @@ section.hero
           .col-lg-6.col-md-6.col-sm-6.animated
             img.pull-right[src="/images/hero-slider/baby.png" width="631" height="800" alt="Components and Styles"]
 /! ここは診断
-section#features.page-block
-  .container
-    input#unko[type="range" min="10" max="1000" step="10" value="300"]
+
 section#features.page-block
   .container
     .link_resorces
@@ -159,15 +157,10 @@ section#features.page-block
       = link_to "反証", rebuttals_path
     .link_resorces
       = link_to "適応的思考", adaptive_thoughts_path
-    .progress
-      .progress-bar[role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"]
-        span.sr-only
-          | 60% complte
     .link_resorces
       = link_to '認知療法開始', 'cognitive_therapy/therapy_start/1'
     .link_resorces
-      = link_to 'ダッシュボード', 'users/dashboard/1'
-
+      = link_to 'ダッシュボード', 'users/dashboard/1', data: { no_turbolink: true }
 section#features.page-block
   .container
     .row.page-header

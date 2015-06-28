@@ -1,0 +1,64 @@
+section#faq.page-block.faq
+  .container
+    .row
+      #progressBar
+      #step3_think_automatic_thought
+    .row.page-header
+
+      .row
+        .col-lg-12.col-md-12.col-sm-12
+          a.btn.btn-default.btn-xs[href="/automatic_thoughts/think/#{@automatic_thought.id}" data-no-turbolink="true"]
+            i.fa.fa-caret-left
+            | 前のステップ
+          a.btn.btn-default.btn-xs[href="/automatic_thoughts/think_adaptively/#{@automatic_thought.id}" data-no-turbolink="true"]
+            i.fa.fa-caret-right
+            | 次のステップ
+
+      h3
+        | 自動思考を角度を変えて考えよう
+      - percentage = @automatic_thought.given_time_feeling.after_percentage.to_s
+
+    .row
+      .col-lg-12.col-md-12.col-sm-12
+
+        a.btn.btn-primary.btn-block
+          = @automatic_thought.contents
+        - @automatic_thought.distortion_patterns.each do |distortion_pattern|
+          a.btn.btn-success.tooltipped[data-toggle="tooltip" data-placement="bottom" title="#{distortion_pattern.cognitive_distortion.discription}"]
+            = distortion_pattern.cognitive_distortion.name
+
+        a.btn.btn-default.btn-xs.tooltipped[data-toggle="tooltip" data-placement="bottom" title=@automatic_thought.given_time_feeling.situation.when]
+          | いつ？
+        a.btn.btn-default.btn-xs.tooltipped[data-toggle="tooltip" data-placement="bottom" title=@automatic_thought.given_time_feeling.situation.where]
+          | どこで？
+        a.btn.btn-default.btn-xs.tooltipped[data-toggle="tooltip" data-placement="bottom" title=@automatic_thought.given_time_feeling.situation.with_whom]
+          | だれと？
+        a.btn.btn-default.btn-xs.tooltipped[data-toggle="tooltip" data-placement="bottom" title=@automatic_thought.given_time_feeling.situation.what_have_you_been_doing]
+          | 何をしているとき？
+        = form_tag("/automatic_thoughts/update_basis_and_rebuttal/#{@automatic_thought.id}" , :role=> 'form', :method => 'patch', :id =>"", :class =>"") do
+          .row
+            .col-lg-6.col-md-6.col-sm-6
+              .form-group
+                label.control-label[for="basis[contents]"]
+                  | 根拠
+                textarea.form-control[rows="6" name="basis[contents]" placeholder="自動思考を支持する事実を考洗い出しましょう" value=@automatic_thought.bases[0].contents required]
+                  = @automatic_thought.bases[0].contents
+
+            .col-lg-6.col-md-6.col-sm-6
+              .form-group
+                label.control-label[for="rebuttal[contents]"]
+                  | 反証
+                textarea.form-control[rows="6" name="rebuttal[contents]" placeholder="自動思考と矛盾する事実を洗い出しましょう" value=@automatic_thought.rebuttals[0].contents required]
+                  = @automatic_thought.rebuttals[0].contents
+
+          .row
+            .col-lg-12.col-md-12.col-sm-12
+              .form-group
+                label[for="feelings_after[#{@automatic_thought.given_time_feeling.feeling.id}]"]
+                  | 気持ちに変化があったら更新しよう
+                = render partial: "shared/feeling", locals: {feeling: @automatic_thought.given_time_feeling.feeling, percentage: percentage, after: "true"}
+
+          button.btn.btn-primary.save_therapy_data[type="submit"]
+            | 保存する
+          a.btn.btn-primary.go_next_step.save_therapy_data[href="/automatic_thoughts/think_adaptively/#{@automatic_thought.id}" data-no-turbolink="true"]
+            | ステップ4へ進む

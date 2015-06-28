@@ -1,5 +1,5 @@
 class AutomaticThoughtsController < ApplicationController
-  before_action :set_automatic_thought, only: [:show, :edit, :update, :destroy]
+  before_action :set_automatic_thought, only: [:show, :edit, :update, :destroy, :update_basis_and_rebuttal, :update_adaptive_thought]
 
   # GET /automatic_thoughts
   # GET /automatic_thoughts.json
@@ -42,6 +42,33 @@ class AutomaticThoughtsController < ApplicationController
   def update
     respond_to do |format|
       if @automatic_thought.update(automatic_thought_params)
+        @automatic_thought.update_distortion(params[:distortion_pattern])
+        @automatic_thought.given_time_feeling.update_after_percentage(params[:feelings_after])
+        format.html { redirect_to @automatic_thought, notice: 'Automatic thought was successfully updated.' }
+        format.json { render :show, status: :ok, location: @automatic_thought }
+      else
+        format.html { render :edit }
+        format.json { render json: @automatic_thought.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def update_basis_and_rebuttal
+    respond_to do |format|
+      if @automatic_thought.update_basis_and_rebuttal(params[:basis], params[:rebuttal])
+        format.html { redirect_to @automatic_thought, notice: 'Automatic thought was successfully updated.' }
+        format.json { render :show, status: :ok, location: @automatic_thought }
+      else
+        format.html { render :edit }
+        format.json { render json: @automatic_thought.errors, status: :unprocessable_entity }
+      end
+    end
+
+  end
+
+  def update_adaptive_thought
+    respond_to do |format|
+      if @automatic_thought.update_adaptive_thought(params[:adaptive_thought])
         format.html { redirect_to @automatic_thought, notice: 'Automatic thought was successfully updated.' }
         format.json { render :show, status: :ok, location: @automatic_thought }
       else
@@ -63,6 +90,22 @@ class AutomaticThoughtsController < ApplicationController
 
   # GET
   def think
+    @user = User.find(1)
+    @automatic_thought = AutomaticThought.find(params[:id])
+    @cognitive_distortions = CognitiveDistortion.all
+    @distortion_ids = @automatic_thought.distortion_patterns.map {|distortion_pattern| distortion_pattern.cognitive_distortion.id}
+    logger.debug("@distortion_ids = " + @distortion_ids.to_s)
+  end
+
+  #GET
+  #根拠と反証
+  def think_deeply
+    @automatic_thought = AutomaticThought.find(params[:id])
+  end
+
+  #GET
+  #適応的思考
+  def think_adaptively
     @automatic_thought = AutomaticThought.find(params[:id])
   end
 
@@ -70,6 +113,7 @@ class AutomaticThoughtsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_automatic_thought
       @automatic_thought = AutomaticThought.find(params[:id])
+      logger.debug("@automatic_thought.contents = " + @automatic_thought.contents)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

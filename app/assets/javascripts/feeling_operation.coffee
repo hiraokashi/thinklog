@@ -15,8 +15,6 @@ $ ->
         false
       else
 
-
-
         $.ajax
           url: '/cognitive_therapy/add_feeling/' + feeling_id
           type:'GET'

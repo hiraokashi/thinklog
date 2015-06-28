@@ -14,6 +14,7 @@ class Situation < ActiveRecord::Base
         #DBにも、フォームにも存在する→データを更新する
         logger.debug("DBにも、フォームにも存在する→データを更新する => #{feeling_id}")
         given_time_feeling.before_percentage = feelings_before_hash[feeling_id]
+        given_time_feeling.after_percentage = feelings_before_hash[feeling_id]
         given_time_feeling.save
       else
         #DBに存在するがフォームでは存在しない→削除する

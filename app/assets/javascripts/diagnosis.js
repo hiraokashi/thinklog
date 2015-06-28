@@ -14,7 +14,7 @@
 $(function(){
 
       $(".diagnosis_start").click(function(){
-        //alert("診断しまーす")
+        //alert("診断しまーす1")
         $("#diagnosis_load").empty();
         $("#ajax_preloader").removeClass("fadeInRight").show();
 

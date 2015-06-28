@@ -13,3 +13,17 @@
  *= require_tree .
  *= require_self
  */
+
+/* レスポンシブ */
+@media (min-width:768px) {
+  div#progressBar {
+    height: 100px;
+  }
+}
+
+@media (max-width:767px) {
+  div#progressBar {
+    width: 350px;
+    height: 100px;
+  }
+}

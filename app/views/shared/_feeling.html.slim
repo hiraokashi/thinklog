@@ -3,4 +3,7 @@
     .form-group
       a.btn.btn-danger.btn-lg.btn-block
         = feeling.contents
-        input.feeling[type="range" name="feelings_before[#{feeling.id}]" min="0" max="100" step="1" value=percentage]
+        - if after.nil?
+          input.feeling[type="range" name="feelings_before[#{feeling.id}]" min="0" max="100" step="1" value=percentage]
+        - else
+          input.feeling[type="range" name="feelings_after[#{feeling.id}]" min="0" max="100" step="1" value=percentage]

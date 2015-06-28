@@ -2,6 +2,13 @@ Rails.application.routes.draw do
   get 'users/dashboard/:id' => 'users#dashboard'
   get 'situations/edit_modal/:id' => 'situations#edit_modal'
   get 'automatic_thoughts/think/:id' => 'automatic_thoughts#think'
+  get 'automatic_thoughts/think_deeply/:id' => 'automatic_thoughts#think_deeply'
+  get 'automatic_thoughts/think_adaptively/:id' => 'automatic_thoughts#think_adaptively'
+  #自動思考、反証、根拠、適応的思考は、今の気持ち生成時に自動で生成されるので更新扱い
+  patch 'automatic_thoughts/update_basis_and_rebuttal/:id' => 'automatic_thoughts#update_basis_and_rebuttal'
+  patch 'automatic_thoughts/update_adaptive_thought/:id' => 'automatic_thoughts#update_adaptive_thought'
+
+
 
   resources :adaptive_thoughts
   resources :rebuttals

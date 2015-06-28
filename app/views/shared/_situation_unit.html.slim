@@ -2,7 +2,7 @@
           .header
             - unless situation.given_time_feelings.nil?
             - situation.given_time_feelings.each do |given_time_feeling|
-              a.btn.btn-danger[href="/automatic_thoughts/think/#{given_time_feeling.automatic_thought.id}"]
+              a.btn.btn-danger[href="/automatic_thoughts/think/#{given_time_feeling.automatic_thought.id}" data-no-turbolink="true"]
                 i.icon-cancel-circle
                 = given_time_feeling.feeling.contents + ' (' + given_time_feeling.before_percentage.to_s  + '%)'
 

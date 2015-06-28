@@ -1,4 +1,5 @@
 
+
 / 新規作成用モーダル
 = render partial: 'shared/situation_modal_form', locals: {situation: @situation, user: @user, modal_id: 'situationNewModal', method: 'post'}
 
@@ -6,14 +7,18 @@
 #edit_form_pos
 
 section#pricing.page-block
+
   .container
+    .row
+      #progressBar
+      #step1_situation
     .row.page-header
-      h2
-        | つらいこと一覧
+      h3
+        | Step1: 状況を記録しよう
       span
         a#addSituation.btn.btn-primary[href="#" data-toggle="modal" data-target="#situationNewModal"]
           i.icon-cancel-circle
-          | つらかったことを追加する
+          | つらかった状況を追加する
     - arranged_by_columns(@situations, 3).each do |row, cols|
       .row
         - cols.each do |col_num, col|
