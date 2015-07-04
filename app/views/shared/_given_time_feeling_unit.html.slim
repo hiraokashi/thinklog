@@ -1,0 +1,25 @@
+
+a.btn.btn-danger.btn-block[href="#" data-toggle="modal" data-target="#given_time_feeling#{given_time_feeling.id}" style="margin-bottom:2px;text-align:left;"]
+  = given_time_feeling.feeling.contents + ' (' + given_time_feeling.before_percentage.to_s  + '%)　　　'
+
+  small[style="color:white;"]
+    = given_time_feeling.updated_at.strftime('%Y/%m/%d')
+
+dark-skin.modal.fade[id="given_time_feeling#{given_time_feeling.id}" tabindex="-1" role="form" aria-hidden="true"]
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close[type="button" data-dismiss="modal" aria-hidden="true"]
+          | ×
+        h4.modal-title
+          a.btn.btn-danger
+            = given_time_feeling.feeling.contents + ' (' + given_time_feeling.before_percentage.to_s  + '%)　　　'
+
+      .modal-body
+          a.btn.btn-primary[]
+            = given_time_feeling.situation.when + given_time_feeling.situation.where + given_time_feeling.situation.with_whom + given_time_feeling.situation.what_have_you_been_doing
+      .modal-footer
+          a.btn.btn-danger[data-dismiss="modal" aria-hidden="true"]
+            | 閉じる
+          a.btn.btn-success[href="/automatic_thoughts/think/#{given_time_feeling.automatic_thought.id}" data-no-turbolink="true"]
+            | Step2へ進む

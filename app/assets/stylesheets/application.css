@@ -17,13 +17,16 @@
 /* レスポンシブ */
 @media (min-width:768px) {
   div#progressBar {
+    width: 100%;
     height: 100px;
+    margin-top: 80px;
   }
 }
 
 @media (max-width:767px) {
   div#progressBar {
-    width: 350px;
+    width: 100%;
     height: 100px;
+    margin-top: 80px;
   }
 }

@@ -1,5 +1,4 @@
-#preloader
-  #spinner
+
 nav.side-navi.animated
   ul
     li.current
@@ -27,85 +26,6 @@ nav.side-navi.animated
     li
       a.tooltipped.scroll[href="#social" data-toggle="tooltip" data-placement="left" title="Social"]
 
-/= render 'shared/situation_new_modal'
-
-#loginModal.light-skin.modal.fade[tabindex="-1" role="form" aria-hidden="true"]
-  .modal-dialog
-    .modal-content
-      .modal-header
-        button.close[type="button" data-dismiss="modal" aria-hidden="true"]
-          | ×
-        h4.modal-title
-          | Login here
-      .modal-body
-        form.login-form[role="form"]
-          .form-group
-            label[for="username"]
-              | Username
-            input#username.form-control[type="text" placeholder="Enter Username" required]
-          .form-group
-            label[for="password"]
-              | Password
-            input#password.form-control[type="password" placeholder="Enter Password" required]
-          button.btn.btn-primary[type="submit"]
-            | Login
-header.stiky-header
-  .container.group
-    a.logo[href="index.html"]
-      img[src="images/logo-dark.png" alt="Ultima"]
-    a.logo-mobile[href="index.html"]
-      img[src="images/logo-mobile.png" alt="Ultima"]
-    .navi-toggle.group
-      span.dot
-      span.line
-      span.dot
-      span.line
-      span.dot
-      span.line
-      span.dot
-      span.line
-    a.btn.btn-primary.btn-login[href="#" data-toggle="modal" data-target="#loginModal"]
-      i.icon-user
-      | Login
-    nav.main-navi
-      ul
-        li.active
-          a.scroll-up[href="#"]
-            | Home
-        li.has-dropdown
-          a.scroll[href="#features"]
-            | Features
-            i.fa.fa-caret-down
-          ul.dropdown
-            li
-              a[href="#"]
-                | Submenu Item
-            li
-              a[href="#"]
-                | Submenu Item
-            li
-              a[href="#"]
-                | Submenu Item
-            li
-              a[href="#"]
-                | Submenu Item
-        li.has-dropdown
-          a[href="coming-soon.html"]
-            | Coming soon
-            i.fa.fa-caret-down
-          ul.dropdown
-            li
-              a[href="#"]
-                | Submenu Item
-            li
-              a[href="#"]
-                | Submenu Item
-            li
-              a[href="#"]
-                | Submenu Item
-        li
-          a[href="cs-page.html"]
-            | Components & Styles
 section.hero
   .container
     .row
@@ -124,7 +44,7 @@ section.hero
                 br
                 a.btn.btn-primary[href="#"]
                   i.icon-warning
-                  | 柔軟な思考を手に入れる
+                  | 思考を記録する
 
               .col-lg-12.col-md-12.col-sm-12.animated#ajax_preloader[style="display:none;"]
                 blockquote [style="margin-top:50px;"]

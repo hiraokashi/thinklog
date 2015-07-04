@@ -1,9 +1,11 @@
 class AutomaticThought < ActiveRecord::Base
   belongs_to :given_time_feeling
-  has_many :distortion_patterns
-  has_many :bases
-  has_many :rebuttals
-  has_many :adaptive_thoughts
+  has_many :distortion_patterns, :dependent => :delete_all
+
+  #以下はいまのところ一つしかもたない
+  has_many :bases, :dependent => :delete_all
+  has_many :rebuttals, :dependent => :delete_all
+  has_many :adaptive_thoughts, :dependent => :delete_all
 
   # 認知のゆがみを追加する
   def update_distortion(distortion_patterns_params)

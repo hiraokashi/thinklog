@@ -1,6 +1,6 @@
 class Situation < ActiveRecord::Base
   belongs_to :user
-  has_many :given_time_feelings
+  has_many :given_time_feelings, :dependent => :delete_all
 
   #今の気持ちを更新する
   def update_feeling_before(feelings_before_hash)

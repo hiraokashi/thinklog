@@ -1,7 +1,7 @@
 class GivenTimeFeeling < ActiveRecord::Base
   belongs_to :feeling
   belongs_to :situation
-  has_one :automatic_thought
+  has_one :automatic_thought,  :dependent => :destroy
 
   def update_after_percentage(percentage_s)
     self.after_percentage = percentage_s[self.feeling.id.to_s].to_i
