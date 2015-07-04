@@ -43,10 +43,12 @@ $(function() {
     $progressBar.refreshLayout();
   }
 
+
   $(window).resize(function() {
     //$(window).width()
+    //alert($("#progressBar").css("height"))
     var $progressDiv = $("#progressBar");
-    var $progressBar = $progressDiv.progressStep({ activeColor: "#ff6f69" ,margin: 30});
+    //var $progressBar = $progressDiv.progressStep({ activeColor: "#ff6f69" ,margin: 30});
     $progressBar.refreshLayout();
 
   });

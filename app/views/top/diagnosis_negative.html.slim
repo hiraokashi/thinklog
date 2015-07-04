@@ -1,12 +1,19 @@
 = javascript_include_tag 'diagnosis'
 
-.col-lg-12.col-md-12.col-sm-12.animated
+.col-lg-12.col-md-12.col-sm-12
 
-  /- if @cognitive_distortions.size > 0
+  h3.text-center.text-light
+    i.icon-aid.fa-3x
+
   .next_question_block
-    blockquote[style="margin-top:50px;"]
-      p
+      h3.text-center.text-light
         | あなたは生きづらさを感じていないようです。
-    a.btn.btn-primary.diagnosis_start[href="#"]
-      i.icon-aid
-      | もう一度診断する
+      .row
+        .col-lg-4.col-md-4.col-sm-4
+        .col-lg-4.col-md-4.col-sm-4
+          a.btn.btn-primary.diagnosis_start[href="#" style="margin-left: auto; margin-right: auto;"]
+            i.icon-aid
+            | もう一度診断する
+          h6.text-light
+            | １回の診断は全40問ある中からランダムに最大20問が抽出されます。
+        .col-lg-4.col-md-4.col-sm-4

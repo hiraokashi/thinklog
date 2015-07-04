@@ -1,19 +1,17 @@
 = javascript_include_tag 'diagnosis'
 
+.col-lg-12.col-md-12.col-sm-12
 
+  h3.text-light.text-center
+    i.fa.fa-ambulance.fa-3x
 
-
-.col-lg-12.col-md-12.col-sm-12.animated
-
-  /- if @cognitive_distortions.size > 0
   .next_question_block
-    blockquote[style="margin-top:50px;"]
-      p
-        | あなたは思考の歪みをもっていて、生きづらさを感じている可能性があります。
-    .row
-      .col-lg-12
-        a.btn.btn-primary.btn-login[href="#" data-toggle="modal" data-target="#situationModal"]
-          | つらかったことを記録する
-    a.btn.btn-default.btn-xs.diagnosis_start[href="#"]
-      i.icon-aid
-      | もう一度診断する
+      h3.text-center.text-light
+        | あなたは生きづらさを感じているようです。
+      .row
+        .col-lg-4.col-md-4.col-sm-4
+        .col-lg-4.col-md-4.col-sm-4
+          a.btn.btn-primary[href="#" data-toggle="modal" data-target="#situationModal" style="margin-left: auto; margin-right: auto;"]
+            i.icon-warning
+            | いますぐ始める（有料）
+        .col-lg-4.col-md-4.col-sm-4

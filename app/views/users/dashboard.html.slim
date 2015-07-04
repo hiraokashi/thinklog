@@ -1,3 +1,20 @@
+section.page-block[style="margin-top: 30px"]
+  .container
+    .row
+      #progressBar
+      #step1_situation
+    .row.page-header
+      a#addSituation.btn.btn-primary[href="#" data-toggle="modal" data-target="#situationNewModal"]
+          | 状況を記録する
+    - arranged_by_columns(@given_time_feelings, 3).each do |row, cols|
+      .row
+        - cols.each do |col_num, col|
+          .col-lg-4.col-md-4.col-sm-4
+            /= row.to_s + " " + col_num.to_s + " " + col.id.to_s
+            = render partial: "shared/given_time_feeling_unit", locals: {given_time_feeling: col}
+
+
+
 
 
 / 新規作成用モーダル
@@ -5,19 +22,3 @@
 
 /　編集用モーダルロード位置
 #edit_form_pos
-
-section#page-block
-
-  .container
-    .row
-      #progressBar
-      #step1_situation
-    .row.page-header
-      a#addSituation.btn.btn-primary[href="#" data-toggle="modal" data-target="#situationNewModal"]
-          | つらい気持ちを記録する
-    - arranged_by_columns(@given_time_feelings, 3).each do |row, cols|
-      .row
-        - cols.each do |col_num, col|
-          .col-lg-4.col-md-4.col-sm-4
-            /= row.to_s + " " + col_num.to_s + " " + col.id.to_s
-            = render partial: "shared/given_time_feeling_unit", locals: {given_time_feeling: col}

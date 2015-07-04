@@ -15,7 +15,7 @@ section#apps.page-block.mobile-apps
                 a.btn.btn-success.btn-block[href="#"]
                   i.icon-windows8
                   | アカウント登録（無料）
-                a.btn.btn-primary.btn-block.diagnosis_start[href="#"]
+                a.btn.btn-primary.btn-block.scroll[href="#diagnosis-block" data-toggle="tooltip" data-placement="left" title="Pricing"]
                   i.icon-aid
                   | 生きづらさを診断する（無料）
                 a.btn.btn-primary.btn-block[href="#"]
@@ -28,6 +28,17 @@ section#apps.page-block.mobile-apps
       .col-lg-7.col-md-7
         img.pull-right[src="/images/hero-slider/baby.png" width="631" height="800" alt="Components and Styles"]
 
+
+
+section.page-block.color#diagnosis-block[style="margin-top: 50px;"]
+  .container[style="min-height:230px;"]
+    .row
+      .col-md-12#diagnosis_load
+        = render partial: "shared/diagnosis", locals: {adult_children_trait: @adult_children_trait}
+
+      .col-lg-12.col-md-12.col-sm-12.animated#ajax_preloader[style="display:none;"]
+        center
+          img [src="images/ajax-preloader.gif" ]
 
 section#features.page-block
   .container

@@ -7,10 +7,19 @@ class TopController < ApplicationController
     @situation = Situation.new
     @feeling_ids = @situation.given_time_feelings.map { |given_time_feeling| given_time_feeling.feeling.id }
 
+    #診断の一問目はここで
+
+
+    remote_ip = request.env['HTTP_X_FORWARDED_FOR'] || request.remote_ip
+    session[remote_ip] = {}
+    session[remote_ip]['question_list'] = []
+
+    @adult_children_trait = AdultChildrenTrait.next_question(session[remote_ip]['question_list'])
+
   end
 
   def diagnosis_start
-    logger.debug('診断しまーす')
+    logger.info('[未使用関数が動いた]診断しまーす')
     # TODO: ランダムな質問にする　でX 門答えたら回答を出すようにする。
     remote_ip = request.env['HTTP_X_FORWARDED_FOR'] || request.remote_ip
     session[remote_ip] = {}

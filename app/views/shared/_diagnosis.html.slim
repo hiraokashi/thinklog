@@ -1,0 +1,25 @@
+
+.col-lg-12.col-md-12.col-sm-12
+
+  /- if @cognitive_distortions.size > 0
+  h3.text-center.text-light
+    i.fa.fa-question.fa-2x
+  .next_question_block
+    h3.text-center.text-light
+      = adult_children_trait.contents
+    .row
+      .col-lg-3.col-md-3
+      .col-lg-6.col-md-6.col-sm-6
+        center
+          a.btn.btn-default.diagnosis_next_question.question_no[href="#" style=""]
+            i.icon-cancel-circle
+            |いいえ
+          a.btn.btn-default.diagnosis_next_question.question_yes[href="#"  style=""]
+            i.icon-checkmark
+            |はい　
+      .col-lg-3.col-md-3
+    input#trait_id[type='hidden' value="#{adult_children_trait.id}"]
+
+  /- else
+  /  h1
+  /    | そんざいしません
