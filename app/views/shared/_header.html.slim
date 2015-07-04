@@ -2,7 +2,7 @@ header.stiky-header
   .container.group
     = link_to :root, class: "logo", data: { no_turbolink: true } do
       img[src="/images/logo-dark.png" alt="ThinkLog"]
-    a.logo-mobile[href="#"]
+    = link_to :root, class: "logo-mobile", data: { no_turbolink: true } do
       img[src="/images/logo-mobile.png" alt="ThinkLog"]
     .navi-toggle.group
       span.dot
@@ -20,7 +20,7 @@ header.stiky-header
       ul
         li.active
           a.scroll-up[href="#"]
-            | Home
+            | ホーム
         li.has-dropdown
           a.scroll[href="#features"]
             | Features
@@ -52,9 +52,7 @@ header.stiky-header
             li
               a[href="#"]
                 | Submenu Item
-        li
-          a[href="cs-page.html"]
-            | Components & Styles
+
 
 #loginModal.light-skin.modal.fade[tabindex="-1" role="form" aria-hidden="true"]
   .modal-dialog

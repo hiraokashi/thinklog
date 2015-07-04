@@ -30,3 +30,12 @@
     margin-top: 80px;
   }
 }
+
+
+.footer p.contents-link a {
+	color: #ffffff;
+	text-decoration: none;
+}
+.footer p.contents-link a:hover {
+	text-decoration: underline;
+}

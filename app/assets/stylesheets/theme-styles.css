@@ -1855,7 +1855,7 @@ img {
 	color: #ffffff;
 	font-size: 1.2em;
 	font-weight: 300;
-  -webkit-transition: all 250ms ease;
+	-webkit-transition: all 250ms ease;
 	-moz-transition: all 250ms ease;
 	transition: all 250ms ease;
 }
@@ -2049,6 +2049,13 @@ img {
 
 /*Mobile Apps
 ---------------------------------------------------------*/
+.mobile-apps {
+	width: 100%;
+	background: #ff6f69 url(/images/bg-art.png) no-repeat center top;
+	padding: 35px 0 0 0;
+
+	color: #ffffff;
+}
 .mobile-apps .btn i {
 	font-size: 1em;
 }
