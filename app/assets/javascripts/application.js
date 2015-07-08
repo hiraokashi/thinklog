@@ -16,14 +16,27 @@
 //= require libs/modernizr.custom
 //= require libs/raphael
 //= require plugins/progressStep
+//= require plugins/jquery.knob
 //= require_tree .
 
 $(function() {
+
+
+  $(".dial").knob({
+    'min': 0,
+    'max': 100,
+    'fgColor': "#ff6f69",
+    'inputColor': "#ff6f69"
+  });
+
   //type="range"要素に対して適応
-    //alert('unko')
+  //alert('unko')
   if ($("#progressBar").size() > 0) {
     var $progressDiv = $("#progressBar");
-    var $progressBar = $progressDiv.progressStep({ activeColor: "#ff6f69"  ,margin: 30});
+    var $progressBar = $progressDiv.progressStep({
+      activeColor: "#ff6f69",
+      margin: 30
+    });
     $progressBar.addStep("状況を記録しよう");
     $progressBar.addStep("自動思考をみつけよう");
     $progressBar.addStep("自動思考をつきつめよう");
