@@ -1,0 +1,26 @@
+section.page-block
+  .container
+    .row
+      .col-lg-5.col-md-5.col-sm-5
+        h3.cs-heading
+          | アカウント登録 (無料)
+        p
+          | アカウント登録すると、ThinkLogの最新情報ならびに、メンタルヘルスに関する様々な情報を受け取ることができます。
+        = form_for(resource, as: resource_name, url: registration_path(resource_name), role: "form") do |f|
+          = devise_error_messages!
+
+          .form-group
+            = f.email_field :email, autofocus: true, class: 'form-control',  placeholder: "メールアドレス"
+
+          .form-group
+            - if @minimum_password_length
+                - placeholder =  "パスワード(" + @minimum_password_length.to_s + "文字以上)"
+            = f.password_field :password, autocomplete: "off", class: 'form-control',  placeholder: placeholder
+
+          .form-group
+            = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control',  placeholder: "パスワード（再入力）"
+
+            .form-group
+            = f.submit "登録", class: "btn btn-primary"
+
+      .col-lg-7.col-md-7.col-sm-7

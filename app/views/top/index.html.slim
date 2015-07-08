@@ -6,13 +6,13 @@ section#apps.page-block.mobile-apps
           .col-lg-12.col-md-12.col-sm-12
             .row.space-bottom
               .col-lg-12.col-md-12
-                h2[style="margin-top:90px;"]
+                h2
                   | 思考をキロクする
                 h2
                   | 気持ちがラクになる
             .row
               .col-lg-10.col-md-11
-                a.btn.btn-success.btn-block[href="#"]
+                = link_to new_user_registration_path, :class => 'btn btn-success btn-block', data: { no_turbolink: true } do
                   i.icon-windows8
                   | アカウント登録（無料）
                 a.btn.btn-primary.btn-block.scroll[href="#diagnosis-block" data-toggle="tooltip" data-placement="left" title="Pricing"]
@@ -67,4 +67,28 @@ section#features.page-block
     .link_resorces
       = link_to '認知療法開始', 'cognitive_therapy/therapy_start/1'
     .link_resorces
-      = link_to 'ダッシュボード', 'users/dashboard/1', data: { no_turbolink: true }
+      = link_to 'ダッシュボード', 'users/dashboard', data: { no_turbolink: true }
+
+    p.navbar-text.pull-right
+      - if user_signed_in?
+        |  Logged in as
+        strong
+          = current_user.email
+        | .
+        .link_resorces
+          = link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link', data: { no_turbolink: true }
+        .link_resorces
+          = link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link', data: { no_turbolink: true }
+      - else
+        .link_resorces
+          = link_to "Sign up", new_user_registration_path, :class => 'navbar-link', data: { no_turbolink: true }
+
+        .link_resorces
+          = link_to "Login", new_user_session_path, :class => 'navbar-link', data: { no_turbolink: true }
+
+
+.row
+  .col-lg-12.col-md-12.col-sm-12.feeling_name
+    .form-group
+      a.btn.btn-danger.btn-lg.btn-block
+        input.feeling[type="range" name="feelings_before" min="0" max="100" step="1" value=30]

@@ -1,4 +1,27 @@
-section.page-block[style="margin-top: 30px"]
+section.page-block
+  .container
+    ul.nav.nav-tabs
+      li.active
+        a[href="#setting" data-toggle="tab"]
+          | アカウント設定
+      li
+        a[href="#columns" data-toggle="tab"]
+          | 思考記録機能
+    .tab-content
+      #setting.tab-pane.fade.in.active
+        ul
+          li
+            = link_to 'ユーザ情報変更・退会', edit_user_registration_path, :class => 'navbar-link', data: { no_turbolink: true }
+
+          li
+            = link_to '有料サービス申し込み・停止', "/", :class => 'navbar-link', data: { no_turbolink: true }
+
+      #columns.tab-pane.fade
+        p
+          | Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+
+
+section.page-block
   .container
     .row
       #progressBar

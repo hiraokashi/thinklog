@@ -1,7 +1,7 @@
 
 #状況テーブルに紐づくサンプルデータを作成する。
-User.create(:name=>"平岡さん")
-
+User.create(email: 'hiraoka@gmail.com', password: '12345678', password_confirmation: '12345678')
+#状況
 
 #状況
 Situation.create({:when=>"いつー？", :where=>"どこでー？", :with_whom=>"だれと", :what_have_you_been_doing=>"何をしているとき", :user_id=>1})

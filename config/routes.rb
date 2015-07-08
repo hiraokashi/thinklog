@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  get 'users/dashboard/:id' => 'users#dashboard'
+  devise_for :users
+  get 'users/dashboard' => 'users#dashboard'
   get 'situations/edit_modal/:id' => 'situations#edit_modal'
   get 'automatic_thoughts/think/:id' => 'automatic_thoughts#think'
   get 'automatic_thoughts/think_deeply/:id' => 'automatic_thoughts#think_deeply'

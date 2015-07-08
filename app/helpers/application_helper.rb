@@ -22,4 +22,5 @@ module ApplicationHelper
 
     arranged_list
   end
+
 end

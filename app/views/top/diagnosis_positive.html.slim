@@ -9,9 +9,13 @@
       h3.text-center.text-light
         | あなたは生きづらさを感じているようです。
       .row
-        .col-lg-4.col-md-4.col-sm-4
-        .col-lg-4.col-md-4.col-sm-4
-          a.btn.btn-primary[href="#" data-toggle="modal" data-target="#situationModal" style="margin-left: auto; margin-right: auto;"]
-            i.icon-warning
-            | いますぐ始める（有料）
-        .col-lg-4.col-md-4.col-sm-4
+        .col-lg-2.col-md-2.col-sm-2
+        .col-lg-8.col-md-8.col-sm-8
+          center
+            = link_to new_user_registration_path, :class => 'btn btn-success', data: { no_turbolink: true } do
+              i.icon-windows8
+              | アカウント登録（無料）
+            a.btn.btn-primary[href="#" data-toggle="modal" data-target="#situationModal" style="margin-left: auto; margin-right: auto;"]
+              i.icon-warning
+              | いますぐ始める（有料）
+        .col-lg-2.col-md-2.col-sm-2
