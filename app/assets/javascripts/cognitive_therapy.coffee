@@ -24,6 +24,7 @@ $ ->
         dataType: 'html'
         timeout:10000
         success: (data) ->
+          alert(data)
           $(data).prependTo("#edit_form_pos")
           $('#situationEditModal').modal('show')
         error: (data) ->

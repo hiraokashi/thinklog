@@ -46,7 +46,7 @@ section.page-block
           .form-group
             label[for="feelings_after[#{@automatic_thought.given_time_feeling.feeling.id}]"]
               | 気持ちに変化があったら更新しよう
-            = render partial: "shared/feeling", locals: {feeling: @automatic_thought.given_time_feeling.feeling, percentage: percentage, after: "true"}
+            = render partial: "shared/feeling", locals: {feeling: @automatic_thought.given_time_feeling.feeling, percentage: percentage, read_only: nil}
 
           #distortion_selecter
             - @automatic_thought.distortion_patterns.each do |distortion_pattern|

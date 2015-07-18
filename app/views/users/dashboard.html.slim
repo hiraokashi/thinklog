@@ -17,31 +17,6 @@ section.page-block
             = link_to '有料サービス申し込み・停止', "/", :class => 'navbar-link', data: { no_turbolink: true }
 
       #columns.tab-pane.fade
-        p
-          | Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
-
-
-section.page-block
-  .container
-    .row
-      #progressBar
-      #step1_situation
-    .row.page-header
-      a#addSituation.btn.btn-primary[href="#" data-toggle="modal" data-target="#situationNewModal"]
-          | 状況を記録する
-    - arranged_by_columns(@given_time_feelings, 3).each do |row, cols|
-      .row
-        - cols.each do |col_num, col|
-          .col-lg-4.col-md-4.col-sm-4
-            /= row.to_s + " " + col_num.to_s + " " + col.id.to_s
-            = render partial: "shared/given_time_feeling_unit", locals: {given_time_feeling: col}
-
-
-
-
-
-/ 新規作成用モーダル
-= render partial: 'shared/situation_modal_form', locals: {situation: @situation, user: @user, modal_id: 'situationNewModal', method: 'post'}
-
-/　編集用モーダルロード位置
-#edit_form_pos
+        ul
+          li
+            = link_to '状況一覧', '/users/situations', :class => 'navbar-link', data: { no_turbolink: true }

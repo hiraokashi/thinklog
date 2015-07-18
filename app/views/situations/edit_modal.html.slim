@@ -1,4 +1,4 @@
 
-= render partial: 'shared/situation_modal_form', locals: {situation: @situation, user: @situation.user, modal_id: 'situationEditModal', method: 'patch'}
+= render partial: 'shared/situation_modal_form', locals: {situation: @situation, user: @situation.user, modal_id: 'situationEditModal', method: 'patch', feeling_ids: @feeling_ids, feelings: @feelings}
 
 = javascript_include_tag 'feeling_operation'

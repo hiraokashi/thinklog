@@ -13,45 +13,43 @@ header.stiky-header
       span.line
       span.dot
       span.line
-    = link_to new_user_session_path, :class => 'btn btn-primary btn-login', data: { no_turbolink: true } do
-      i.icon-user
-      | ログイン
+    - unless user_signed_in?
+      = link_to new_user_session_path, :class => 'btn btn-primary btn-login', data: { no_turbolink: true } do
+        i.icon-user
+        | ログイン
+    - else
+      = link_to '/situations/add_situation', :class => 'btn btn-success btn-login', data: { no_turbolink: true } do
+        i.icon-user
+        | いやなことあった？
+
     nav.main-navi
       ul
         li.active
           a.scroll-up[href="#"]
             | ホーム
-        li.has-dropdown
-          a.scroll[href="#features"]
-            | Features
-            i.fa.fa-caret-down
-          ul.dropdown
-            li
-              a[href="#"]
-                | Submenu Item
-            li
-              a[href="#"]
-                | Submenu Item
-            li
-              a[href="#"]
-                | Submenu Item
-            li
-              a[href="#"]
-                | Submenu Item
-        li.has-dropdown
-          a[href="coming-soon.html"]
-            | Coming soon
-            i.fa.fa-caret-down
-          ul.dropdown
-            li
-              a[href="#"]
-                | Submenu Item
-            li
-              a[href="#"]
-                | Submenu Item
-            li
-              a[href="#"]
-                | Submenu Item
+        - if user_signed_in?
+          li
+            a.navbar-link[href="/users/sign_out" data-no-turbolink="true" rel="nofollow" data-method="delete" ]
+              | ログアウト
+        - if user_signed_in?
+          li.has-dropdown
+            a.scroll[href="#"]
+              | #{current_user.email}さん
+              i.fa.fa-caret-down
+            ul.dropdown
+              li
+                = link_to '/users/dashboard', :class => '', data: { no_turbolink: true } do
+                  | ダッシュボード
+              li
+                a[href="#"]
+                  | Submenu Item
+              li
+                a[href="#"]
+                  | Submenu Item
+              li
+                a[href="#"]
+                  | Submenu Item
+
 
 
 .[style="margin-top: 65px;"]

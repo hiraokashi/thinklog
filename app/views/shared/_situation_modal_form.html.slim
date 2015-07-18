@@ -18,8 +18,8 @@ light-skin.modal.fade[id="#{modal_id}" tabindex="-1" role="form" aria-hidden="tr
             input.form-control[type="text" name="situation[what_have_you_been_doing]" placeholder="何をしていたとき？" value=situation.what_have_you_been_doing]
           h5
             |そのときの気持ちと程度（0-100%）を選択してください
-          - @feelings.each do |feeling|
-            - if disabled(feeling.id, @feeling_ids)
+          - feelings.each do |feeling|
+            - if disabled(feeling.id, feeling_ids)
               a.btn.btn-default.btn-xs.feeling_selecter[id="feeling_id_#{feeling.id}"]
                 = feeling.contents
             - else

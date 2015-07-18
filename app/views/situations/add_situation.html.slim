@@ -1,0 +1,37 @@
+section.page-block
+  .container
+    .row
+      #progressBar
+      #step1_situation
+    .row.page-header
+      h3
+        | Step1: 状況を記録しよう
+    .row
+
+      = form_tag(path_for_modal_form('post', @situation), :role=> 'form', :method => 'post') do
+        .form-group
+          input.form-control[type="text" name="situation[when]" placeholder="いつ？" required value=@situation.when]
+        .form-group
+          input.form-control[type="text" name="situation[where]" placeholder="だれと？" required value=@situation.where]
+        .form-group
+          input.form-control[type="text" name="situation[with_whom]" placeholder="だれと？" value=@situation.with_whom]
+        .form-group
+          input.form-control[type="text" name="situation[what_have_you_been_doing]" placeholder="何をしていたとき？" value=@situation.what_have_you_been_doing]
+        h5
+          |そのときの気持ちと程度（0-100%）を選択してください
+        - @feelings.each do |feeling|
+          - if disabled(feeling.id, @feeling_ids)
+            a.btn.btn-default.btn-xs.feeling_selecter[id="feeling_id_#{feeling.id}"]
+              = feeling.contents
+          - else
+            a.btn.btn-primary.btn-xs.feeling_selecter[id="feeling_id_#{feeling.id}"]
+              = feeling.contents
+        .feeling_select
+          - unless @situation.given_time_feelings.nil?
+            - @situation.given_time_feelings.each do |given_time_feeling|
+              = render partial: "shared/feeling", locals: {feeling: given_time_feeling.feeling, percentage: given_time_feeling.before_percentage, after: nil}
+
+        hr
+
+        button.btn.btn-primary[type="submit"]
+          | 記録する

@@ -1,0 +1,31 @@
+section.page-block
+  .container
+    .row.page-header
+
+      h3
+        | 状況一覧
+    .row
+      - @user.situations.each do |situation|
+        h4
+          = situation.when + situation.where + situation.with_whom + situation.what_have_you_been_doing
+
+        - arranged_by_columns(situation.given_time_feelings, 2).each do |row, cols|
+          .row
+            - cols.each do |col_num, col|
+              .col-lg-6.col-md-6.col-sm-6
+                /= row.to_s + " " + col_num.to_s + " " + col.id.to_s
+                = render partial: "shared/given_time_feeling_unit", locals: {given_time_feeling: col}
+
+
+        a.btn.btn-success.btn-sm[href="/situations/edit_for_app/#{situation.id}" style="margin-left: 5px;"]
+          | 編集する
+        span.devider
+
+
+
+
+/ 新規作成用モーダル
+/ = render partial: 'shared/situation_modal_form', locals: {situation: @situation, user: @user, modal_id: 'situationNewModal', method: 'post', feeling_ids: @feeling_ids, feelings: @feelings}
+
+/　編集用モーダルロード位置
+/ #edit_form_pos

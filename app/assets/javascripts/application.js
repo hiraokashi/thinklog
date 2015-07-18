@@ -22,12 +22,9 @@
 $(function() {
 
 
-  $(".dial").knob({
-    'min': 0,
-    'max': 100,
-    'fgColor': "#ff6f69",
-    'inputColor': "#ff6f69"
-  });
+
+
+
 
   //type="range"要素に対して適応
   //alert('unko')

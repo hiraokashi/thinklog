@@ -1,5 +1,5 @@
 class SituationsController < ApplicationController
-  before_action :set_situation, only: [:show, :edit, :update, :destroy, :edit_modal]
+  before_action :set_situation, only: [:show, :edit, :update, :destroy, :edit_modal, :edit_for_app]
 
   # GET /situations
   # GET /situations.json
@@ -25,7 +25,7 @@ class SituationsController < ApplicationController
   # POST /situations.json
   def create
     @situation = Situation.new(situation_params)
-
+    @situation.user = current_user
     respond_to do |format|
       if @situation.save
 
@@ -35,7 +35,7 @@ class SituationsController < ApplicationController
           @situation.given_time_feelings << given_time_feeling
         end
         # format.html { redirect_to @situation, notice: 'Situation was successfully created.' }
-        format.html { redirect_to '/users/dashboard/1', notice: 'Situation was successfully created.' }
+        format.html { redirect_to '/users/situations/', notice: 'Situation was successfully created.' }
         format.json { render :show, status: :created, location: @situation }
       else
         format.html { render :new }
@@ -57,7 +57,7 @@ class SituationsController < ApplicationController
     respond_to do |format|
       if @situation.update(situation_params)
         @situation.update_feeling_before(params[:feelings_before])
-        format.html { redirect_to '/users/dashboard/1', notice: 'Situation was successfully created.' }
+        format.html { redirect_to '/users/situations', notice: 'Situation was successfully created.' }
         # format.html { redirect_to @situation, notice: 'Situation was successfully updated.' }
         format.json { render :show, status: :ok, location: @situation }
       else
@@ -77,6 +77,20 @@ class SituationsController < ApplicationController
     end
   end
 
+
+  def add_situation
+    @user = current_user
+    @situation = Situation.new
+    @feelings = Feeling.all
+    @feeling_ids = []
+  end
+
+  def edit_for_app
+    # ajaxでモーダルフォームをロードする
+    @feelings = Feeling.all
+    @feeling_ids = @situation.given_time_feelings.map { |given_time_feeling| given_time_feeling.feeling.id }
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -86,6 +100,6 @@ class SituationsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def situation_params
-    params.require(:situation).permit(:when, :where, :with_whom, :what_have_you_been_doing, :user_id)
+    params.require(:situation).permit(:when, :where, :with_whom, :what_have_you_been_doing)
   end
 end
