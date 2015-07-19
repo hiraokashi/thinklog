@@ -3,29 +3,21 @@ section.page-block
     .row.page-header
 
       h3
-        | 状況一覧
-    .row
-      - @user.situations.each do |situation|
-        h4
-          = situation.when + situation.where + situation.with_whom + situation.what_have_you_been_doing
-
-        - arranged_by_columns(situation.given_time_feelings, 2).each do |row, cols|
+        i.fa.fa-list-alt
+        | いやなこと一覧
+    .row.situation-unit
+      .col-lg-12.col-md-12.col-sm-12
+        - @user.situations.each do |situation|
           .row
-            - cols.each do |col_num, col|
-              .col-lg-6.col-md-6.col-sm-6
-                /= row.to_s + " " + col_num.to_s + " " + col.id.to_s
-                = render partial: "shared/given_time_feeling_unit", locals: {given_time_feeling: col}
+            .col-lg-9.col-md-9.col-sm-9[style=""]
+              p
+                = situation.toSentence
+              a.btn.btn-link[href="/situations/edit_for_app/#{situation.id}" style="font-size:30px" data-no-turbolink="true"]
+                i.fa.fa-pencil-square-o.fa-3x
+              a.btn.btn-success.btn-sm[href="/users/situation_summary/#{situation.id}" data-no-turbolink="true"]
+                | サマリーへ
 
-
-        a.btn.btn-success.btn-sm[href="/situations/edit_for_app/#{situation.id}" style="margin-left: 5px;"]
-          | 編集する
-        span.devider
-
-
-
-
-/ 新規作成用モーダル
-/ = render partial: 'shared/situation_modal_form', locals: {situation: @situation, user: @user, modal_id: 'situationNewModal', method: 'post', feeling_ids: @feeling_ids, feelings: @feelings}
-
-/　編集用モーダルロード位置
-/ #edit_form_pos
+              -situation.given_time_feelings.each do |given_time_feeling|
+                a.btn.btn-danger.btn-sm[href=step_path(given_time_feeling) data-no-turbolink="true"]
+                  = "#{given_time_feeling.feeling.contents }[#{given_time_feeling.status}実行中]"
+          span.devider

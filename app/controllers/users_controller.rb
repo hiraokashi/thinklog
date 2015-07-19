@@ -9,4 +9,11 @@ class UsersController < ApplicationController
 
 
   end
+
+
+  def situation_summary
+    #code
+    @user = current_user
+    @situation = Situation.find(params[:id])
+  end
 end

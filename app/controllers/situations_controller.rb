@@ -29,9 +29,9 @@ class SituationsController < ApplicationController
     respond_to do |format|
       if @situation.save
 
-        params[:feelings_before].each do |id, percentage|
-          # logger.debug("id= #{id}, percentage=#{percentage}")
-          given_time_feeling = @situation.given_time_feelings.build(before_percentage: percentage, feeling: Feeling.find(id))
+        params[:feelings].each do |id, percentage|
+          # logger.debug("id= #{id}, percentage=#{percentage}")"
+          given_time_feeling = @situation.given_time_feelings.build(after_percentage: percentage, before_percentage: percentage, feeling: Feeling.find(id), status: :step_2)
           @situation.given_time_feelings << given_time_feeling
         end
         # format.html { redirect_to @situation, notice: 'Situation was successfully created.' }
@@ -56,7 +56,7 @@ class SituationsController < ApplicationController
   def update
     respond_to do |format|
       if @situation.update(situation_params)
-        @situation.update_feeling_before(params[:feelings_before])
+        @situation.update_feeling_before(params[:feelings])
         format.html { redirect_to '/users/situations', notice: 'Situation was successfully created.' }
         # format.html { redirect_to @situation, notice: 'Situation was successfully updated.' }
         format.json { render :show, status: :ok, location: @situation }

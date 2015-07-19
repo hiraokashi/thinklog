@@ -6,19 +6,16 @@
 /  span
 /    | うんこうんこうんこうんこうんこうんこうんこうんこうんこうんこうんこうんこうんこうんこ
 
-.row
-  .col-lg-6.col-md-6.col-sm-6
-    .[style="margin-left:65px;"]
-      input.dial_ro[type="text" data-width="160" value="#{given_time_feeling.before_percentage.to_s}"]
-  .col-lg-6.col-md-6.col-sm-6
-    h3[style="margin-right: 45px; text-align:center;color:#ff6f69;"]
-      = given_time_feeling.feeling.contents
+/div[style="width:100px;height:200px;margin: 0px auto;"]
 
-    p
-      = given_time_feeling.situation.when + given_time_feeling.situation.where + given_time_feeling.situation.with_whom + given_time_feeling.situation.what_have_you_been_doing
 
-    a.btn.btn-success.btn-sm[style="margin-right: 5px;" href="/automatic_thoughts/think/#{given_time_feeling.automatic_thought.id}" data-no-turbolink="true"]
-      | Step2へ進む
+
+/  a.btn.btn-dismiss[href="/automatic_thoughts/think/#{given_time_feeling.automatic_thought.id}"]
+
+/  i.fa.fa-medkit
+
+/input.dial_ro[style="z-index:0;" type="text" data-width="50" value="#{given_time_feeling.before_percentage.to_s}"]
+
 
 /a.btn.btn-danger.btn-block[href="#" data-toggle="modal" data-target="#given_time_feeling#{given_time_feeling.id}" style="margin-bottom:2px;text-align:left;"]
 /  = given_time_feeling.feeling.contents + ' (' + given_time_feeling.before_percentage.to_s  + '%)　　　'

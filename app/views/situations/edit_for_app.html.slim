@@ -29,7 +29,7 @@ section.page-block
         .feeling_select
           - unless @situation.given_time_feelings.nil?
             - @situation.given_time_feelings.each do |given_time_feeling|
-              = render partial: "shared/feeling", locals: {feeling: given_time_feeling.feeling, percentage: given_time_feeling.before_percentage, after: nil}
+              = render partial: "shared/feeling", locals: {feeling: given_time_feeling.feeling, percentage: given_time_feeling.before_percentage, read_only: nil}
 
         hr
 

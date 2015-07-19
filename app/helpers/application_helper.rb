@@ -23,4 +23,11 @@ module ApplicationHelper
     arranged_list
   end
 
+  def step_path(given_time_feeling)
+    return "/automatic_thoughts/think/#{given_time_feeling.automatic_thought.id}" if given_time_feeling.step_2?
+    return "/automatic_thoughts/think_deeply/#{given_time_feeling.automatic_thought.id}" if given_time_feeling.step_3?
+    return "/automatic_thoughts/think_adaptively/#{given_time_feeling.automatic_thought.id}" if given_time_feeling.step_4?
+    return "#" #ありえない
+  end
+
 end

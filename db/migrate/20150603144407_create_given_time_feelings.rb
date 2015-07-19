@@ -5,6 +5,7 @@ class CreateGivenTimeFeelings < ActiveRecord::Migration
       t.references :situation, index: true, foreign_key: true
       t.integer :before_percentage
       t.integer :after_percentage
+      t.integer :status
 
       t.timestamps null: false
     end

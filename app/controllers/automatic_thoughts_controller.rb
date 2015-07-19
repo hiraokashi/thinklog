@@ -43,7 +43,7 @@ class AutomaticThoughtsController < ApplicationController
     respond_to do |format|
       if @automatic_thought.update(automatic_thought_params)
         @automatic_thought.update_distortion(params[:distortion_pattern])
-        @automatic_thought.given_time_feeling.update_after_percentage(params[:feelings_after])
+        @automatic_thought.given_time_feeling.update_after_percentage(params[:feelings])
         format.html { redirect_to @automatic_thought, notice: 'Automatic thought was successfully updated.' }
         format.json { render :show, status: :ok, location: @automatic_thought }
       else
@@ -56,6 +56,7 @@ class AutomaticThoughtsController < ApplicationController
   def update_basis_and_rebuttal
     respond_to do |format|
       if @automatic_thought.update_basis_and_rebuttal(params[:basis], params[:rebuttal])
+        @automatic_thought.given_time_feeling.update_after_percentage(params[:feelings])
         format.html { redirect_to @automatic_thought, notice: 'Automatic thought was successfully updated.' }
         format.json { render :show, status: :ok, location: @automatic_thought }
       else
@@ -69,6 +70,7 @@ class AutomaticThoughtsController < ApplicationController
   def update_adaptive_thought
     respond_to do |format|
       if @automatic_thought.update_adaptive_thought(params[:adaptive_thought])
+        @automatic_thought.given_time_feeling.update_after_percentage(params[:feelings])
         format.html { redirect_to @automatic_thought, notice: 'Automatic thought was successfully updated.' }
         format.json { render :show, status: :ok, location: @automatic_thought }
       else

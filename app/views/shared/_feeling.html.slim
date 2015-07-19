@@ -1,17 +1,13 @@
 span.devider
 
-.row[id="selected_feeling#{feeling.id}"]
-  .col-lg-12.col-md-12.col-sm-12.feeling_name[ style="height:100px;"]
-    .form-group[]
-      .row
-        .col-lg-2.col-md-2.col-sm-2[ style="height:100px;"]
-          h4[style="padding-left:0px;padding-right:0px;margin-top:30px;color:#ff6f69;"]
+.row.feeling-input[id="selected_feeling#{feeling.id}"]
+  .col-lg-12.col-md-12.col-sm-12.feeling_name
+    div[style="width:80px; height:120px;margin: 0px auto;"]
+      h4[style="color:#ff6f69; text-align:center"]
+        = feeling.contents
 
-            = feeling.contents
+      - if read_only.nil?
+        input.dial[type="text" name="feelings[#{feeling.id}]" data-width="80" value=percentage]
 
-        .col-lg-3.col-md-3.col-sm-3[ style="height:100px;"]
-          - if read_only.nil?
-            input.dial[type="text" name="feelings_after[#{feeling.id}]" data-width="80" value=percentage]
-
-          - else
-            input.dial_ro[type="text" name="feelings_after[#{feeling.id}]" data-width="80" value=percentage]
+      - else
+        input.dial_ro[type="text" name="feelings[#{feeling.id}]" data-width="80" value=percentage]

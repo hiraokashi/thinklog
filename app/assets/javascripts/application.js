@@ -59,7 +59,9 @@ $(function() {
     //alert($("#progressBar").css("height"))
     var $progressDiv = $("#progressBar");
     //var $progressBar = $progressDiv.progressStep({ activeColor: "#ff6f69" ,margin: 30});
-    $progressBar.refreshLayout();
+    if ($("#progressBar").size() > 0) {
+      $progressBar.refreshLayout();
+    }
 
   });
 });

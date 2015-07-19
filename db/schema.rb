@@ -92,6 +92,7 @@ ActiveRecord::Schema.define(version: 20150603144746) do
     t.integer  "situation_id"
     t.integer  "before_percentage"
     t.integer  "after_percentage"
+    t.integer  "status"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
   end

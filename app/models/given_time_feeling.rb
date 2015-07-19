@@ -3,6 +3,8 @@ class GivenTimeFeeling < ActiveRecord::Base
   belongs_to :situation
   has_one :automatic_thought,  :dependent => :destroy
 
+  enum status:  {step_1: 0, step_2: 1, step_3: 2, step_4: 3, finished: 4}
+
   def update_after_percentage(percentage_s)
     self.after_percentage = percentage_s[self.feeling.id.to_s].to_i
     self.save
