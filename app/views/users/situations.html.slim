@@ -28,8 +28,7 @@ section.page-block
                       - cols.each do |col_num, given_time_feeling|
                         .col-lg-3.col-md-3.col-sm-3
                           .btn-group[style="margin:0px auto;"]
-                            a
-                            .btn.btn-danger[style="margin-right:0px;margin-bottom:2px;" type="button" href=step_path(given_time_feeling) data-no-turbolink="true"]
+                            a.btn.btn-danger[style="margin-right:0px;margin-bottom:2px;" type="button" href=step_path(given_time_feeling) data-no-turbolink="true"]
                               = "#{given_time_feeling.feeling.contents }"
 
                             button.btn.btn-danger.dropdown-toggle[style="margin-bottom:2px;padding-left:10px;width:20px;" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"]
