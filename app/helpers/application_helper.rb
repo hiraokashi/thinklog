@@ -30,4 +30,14 @@ module ApplicationHelper
     return "#" #ありえない
   end
 
+  def accordion_not_collapsed?(target_id, cur_id)
+    return "collapsed" if target_id != cur_id
+    return ""
+  end
+
+  def accordion_in?(target_id, cur_id)
+    return "in" if target_id == cur_id
+    return ""
+  end
+
 end

@@ -21,8 +21,36 @@
 
 $(function() {
 
+  // サマリーの感情変化グラフ
+  $('.feeling_before_after_chart').ready(function(){
+      //alert("unkoooooo")
+      $('.feeling_before_after_chart').each(function(i,elem){
+        var barChartData = {
+          labels: ["記録前", "記録後"],
+          datasets: [{
+            fillColor: "rgba(255,111,105,0.5)",
+            strokeColor: "rgba(255,111,105,1)",
+            data: [parseInt($(elem).find("input[name='before']").val()), parseInt($(elem).find("input[name='after']").val())]
+          }]
+        }
 
-
+        //alert($(elem).find("input[name='before']").val())
+        $(elem).find('canvas').waypoint(function(data) {
+          var option = {
+            scaleOverride : true,
+            // Y 軸の値の始まりの値
+            scaleSteps : 5,
+            scaleStepWidth : 20,
+            // Y 軸の値の始まりの値
+            scaleStartValue : 0
+          }
+          var barChart = new Chart($(elem).find('canvas')[0].getContext("2d")).Bar(barChartData, option);
+        }, {
+          offset: '75%',
+          triggerOnce: true
+        });
+      });
+  });
 
 
 
