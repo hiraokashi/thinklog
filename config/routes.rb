@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   get 'users/dashboard' => 'users#dashboard'
   get 'users/situations' => 'users#situations'
-  get 'users/situation_summary/:id' => 'users#situation_summary'
+  get 'users/given_time_feeling_summary/:id' => 'users#given_time_feeling_summary'
   get 'situations/edit_modal/:id' => 'situations#edit_modal'
   get 'situations/edit_for_app/:id' => 'situations#edit_for_app'
   get 'situations/add_situation' => 'situations#add_situation'

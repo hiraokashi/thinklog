@@ -11,9 +11,9 @@ class UsersController < ApplicationController
   end
 
 
-  def situation_summary
+  def given_time_feeling_summary
     #code
     @user = current_user
-    @situation = Situation.find(params[:id])
+    @given_time_feeling = GivenTimeFeeling.find(params[:id])
   end
 end

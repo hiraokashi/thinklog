@@ -1,0 +1,37 @@
+section.page-block
+  .container
+    .row.page-header
+      h3
+        i.fa.fa-list-alt
+        | 思考記録サマリー
+
+    .row
+      .col-lg-9.col-md-9.col-sm-9[style=""]
+        h4
+          i.fa.fa-heart
+          | 状況の記録
+          a.btn.btn-link[href="/situations/edit_for_app/#{@given_time_feeling.situation.id}" style="font-size:30px" ]
+            i.fa.fa-pencil-square-o.fa-3x
+        p
+          = @given_time_feeling.situation.toSentence
+
+    .row
+      .col-lg-6.col-md-6.col-sm-6.chart
+        h5
+          = @given_time_feeling.feeling.contents
+        .feeling_before_after_chart[width="550" height="320"]
+          input[type="hidden" name="before" value=@given_time_feeling.before_percentage]
+          input[type="hidden" name="after" value=@given_time_feeling.after_percentage]
+          canvas
+
+    .row
+      .col-lg-12.col-md-12.col-sm-12
+        - arranged_by_columns(@given_time_feeling.others, 3).each do |row, cols|
+          .row
+            - cols.each do |col_num, given_time_feeling|
+              .col-lg-4.col-md-4.col-sm-4
+                h4
+                  i.fa.a-arrow-right
+                  =given_time_feeling.feeling.contents
+                  a.btn.btn-dismiss[style="margin: 5px;font-size:30px;" href="/users/given_time_feeling_summary/#{given_time_feeling.id}" data-no-turbolink="true"]
+                    i.fa.fa-medkit

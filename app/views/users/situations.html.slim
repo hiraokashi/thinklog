@@ -12,12 +12,22 @@ section.page-block
             .col-lg-9.col-md-9.col-sm-9[style=""]
               p
                 = situation.toSentence
-              a.btn.btn-link[href="/situations/edit_for_app/#{situation.id}" style="font-size:30px" data-no-turbolink="true"]
-                i.fa.fa-pencil-square-o.fa-3x
-              a.btn.btn-success.btn-sm[href="/users/situation_summary/#{situation.id}" data-no-turbolink="true"]
-                | サマリーへ
+                a.btn.btn-link[href="/situations/edit_for_app/#{situation.id}" style="font-size:30px" data-no-turbolink="true"]
+                 i.fa.fa-pencil-square-o.fa-3x
+          .row
+            .col-lg-12.col-md-12.col-sm-12
+              - arranged_by_columns(situation.given_time_feelings, 2).each do |row, cols|
+                .row
+                  - cols.each do |col_num, given_time_feeling|
+                    .col-lg-6.col-md-6.col-sm-6
+                      span
+                        = "#{given_time_feeling.feeling.contents }"
 
-              -situation.given_time_feelings.each do |given_time_feeling|
-                a.btn.btn-danger.btn-sm[href=step_path(given_time_feeling) data-no-turbolink="true"]
-                  = "#{given_time_feeling.feeling.contents }[#{given_time_feeling.status}実行中]"
+                      span
+                        a.btn.btn-link[href=step_path(given_time_feeling) data-no-turbolink="true"]
+                          = "#{given_time_feeling.status}実行"
+
+                      span
+                        a.btn.btn-link[href="/users/given_time_feeling_summary/#{given_time_feeling.id}" data-no-turbolink="true"]
+                          | サマリー
           span.devider

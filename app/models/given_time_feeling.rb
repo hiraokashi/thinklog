@@ -23,4 +23,10 @@ class GivenTimeFeeling < ActiveRecord::Base
   after_update  do
     #logger.debug("GivenTimeFeeling after_update")
   end
+
+  #同じ親に属する自分以外の感情
+  def others
+    self.situation.given_time_feelings.select {|given_time_feeling| given_time_feeling.id != self.id}
+    #code
+  end
 end
