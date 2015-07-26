@@ -31,7 +31,7 @@ class SituationsController < ApplicationController
 
         params[:feelings].each do |id, percentage|
           # logger.debug("id= #{id}, percentage=#{percentage}")"
-          given_time_feeling = @situation.given_time_feelings.build(after_percentage: percentage, before_percentage: percentage, feeling: Feeling.find(id), status: :step_2)
+          given_time_feeling = @situation.given_time_feelings.build(step1_percentage: percentage, step2_percentage: percentage, step3_percentage: percentage, step4_percentage: percentage, feeling: Feeling.find(id), status: :step_1)
           @situation.given_time_feelings << given_time_feeling
         end
         # format.html { redirect_to @situation, notice: 'Situation was successfully created.' }

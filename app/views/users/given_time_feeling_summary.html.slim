@@ -1,37 +1,72 @@
 section.page-block
   .container
-    .row.page-header
-      h3
-        i.fa.fa-list-alt
-        | 思考記録サマリー
-
     .row
-      .col-lg-9.col-md-9.col-sm-9[style=""]
-        h4
-          i.fa.fa-heart
-          | 状況の記録
-          a.btn.btn-link[href="/situations/edit_for_app/#{@given_time_feeling.situation.id}" style="font-size:30px" ]
-            i.fa.fa-pencil-square-o.fa-3x
-        p
-          = @given_time_feeling.situation.toSentence
-
-    .row
-      .col-lg-6.col-md-6.col-sm-6.chart
-        h5
-          = @given_time_feeling.feeling.contents
-        .feeling_before_after_chart[width="550" height="320"]
-          input[type="hidden" name="before" value=@given_time_feeling.before_percentage]
-          input[type="hidden" name="after" value=@given_time_feeling.after_percentage]
-          canvas
+      #progressBar
+      .div[id=current_step_id(@given_time_feeling.status)]
 
     .row
       .col-lg-12.col-md-12.col-sm-12
-        - arranged_by_columns(@given_time_feeling.others, 3).each do |row, cols|
-          .row
-            - cols.each do |col_num, given_time_feeling|
-              .col-lg-4.col-md-4.col-sm-4
-                h4
-                  i.fa.a-arrow-right
-                  =given_time_feeling.feeling.contents
-                  a.btn.btn-dismiss[style="margin: 5px;font-size:30px;" href="/users/given_time_feeling_summary/#{given_time_feeling.id}" data-no-turbolink="true"]
-                    i.fa.fa-medkit
+        h3
+          i.fa.fa-heart
+          | 気分の変化
+
+        h4
+          = @given_time_feeling.feeling.contents
+        = render partial: "shared/one_data_series_bar_chart", locals: {datalabels: @feeling_series_datalabels, datapoints: @feeling_series_datapoints}
+
+
+        span
+          | ほかの気分 ->
+
+        - @given_time_feeling.others.each do |given_time_feeling|
+          span
+            a[href="/users/given_time_feeling_summary/#{given_time_feeling.id}" data-no-turbolink="true"]
+              =given_time_feeling.feeling.contents
+
+    .row
+      .col-lg-12.col-md-12.col-sm-12
+        h3
+          | ステップ1 （状況を記録しよう）
+
+        p
+          = @given_time_feeling.situation.toSentence
+
+        a.btn.btn-link[href="/situations/edit_for_app/#{@given_time_feeling.situation.id}"  data-no-turbolink="true"]
+          | 実行する
+
+    .row
+      .col-lg-12.col-md-12.col-sm-12
+        h3
+          | ステップ2 （自動思考を見つけよう）
+
+
+        a.btn.btn-default.btn-xs.tooltipped[data-toggle="tooltip" data-placement="bottom" title=@given_time_feeling.automatic_thought.contents]
+          | 自動思考
+        - @given_time_feeling.automatic_thought.distortion_patterns.each do |distortion_pattern|
+          a.btn.btn-success.tooltipped[data-toggle="tooltip" data-placement="bottom" title="#{distortion_pattern.cognitive_distortion.discription}"]
+            = distortion_pattern.cognitive_distortion.name
+
+        a.btn.btn-link[href="/automatic_thoughts/think/#{@given_time_feeling.automatic_thought.id}"  data-no-turbolink="true"]
+          | 実行する
+    .row
+      .col-lg-12.col-md-12.col-sm-12
+        h3
+          | ステップ3 (自動思考をつきつめよう)
+
+        a.btn.btn-default.btn-xs.tooltipped[data-toggle="tooltip" data-placement="bottom" title=@given_time_feeling.automatic_thought.bases[0].contents]
+          | 根拠
+        a.btn.btn-default.btn-xs.tooltipped[data-toggle="tooltip" data-placement="bottom" title=@given_time_feeling.automatic_thought.rebuttals[0].contents]
+          | 反証
+
+        a.btn.btn-link[href="/automatic_thoughts/think_deeply/#{@given_time_feeling.automatic_thought.id}"  data-no-turbolink="true"]
+          | 実行する
+    .row
+      .col-lg-12.col-md-12.col-sm-12
+        h3
+          | ステップ4 （適応的に考えよう）
+
+        a.btn.btn-default.btn-xs.tooltipped[data-toggle="tooltip" data-placement="bottom" title=@given_time_feeling.automatic_thought.adaptive_thoughts[0].contents]
+          | 適応的思考
+
+        a.btn.btn-link[href="/automatic_thoughts/think_adaptively/#{@given_time_feeling.automatic_thought.id}"  data-no-turbolink="true"]
+          | 実行する

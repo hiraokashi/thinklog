@@ -1,0 +1,6 @@
+.one_data_series_bar_chart[width="550" height="320"]
+  - datalabels.each do |key, value|
+    input.datalabel[type="hidden" name=key value=value]
+  - datapoints.each do |key, value|
+    input.datapoint[type="hidden" name=key value=value]
+  canvas

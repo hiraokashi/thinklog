@@ -1,10 +1,13 @@
-- percentage = @automatic_thought.given_time_feeling.after_percentage.to_s
+- percentage = @automatic_thought.given_time_feeling.step4_percentage.to_s
 
 section#faq.page-block
   .container
     .row
       #progressBar
-      #step4_think_adaptively
+      - if @automatic_thought.given_time_feeling.step_4?
+        #step4_think_adaptively
+      - if @automatic_thought.given_time_feeling.finished?
+        #therapy_finished
     .row.page-header
       .row
         .col-lg-12.col-md-12.col-sm-12
@@ -41,7 +44,7 @@ section#faq.page-block
                 label.control-label[for="basis[contents]"]
                   | 適応的思考
                 textarea.form-control[rows="6" name="adaptive_thought[contents]" placeholder="根拠、反証を合わせて適応的な思考を導こう" value=@automatic_thought.adaptive_thoughts[0].contents required]
-                  = @automatic_thought.bases[0].contents
+                  = @automatic_thought.adaptive_thoughts[0].contents
 
           .form-group
             label[for="feelings_after[#{@automatic_thought.given_time_feeling.feeling.id}]"]
@@ -50,3 +53,5 @@ section#faq.page-block
 
           button.btn.btn-primary.save_therapy_data[type="submit"]
             | 保存する
+          a.btn.btn-success.finish_therapy[href="/automatic_thoughts/progress_finished/#{@automatic_thought.id}"]
+            | 完了する

@@ -23,11 +23,24 @@ module ApplicationHelper
     arranged_list
   end
 
-  def step_path(given_time_feeling)
-    return "/automatic_thoughts/think/#{given_time_feeling.automatic_thought.id}" if given_time_feeling.step_2?
-    return "/automatic_thoughts/think_deeply/#{given_time_feeling.automatic_thought.id}" if given_time_feeling.step_3?
-    return "/automatic_thoughts/think_adaptively/#{given_time_feeling.automatic_thought.id}" if given_time_feeling.step_4?
+  def step_path(given_time_feeling, step)
+
+    return "/situations/edit_for_app/#{given_time_feeling.situation.id}" if step == "step_1"
+    return "/automatic_thoughts/think/#{given_time_feeling.automatic_thought.id}" if step == "step_2"
+    return "/automatic_thoughts/think_deeply/#{given_time_feeling.automatic_thought.id}" if step == "step_3"
+    return "/automatic_thoughts/think_adaptively/#{given_time_feeling.automatic_thought.id}" if step == "step_4"
+    logger.debug("うっほー")
     return "#" #ありえない
+  end
+
+  def current_step_id(step)
+    return "step1_situation" if step == "step_1"
+    return  "step2_find_automatic_thought" if step == "step_2"
+    return  "step3_think_automatic_thought" if step == "step_3"
+    return  "step4_think_adaptively" if step == "step_4"
+    return "step4_think_adaptively" if step == "finished"
+    logger.debug("うっほー")
+    return "" #ありえないパス
   end
 
   def accordion_not_collapsed?(target_id, cur_id)

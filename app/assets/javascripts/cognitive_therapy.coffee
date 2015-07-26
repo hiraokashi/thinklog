@@ -3,35 +3,30 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $ ->
-    $('input[type="range"]').rangeslider();
 
-    #新規作成モーダルの内容の初期化
-    $('#addSituation').click ->
-        $("#situationNewModalForm .feeling_select").empty()
-        $("#situationNewModalForm div input[type='text']").val('')
-        $("#situationNewModalForm a.btn.btn-xs.btn-default").removeClass('btn-default')
-        $("#situationNewModalForm a.btn.btn-xs").addClass('btn-primary')
+    $('.finish_therapy').click ->
+      # 操作対象のフォーム要素を取得
 
-    #編集用フォームをロードする
-    $('.edit_situation').click ->
-      #複数回実行時のためにいったん空にしておく
-      $("#edit_form_pos").empty()
-      situation_id   = $(this).attr('id').replace('situation_id_', '')
-
+      $link = $(this)
+      button_name = $link.text()
       $.ajax
-        url: '/situations/edit_modal/' + situation_id
-        type:'GET'
-        dataType: 'html'
+        url: $link.attr('href')
+        type: 'get'
         timeout:10000
-        success: (data) ->
-          alert(data)
-          $(data).prependTo("#edit_form_pos")
-          $('#situationEditModal').modal('show')
-        error: (data) ->
-          alert("編集画面のロードに失敗しました")
+        beforeSend: () ->
+          $link.attr('disabled', true);
+          $link.text('保存中')
+        success: () ->
+          alert("進捗を更新しました！")
+        error: () ->
+          alert("データの保存に失敗しました")
+        complete: () ->
+          $link.attr('disabled', false)
+          $link.text(button_name)
 
       false
 
+    #保存する(step2以降)
     $('.save_therapy_data').click ->
       #codes...
       $button = $(this)
