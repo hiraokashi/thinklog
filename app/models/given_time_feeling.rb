@@ -106,9 +106,9 @@ class GivenTimeFeeling < ActiveRecord::Base
     # code
   end
 
-  # 実行済みのステップをリストで返却する
-  def executed_steps
-    return 1 if self.step_1?
+  # 実行済できるステップを返却する
+  def executable_steps
+    return 2 if self.step_1?
     return 2 if self.step_2?
     return 3 if self.step_3?
     return 4 if self.step_4?

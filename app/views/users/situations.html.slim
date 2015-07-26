@@ -37,7 +37,7 @@ section.page-block
                             ul.dropdown-menu.list-unstyled[style="margin-left:13px"]
                               li.dropdown-header
                                 = "#{given_time_feeling.status_jp}まで進んでいます。"
-                              - (1..given_time_feeling.executed_steps).each do |step|
+                              - (1..given_time_feeling.executable_steps).each do |step|
                                 li
                                   a[href=step_path(given_time_feeling, "step_#{step}") data-no-turbolink="true"]
                                     = "ステップ#{step}を実行する"
