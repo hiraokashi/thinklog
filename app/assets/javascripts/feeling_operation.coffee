@@ -8,9 +8,12 @@ $ ->
       if button.hasClass('btn-default')
         #ドキュメントから削除する
         $("#selected_feeling" + feeling_id).remove()
+        $("#go_step2_feeling" + feeling_id).remove()
 
         button.removeClass('btn-default')
         button.addClass('btn-primary')
+
+        alert(button.text() + "を削除しました。更新を確定するには保存を実行してください。")
 
         false
       else
@@ -21,11 +24,13 @@ $ ->
           dataType: 'html'
           timeout:10000
           success: (data) ->
+
             $(data).prependTo(button.parent().children().filter('.feeling_select'))
             #button.addClass('disabled')
             button.removeClass('btn-primary')
             button.addClass('btn-default')
-            #button.text(button.text() + '(削除)')
+            #button.text(button.text() + '(削除)')alert("step2に進むには保存して下さい")
+            alert($(data).find('h4').text() + "のstep2に進むには保存して下さい")
           error: (data) ->
             alert("感情の選択に失敗しました")
 

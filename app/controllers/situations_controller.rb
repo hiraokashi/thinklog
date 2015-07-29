@@ -35,7 +35,7 @@ class SituationsController < ApplicationController
           @situation.given_time_feelings << given_time_feeling
         end
         # format.html { redirect_to @situation, notice: 'Situation was successfully created.' }
-        format.html { redirect_to '/users/situations/', notice: 'Situation was successfully created.' }
+        format.html { redirect_to '/situations/edit_for_app/#{@situation.id}', notice: 'Situation was successfully created.' }
         format.json { render :show, status: :created, location: @situation }
       else
         format.html { render :new }
@@ -57,7 +57,7 @@ class SituationsController < ApplicationController
     respond_to do |format|
       if @situation.update(situation_params)
         @situation.update_feeling_before(params[:feelings])
-        format.html { redirect_to '/users/situations', notice: 'Situation was successfully created.' }
+        format.html { redirect_to "/situations/edit_for_app/#{@situation.id}", notice: 'Situation was successfully created.' }
         # format.html { redirect_to @situation, notice: 'Situation was successfully updated.' }
         format.json { render :show, status: :ok, location: @situation }
       else

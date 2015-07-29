@@ -24,7 +24,13 @@ section#apps.page-block.mobile-apps
             .row
               .col-lg-12.col-md-12
                 p.text-justify
-                  | 気持ちが、沈んだり、不安になったり、人間関係に悩むとき、ThinkLogはそんなあなたのこころをラクにするためのお手伝いをします。本サービスは、主に、うつ病等の治療に実績にある、「認知療法」という治療にヒントを得て開発しました。
+                  | ThinkLogは、主に、うつ病等の治療に実績にある、「認知療法」という治療のなかの「コラム法（思考記録法）」にヒントを得た、心のセルフヘルプアプリです。
+                p.text-justify
+                  | 気持ちが沈んだり、不安になったり、人間関係に悩むとき、 無意識のうちに、思考に特有の偏りが生じています。
+                  | この思考の偏りを客観的にみつめる作業をすることで、ネガティブな気分を軽くすることができます。
+                p.text-justify
+                  | ThinkLogはその作業を、より身近に、そして簡単に行う環境をみなさまへ提供します。
+
       .col-lg-7.col-md-7
         img.pull-right[src="/images/hero-slider/baby.png" width="631" height="800" alt="Components and Styles"]
 
@@ -40,66 +46,66 @@ section.page-block.color#diagnosis-block[style="margin-top: 50px;"]
         center
           img [src="images/ajax-preloader.gif" ]
 
-section#features.page-block
-  .container
-    .link_resorces
-      = link_to "認知の歪み一覧", cognitive_distortions_path
-    .link_resorces
-      = link_to "アダルトチルドレン特徴一覧", adult_children_traits_path
-    .link_resorces
-      = link_to "共依存特徴", co_independent_traits_path
-    .link_resorces
-      = link_to "感情", feelings_path
-    .link_resorces
-      = link_to "状況", situations_path
-    .link_resorces
-      = link_to "今の気持ち", given_time_feelings_path
-    .link_resorces
-      = link_to "自動思考", automatic_thoughts_path
-    .link_resorces
-      = link_to "歪みぱた−ん", distortion_patterns_path
-    .link_resorces
-      = link_to "根拠", bases_path
-    .link_resorces
-      = link_to "反証", rebuttals_path
-    .link_resorces
-      = link_to "適応的思考", adaptive_thoughts_path
-    .link_resorces
-      = link_to '認知療法開始', 'cognitive_therapy/therapy_start/1'
-    .link_resorces
-      = link_to 'ダッシュボード', 'users/dashboard', data: { no_turbolink: true }
+/section#features.page-block
+/  .container
+/    .link_resorces
+/      = link_to "認知の歪み一覧", cognitive_distortions_path
+/    .link_resorces
+/      = link_to "アダルトチルドレン特徴一覧", adult_children_traits_path
+/    .link_resorces
+/      = link_to "共依存特徴", co_independent_traits_path
+/    .link_resorces
+/      = link_to "感情", feelings_path
+/    .link_resorces
+/      = link_to "状況", situations_path
+/    .link_resorces
+/      = link_to "今の気持ち", given_time_feelings_path
+/    .link_resorces
+/      = link_to "自動思考", automatic_thoughts_path
+/    .link_resorces
+/      = link_to "歪みぱた−ん", distortion_patterns_path
+/    .link_resorces
+/      = link_to "根拠", bases_path
+/    .link_resorces
+/      = link_to "反証", rebuttals_path
+/    .link_resorces
+/      = link_to "適応的思考", adaptive_thoughts_path
+/    .link_resorces
+/      = link_to '認知療法開始', 'cognitive_therapy/therapy_start/1'
+/    .link_resorces
+/      = link_to 'ダッシュボード', 'users/dashboard', data: { no_turbolink: true }
 
-    p.navbar-text.pull-right
-      - if user_signed_in?
-        |  Logged in as
-        strong
-          = current_user.email
-        | .
-        .link_resorces
-          = link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link', data: { no_turbolink: true }
-        .link_resorces
-          = link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link', data: { no_turbolink: true }
-      - else
-        .link_resorces
-          = link_to "Sign up", new_user_registration_path, :class => 'navbar-link', data: { no_turbolink: true }
+/    p.navbar-text.pull-right
+/      - if user_signed_in?
+/        |  Logged in as
+/        strong
+/          = current_user.email
+/        | .
+/        .link_resorces
+/          = link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link', data: { no_turbolink: true }
+/        .link_resorces
+/          = link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link', data: { no_turbolink: true }
+/      - else
+/        .link_resorces
+/          = link_to "Sign up", new_user_registration_path, :class => 'navbar-link', data: { no_turbolink: true }
 
-        .link_resorces
-          = link_to "Login", new_user_session_path, :class => 'navbar-link', data: { no_turbolink: true }
+/        .link_resorces
+/          = link_to "Login", new_user_session_path, :class => 'navbar-link', data: { no_turbolink: true }
 
 
-.row
-  .col-lg-12.col-md-12.col-sm-12.feeling_name
-    .form-group
-      a.btn.btn-danger.btn-lg.btn-block
-        input.feeling[type="range" name="feelings_before" min="0" max="100" step="1" value=30]
+/row
+/  .col-lg-12.col-md-12.col-sm-12.feeling_name
+/    .form-group
+/      a.btn.btn-danger.btn-lg.btn-block
+/        input.feeling[type="range" name="feelings_before" min="0" max="100" step="1" value=30]
 
-.row
-  .col-lg-6.col-md-6.col-sm-6
-    .row
-      .col-lg-3.col-md-3.col-sm-3
-        div[style="float:left; width:110px;"]
-          input[type="text" data-width="100" value="25" class="dial"]
-        div[style="float:left; width:100px;"]
-          span
-            | hiraoka
-      .col-lg-6.col-md-6.col-sm-6
+/row
+/  .col-lg-6.col-md-6.col-sm-6
+/    .row
+/      .col-lg-3.col-md-3.col-sm-3
+/        div[style="float:left; width:110px;"]
+/          input[type="text" data-width="100" value="25" class="dial"]
+/        div[style="float:left; width:100px;"]
+/          span
+/            | hiraoka
+/      .col-lg-6.col-md-6.col-sm-6
