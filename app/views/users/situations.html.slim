@@ -1,22 +1,31 @@
+section.page-block.color[style="margin-top: 50px;"]
+  .container[style="min-height:180px;"]
+    .row
+      .countdown#now[style="font-size: 20px;margin-top: 20px;"]
+      h2.text-center.text-light
+        | 今、嫌な気分？
+      center
+        div[style="width: 250px;"]
+          a.btn.btn-block.btn-success.create_as_empty[href="/situations/create_as_empty"]
+            | うん。記録は後で
+        div[style="width: 250px;"]
+          a.btn.btn-block.btn-success[href="/situations/start_step1"]
+            | うん。出来事を記録する
+
 section.page-block
   .container
-    .row.page-header
-
-      h3
-        i.fa.fa-list-alt
-        | いやなこと一覧
     .row.situation-unit
       .col-lg-12.col-md-12.col-sm-12
         #situation-list.panel-group
           - @situations.each do |situation|
             .panel
-              a.panel-heading[class=accordion_not_collapsed?(@situations.size, situation.id.to_i) data-toggle="collapse" data-parent="#situation-list" href="#collapse#{situation.id}"]
-                = situation.when
+              a.panel-heading[class=accordion_not_collapsed?(@situations.first.id.to_i, situation.id.to_i) data-toggle="collapse" data-parent="#situation-list" href="#collapse#{situation.id}"]
+                = "#{situation.occured_time_for_view}のいやな気分"
                 .indicator
                  .icon
                    span.hr-line
                    span.vr-line
-              .panel-collapse.collapse[id="collapse#{situation.id}" class=accordion_in?(@situations.size, situation.id.to_i) ]
+              .panel-collapse.collapse[id="collapse#{situation.id}" class=accordion_in?(@situations.first.id.to_i, situation.id.to_i) ]
                 .panel-body
                   p
                     = situation.toSentence

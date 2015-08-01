@@ -3,7 +3,7 @@
 
 User.create(email: 'hiraoka@gmail.com', password: '12345678', password_confirmation: '12345678')
 #状況
-Situation.create({:when=>"いつー？", :where=>"どこでー？", :with_whom=>"だれと", :what_have_you_been_doing=>"何をしているとき", :user_id=>1})
+Situation.create({:when=>"いつー？", :where=>"どこでー？", :with_whom=>"だれと", :what_have_you_been_doing=>"何をしているとき", :occured_time=>"201507312143245", :user_id=>1})
 situation = Situation.find(1)
 
 

@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(version: 20150603144746) do
     t.text     "where"
     t.text     "with_whom"
     t.text     "what_have_you_been_doing"
+    t.string   "occured_time"
     t.integer  "user_id"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false

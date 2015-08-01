@@ -2,6 +2,28 @@ class Situation < ActiveRecord::Base
   belongs_to :user
   has_many :given_time_feelings, :dependent => :delete_all
 
+  def set_empty(occured_time, user)
+    self.when = ""
+    self.where = ""
+    self.with_whom = ""
+    self.what_have_you_been_doing = ""
+    self.occured_time = occured_time
+    self.user = user
+    #code
+  end
+
+  #yyyymmmmddhhMMssを 2015 / 08 / 01 (Sat) 16:42:36 形式にする
+  def occured_time_for_view
+    #code
+    #wNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+    "#{self.occured_time[0..3]}/ \
+    #{self.occured_time[4..5]}/  \
+    #{self.occured_time[6..7]}   \
+    (#{['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][self.occured_time[8, 1].to_i]}) \
+    #{self.occured_time[9..10]}:  \
+    #{self.occured_time[11..12]}: \
+    #{self.occured_time[13..14]}"
+  end
 
   def toSentence
 

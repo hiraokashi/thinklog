@@ -10,7 +10,7 @@ section.page-block
     .row.page-header
 
       .col-lg-12.col-md-12.col-sm-12
-        a.btn.btn-default.btn-xs[href="/users/dashboard/#{@user.id}" data-no-turbolink="true"]
+        a.btn.btn-default.btn-xs[href="/situations/edit_for_app/#{@automatic_thought.given_time_feeling.situation.id}" data-no-turbolink="true"]
           i.fa.fa-caret-left
           | 前のステップ
         a.btn.btn-default.btn-xs[href="/automatic_thoughts/think_deeply/#{@automatic_thought.id}" data-no-turbolink="true"]
@@ -50,12 +50,12 @@ section.page-block
             label[for="feelings_after[#{@automatic_thought.given_time_feeling.feeling.id}]"]
               | 気持ちに変化があったら更新しよう
             = render partial: "shared/feeling", locals: {feeling: @automatic_thought.given_time_feeling.feeling, percentage: percentage, read_only: nil}
-
+          div[style="clear:both;;"]
           #distortion_selecter
             - @automatic_thought.distortion_patterns.each do |distortion_pattern|
               input[type="hidden" name="distortion_pattern[#{distortion_pattern.cognitive_distortion.id}]" value=distortion_pattern.cognitive_distortion.id]
 
-          button.btn.btn-primary.save_therapy_data[type="submit"]
+          button.btn.btn-primary.save_therapy_data[style="position: fixed; bottom: 300px; right: 0px; z-index:10;" type="submit"]
             | 保存する
           a.btn.btn-primary.go_next_step.save_therapy_data[href="/automatic_thoughts/think_deeply/#{@automatic_thought.id}" data-no-turbolink="true"]
             i.fa.fa-caret-right

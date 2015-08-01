@@ -91,6 +91,14 @@ class SituationsController < ApplicationController
     @feeling_ids = @situation.given_time_feelings.map { |given_time_feeling| given_time_feeling.feeling.id }
   end
 
+  def create_as_empty
+    @user = current_user
+    @situation = Situation.new
+    @situation.set_empty(params[:occured_time], @user)
+    @situation.save
+    #code
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
