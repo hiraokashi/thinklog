@@ -25,7 +25,7 @@ class SituationsController < ApplicationController
   # POST /situations.json
   def create
     @situation = Situation.new(situation_params)
-    @situation.user = current_user
+    @situation.mood_status = 2 # 今の所いやな気持ちのみ
     respond_to do |format|
       if @situation.save
 
@@ -93,11 +93,18 @@ class SituationsController < ApplicationController
 
   def create_as_empty
     @user = current_user
+
     @situation = Situation.new
+    @situation.user = @user
+    @situation.mood_status = params[:mood_status].to_i
     @situation.set_empty(params[:occured_time], @user)
     @situation.save
-    #code
+
+    @situations = Situation.where(user_id: @user.id).negative.order(:updated_at).reverse_order
+    render layout: false # レイアウトをなしにする場合
+
   end
+
 
   private
 

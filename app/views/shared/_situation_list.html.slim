@@ -1,0 +1,37 @@
+.col-lg-12.col-md-12.col-sm-12
+  #situation-list.panel-group
+    - situations.each do |situation|
+      .panel
+        a.panel-heading[class=accordion_not_collapsed?(situations.first.id.to_i, situation.id.to_i) data-toggle="collapse" data-parent="#situation-list" href="#collapse#{situation.id}"]
+          = "#{situation.occured_time_for_view}のいやな気分"
+          .indicator
+           .icon
+             span.hr-line
+             span.vr-line
+        .panel-collapse.collapse[id="collapse#{situation.id}" class=accordion_in?(situations.first.id.to_i, situation.id.to_i) ]
+          .panel-body
+            p
+              = situation.toSentence
+            - arranged_by_columns(situation.given_time_feelings, 4).each do |row, cols|
+              .row[style="padding-top:0px;"]
+                - cols.each do |col_num, given_time_feeling|
+                  .col-lg-3.col-md-3.col-sm-3
+                    .btn-group[style="margin:0px auto;"]
+                      a.btn.btn-danger[style="margin-right:0px;margin-bottom:2px;" type="button" href=step_path(given_time_feeling, given_time_feeling.status) data-no-turbolink="true"]
+                        = "#{given_time_feeling.feeling.contents }(#{given_time_feeling.current_percentage.to_s}%)"
+
+                      button.btn.btn-danger.dropdown-toggle[style="margin-bottom:2px;padding-left:10px;width:20px;" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"]
+                        span.caret
+                        span.sr-only
+                          | Toggle dropdown
+                      ul.dropdown-menu.list-unstyled[style="margin-left:13px"]
+                        li.dropdown-header
+                          = "#{given_time_feeling.status_jp}まで進んでいます。"
+                        - (1..given_time_feeling.executable_steps).each do |step|
+                          li
+                            a[href=step_path(given_time_feeling, "step_#{step}") data-no-turbolink="true"]
+                              = "ステップ#{step}を実行する"
+                        li.divider[role="separator"]
+                        li
+                          a[href="/users/given_time_feeling_summary/#{given_time_feeling.id}" data-no-turbolink="true"]
+                            | 進捗状況の詳細の確認

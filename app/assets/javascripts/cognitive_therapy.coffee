@@ -4,10 +4,9 @@
 
 $ ->
 
-    $('.create_as_empty').click ->
-
+    #現在時刻を文字列で返す関数
+    occured_time =  ->
       now = new Date()
-      #「年」「月」「日」「曜日」を Date オブジェクトから取り出してそれぞれに代入
       y = now.getFullYear()
       m = now.getMonth() + 1
       d = now.getDate()
@@ -25,56 +24,67 @@ $ ->
         min = '0' + min
       if sec < 10
         sec = '0' + sec
+      wNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
-      occured_time = y + m + d + w + h + min + sec
+      return  [y, m, d, w, wNames[w], h, min, sec]
 
-      $link = $(this)
-      button_name = $link.text()
+
+    $('.mood_button').click ->
+
+      # 前回の記録から5分以上たってなければやめる。
+      mood_status = 0 if $(this).hasClass('current_mood_positive') is true
+      mood_status = 1 if $(this).hasClass('current_mood_neutral') is true
+      mood_status = 2 if $(this).hasClass('current_mood_negative') is true
+
+      #「年」「月」「日」「曜日」を Date オブジェクトから取り出してそれぞれに代入
+      arr_occured_time = occured_time()
+      str_occured_time =  arr_occured_time[0] +
+                          arr_occured_time[1] +
+                          arr_occured_time[2] +
+                          arr_occured_time[3] +
+                          arr_occured_time[5] +
+                          arr_occured_time[6] +
+                          arr_occured_time[7]
+
+      $mood_name = $(this).children('.mood_name').children('p').text()
+      $prev = $(this).parent().children('.current_mood')
+      $current =$(this)
+
+      #選択された顔を大きくする
+      $prev.removeClass('current_mood').children('.mood_face').children('i').removeClass('fa-5x').addClass('fa-4x')
+      $current.addClass('current_mood').children('.mood_face').children('i').removeClass('fa-4x').addClass('fa-5x')
+
+      $mood_buttons = $('.mood_button').unbind('click')
+      f = arguments.callee
       $.ajax
-        url: $link.attr('href') + "/" + occured_time
+        url: "/situations/create_as_empty/" + str_occured_time + "/" + mood_status
         type: 'get'
         timeout:10000
         beforeSend: () ->
-          $link.attr('disabled', true);
-          $link.text('保存中')
-        success: () ->
-          alert("いやな気分を登録しました。")
+        success: (data) ->
+          #alert($mood_name + "な気分を登録しました。")
+
+          # グラフの更新
+          # negativeの場合、step1へいくためのダイアログを立ち上げる
+          $('.situation-unit').html(data)
         error: () ->
           alert("データの保存に失敗しました")
         complete: () ->
-          $link.attr('disabled', false)
-          $link.text(button_name)
+          $mood_buttons.bind('click', f)
 
       false
 
     #時刻をリアルタイムで表示する
     setInterval ->
-      now = new Date()
-      #「年」「月」「日」「曜日」を Date オブジェクトから取り出してそれぞれに代入
-      y = now.getFullYear()
-      m = now.getMonth() + 1
-      d = now.getDate()
-      w = now.getDay()
-      h = now.getHours()
-      min = now.getMinutes()
-      sec = now.getSeconds()
-
-      # 曜日の表記を文字列の配列で指定
-      wNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-
-      # 「月」と「日」で1桁だったときに頭に 0 をつける
-      if m < 10
-        m = '0' + m
-      if d < 10
-        d = '0' + d
-      if h < 10
-        h = '0' + h
-      if min < 10
-        min = '0' + min
-      if sec < 10
-        sec = '0' + sec
-
-      $(".countdown").text(y + ' / ' + m + ' / ' + d + ' (' + wNames[w] + ')'+ ' ' + h + ':' + min + ':' + sec)
+      arr_occured_time = occured_time()
+      str_occured_time =  arr_occured_time[0] + ' / ' +
+                          arr_occured_time[1] + ' / ' +
+                          arr_occured_time[2] + ' (' +
+                          arr_occured_time[4] + ' ) ' +
+                          arr_occured_time[5] + ':' +
+                          arr_occured_time[6] + ':' +
+                          arr_occured_time[7]
+      $(".countdown").text(str_occured_time)
     , 1000
 
     $('.finish_therapy').click ->

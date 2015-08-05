@@ -6,7 +6,8 @@ class UsersController < ApplicationController
   def situations
     @user = current_user
     # @situations = Situation.where(user_id: @user.id).order(:updated_at).reverse_order
-    @situations = Situation.where(user_id: @user.id).order(:updated_at).reverse_order
+    @recent_situation = Situation.where(user_id: @user.id).last
+    @situations = Situation.where(user_id: @user.id).negative.order(:updated_at).reverse_order
   end
 
   def given_time_feeling_summary

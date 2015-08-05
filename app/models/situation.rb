@@ -1,5 +1,7 @@
 class Situation < ActiveRecord::Base
   belongs_to :user
+  enum mood_status:  { positive: 0, neutral: 1, negative: 2}
+  scope :negative, -> { where(mood_status: 2) }
   has_many :given_time_feelings, :dependent => :delete_all
 
   def set_empty(occured_time, user)

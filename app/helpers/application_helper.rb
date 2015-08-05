@@ -39,7 +39,7 @@ module ApplicationHelper
     return  "step3_think_automatic_thought" if step == "step_3"
     return  "step4_think_adaptively" if step == "step_4"
     return "step4_think_adaptively" if step == "finished"
-    logger.debug("うっほー")
+    #logger.debug("うっほー")
     return "" #ありえないパス
   end
 
@@ -51,6 +51,17 @@ module ApplicationHelper
   def accordion_in?(target_id, cur_id)
     return "in" if target_id == cur_id
     return ""
+  end
+
+  def current_mood(situation, status_i)
+    return "current_mood" if situation.mood_status == status_i
+    return ""
+  end
+
+  def mood_face_size(situation, status_name)
+    logger.debug("situation.mood_status = " + situation.mood_status)
+    return "fa-5x" if situation.mood_status == status_name
+    return "fa-4x"
   end
 
 end
