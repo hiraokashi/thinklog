@@ -21,6 +21,61 @@
 
 $(function() {
 
+    var chart_data = {
+      labels: ['9月', '10月', '11月'],
+      datasets: [
+          {
+              label: 'りんご',
+              fillColor: 'rgba(255, 0, 0, 0.5)',
+              strokeColor: 'rgba(255, 0, 0, 0.75)',
+              highlightFill: 'rgba(255, 0, 0, 0.75)',
+              highlightStroke: 'rgba(255, 0, 0, 1)',
+              data: [10, 20, 30]
+          },
+          {
+              label: 'バナナ',
+              fillColor: 'rgba(255, 255, 0, 0.5)',
+              strokeColor: 'rgba(255, 255, 0, 0.75)',
+              highlightFill: 'rgba(255, 255, 0, 0.75)',
+              highlightStroke: 'rgba(255, 255, 0, 1)',
+              data: [30, 10, 20]
+          },
+          {
+              label: 'みかん',
+              fillColor: 'rgba(255, 255, 128, 0.5)',
+              strokeColor: 'rgba(255, 255, 128, 0.75)',
+              highlightFill: 'rgba(255, 255, 128, 0.75)',
+              highlightStroke: 'rgba(255, 255, 128, 1)',
+              data: [20, 30, 10]
+          }
+      ]
+  };
+  //alert($('#chart_canvas').attr('width'))
+  var chart_context = $('#chart_canvas')[0].getContext('2d');
+
+  var chart_option = {};
+  //    legendTemplate : "<% for (var i=0; i<datasets.length; i++){%><li><span style=\"color:<%=datasets[i].strokeColor%>\">■</span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%>"
+  //};
+
+  var chart = new Chart(chart_context).Bar({
+      labels: chart_data.labels,
+      datasets: chart_data.datasets
+  }, chart_option);
+
+  for (var i=0; i<chart_data.datasets.length; i++){
+    //alert(chart_data.datasets[i].strokeColor);
+    var legend_tag = "<li><span style=\"color:" + chart_data.datasets[i].strokeColor + "\">■</span>";
+		if(chart_data.datasets[i].label){
+      legend_tag = legend_tag + chart_data.datasets[i].label;
+		}
+    legend_tag = legend_tag + "</li>";
+    $('#chart_legend').append(legend_tag);
+
+  }
+
+  //$('#chart_legend').html(chart.generateLegend());
+
+
   // データ系列 1つの場合の棒グラフ描画処理
   //..データ系列 1つの棒グラフに関しては、slim側で書き方を守れば、jsのコードを書く必要なしになるように実装工夫
   $('.one_data_series_bar_chart').ready(function(){

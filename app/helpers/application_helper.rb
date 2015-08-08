@@ -64,4 +64,18 @@ module ApplicationHelper
     return "fa-4x"
   end
 
+  def style_goto_record_situation_button(situation)
+    return "display: none;" if situation.nil?
+    return "display: none;" unless situation.negative?
+    return "" # ふつうに表示する
+    #code
+  end
+
+  def link_goto_record_situation_button(situation)
+    return "" if situation.nil?
+    return "" unless situation.negative?
+    return "/situations/start_recent_step1"
+    #code
+  end
+
 end

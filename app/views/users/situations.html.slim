@@ -31,13 +31,15 @@ section.page-block.color[style="margin-top: 50px;"]
             div[style="clear: both;"]
 
 
-        div.goto_record_situation
-          - if @recent_situation.negative?
-            a.btn.btn-success[href="#"]
-              | 出来事を記録する
+        a.btn.btn-success.goto_record_situation[style=style_goto_record_situation_button(@recent_situation) href=link_goto_record_situation_button(@recent_situation) data-no-turbolink="true"]
+          | 出来事を記録する
 
 section.page-block
   .container
+    .row
+      canvas#chart_canvas[width="800" height="400"]
+      ul.list-unstyled#chart_legend
+
     .row
       h4
         | いやな出来事リスト

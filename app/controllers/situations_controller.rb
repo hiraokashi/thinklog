@@ -85,8 +85,10 @@ class SituationsController < ApplicationController
     @feeling_ids = []
   end
 
+  #step1を実行
   def edit_for_app
     # ajaxでモーダルフォームをロードする
+    @user = current_user
     @feelings = Feeling.all
     @feeling_ids = @situation.given_time_feelings.map { |given_time_feeling| given_time_feeling.feeling.id }
   end
@@ -105,6 +107,14 @@ class SituationsController < ApplicationController
 
   end
 
+  def start_recent_step1
+    #code
+    @user = current_user
+    @situation = Situation.where(user_id: @user.id).last
+    @feelings = Feeling.all
+    @feeling_ids = @situation.given_time_feelings.map { |given_time_feeling| given_time_feeling.feeling.id }
+    render "edit_for_app"
+  end
 
   private
 

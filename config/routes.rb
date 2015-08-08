@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  get 'situations/start_step1' => 'situations#start_step1'
+  get 'situations/start_recent_step1' => 'situations#start_recent_step1'
   get 'situations/create_as_empty/:occured_time/:mood_status' => 'situations#create_as_empty'
   get 'users/dashboard' => 'users#dashboard'
   get 'users/situations' => 'users#situations'

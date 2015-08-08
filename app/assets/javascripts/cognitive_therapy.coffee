@@ -62,11 +62,15 @@ $ ->
         timeout:10000
         beforeSend: () ->
         success: (data) ->
-          #alert($mood_name + "な気分を登録しました。")
+          $('.goto_record_situation').hide() if mood_status is 0
+          $('.goto_record_situation').hide() if mood_status is 1
+          alert($mood_name + "な気分を登録しました。")
 
           # グラフの更新
           # negativeの場合、step1へいくためのダイアログを立ち上げる
           $('.situation-unit').html(data)
+          $('.goto_record_situation').show().attr('href', "/situations/start_recent_step1") if mood_status is 2
+
         error: () ->
           alert("データの保存に失敗しました")
         complete: () ->
