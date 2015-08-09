@@ -26,6 +26,8 @@ class SituationsController < ApplicationController
   def create
     @situation = Situation.new(situation_params)
     @situation.mood_status = 2 # 今の所いやな気持ちのみ
+    @situation.user = current_user
+    @situation.set_now
     respond_to do |format|
       if @situation.save
 

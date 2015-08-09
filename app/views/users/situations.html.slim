@@ -1,47 +1,94 @@
 section.page-block.color[style="margin-top: 50px;"]
   .container[style="min-height:180px;"]
     .row
-      .countdown#now[style="font-size: 20px;margin-top: 20px;"]
-      h2.text-center.text-light
-        | 今の気分は？
-      center
-        div
-          div[style="margin: 0 auto; width:300px;"]
-            div.text-light.mood_button.current_mood_positive[style="width: 100px; float:left;" class=current_mood(@recent_situation, "positive")]
-              /a.btn.btn-block.btn-success.create_as_empty[href="/situations/create_as_empty"]
-              div.mood_face
-                i.fa.icon-grin[class=mood_face_size(@recent_situation, "positive")]
-              div.mood_name
-                p
-                  | ポジティブ
-            div.text-light.mood_button.current_mood_neutral[style="width: 100px; float:left;"  class=current_mood(@recent_situation, "neutral")]
-              /a.btn.btn-block.btn-success[href="/situations/start_step1"]
-              div.mood_face
-                i.fa.icon-neutral[class=mood_face_size(@recent_situation, "neutral")]
-              div.mood_name
-                p
-                  | ふつう
-            div.text-light.mood_button.current_mood_negative[style="width: 100px; float:left;"  class=current_mood(@recent_situation, "negative")]
-              /a.btn.btn-block.btn-success[href="/situations/start_step1"]
-              div.mood_face
-                i.fa.icon-sad[class=mood_face_size(@recent_situation, "negative")]
-              div.mood_name
-                p
-                  | ネガティブ
-            div[style="clear: both;"]
+      .col-lg-12.col-md-12.col-sm-12
+        .countdown#now[style="font-size: 20px;margin-top: 20px;"]
+        h2.text-center.text-light
+          | 今の気分は？
+        center
+          div
+            div[style="margin: 0 auto; width:300px;"]
+              div.text-light.mood_button.current_mood_positive[style="width: 100px; float:left;" class=current_mood(@recent_situation, "positive")]
+                /a.btn.btn-block.btn-success.create_as_empty[href="/situations/create_as_empty"]
+                div.mood_face
+                  i.fa.icon-grin[class=mood_face_size(@recent_situation, "positive")]
+                div.mood_name
+                  p
+                    | ポジティブ
+              div.text-light.mood_button.current_mood_neutral[style="width: 100px; float:left;"  class=current_mood(@recent_situation, "neutral")]
+                /a.btn.btn-block.btn-success[href="/situations/start_step1"]
+                div.mood_face
+                  i.fa.icon-neutral[class=mood_face_size(@recent_situation, "neutral")]
+                div.mood_name
+                  p
+                    | ふつう
+              div.text-light.mood_button.current_mood_negative[style="width: 100px; float:left;"  class=current_mood(@recent_situation, "negative")]
+                /a.btn.btn-block.btn-success[href="/situations/start_step1"]
+                div.mood_face
+                  i.fa.icon-sad[class=mood_face_size(@recent_situation, "negative")]
+                div.mood_name
+                  p
+                    | ネガティブ
+              div[style="clear: both;"]
 
 
-        a.btn.btn-success.goto_record_situation[style=style_goto_record_situation_button(@recent_situation) href=link_goto_record_situation_button(@recent_situation) data-no-turbolink="true"]
-          | 出来事を記録する
+          a.btn.btn-success.goto_record_situation[style=style_goto_record_situation_button(@recent_situation) href=link_goto_record_situation_button(@recent_situation) data-no-turbolink="true"]
+            | 出来事を記録する
 
 section.page-block
   .container
     .row
-      canvas#chart_canvas[width="800" height="400"]
-      ul.list-unstyled#chart_legend
+      .col-lg-6.col-md-6.col-sm-6.chart
+        .group
+          h3
+            | 今日の気分(1時間ごと)
 
+          div#mood_stacked_area[style="width: 100%"]
+            canvas#mood_stacked[width="550" height="320"]
+
+            /ラベル(データ区間の指定)
+            - @mood_stacked_datalabels.each do |value|
+              input.mood_stacked_datalabel[type="hidden" name=value value=value]
+
+            /データセット
+            - @mood_chart_data[0].each do |label, value|
+              input.positive_datapoint[type="hidden" name="positive#{label}" value=value]
+
+            - @mood_chart_data[1].each do |label, value|
+              input.neutral_datapoint[type="hidden" name="neutral#{label}" value=value]
+
+            - @mood_chart_data[2].each do |label, value|
+              input.negative_datapoint[type="hidden" name="negative#{label}" value=value]
+
+          div#mood_chart_legend[style="margin-top:10px;"]
+      .col-lg-6.col-md-6.col-sm-6.chart
+        .group
+          h3
+            | 感じた気分の構成(累計)
+          p
+            = "あなたには解決すべき#{@mood_counts[2]}個のネガティブな気分があります。"
+          .pie-chart
+            canvas#doughnutChart[width="260" height="260"]
+            input#positive_percentage[type="hidden" name="positive_percentage" value=@mood_counts[0]]
+            input#neutral_percentage[type="hidden" name="neutral_percentage" value=@mood_counts[1]]
+            input#negative_percentage[type="hidden" name="negative_percentage" value=@mood_counts[2]]
+          .pie-chart-legend.animated-legend
+            .label[style="color:rgba(151,187,205,1);"]
+              span
+                = @mood_counts[0]
+              | ボジティブ
+            .label[style="color:rgba(220,220,220,1);"]
+              span
+                = @mood_counts[1]
+              | ふつう
+            .label[style="color:rgba(240,73,73,0.8);"]
+              span
+                = @mood_counts[2]
+              | ネガティブ
     .row
-      h4
-        | いやな出来事リスト
+      .col-lg-12.col-md-12.col-sm-12
+        h4
+          | いやな気分一覧
     .row.situation-unit
-      = render partial: "shared/situation_list", locals: {situations: @situations}
+      .col-lg-12.col-md-12.col-sm-12
+        = render partial: "shared/situation_list", locals: {situations: @situations_negative}

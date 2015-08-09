@@ -17,61 +17,104 @@
 //= require libs/raphael
 //= require plugins/progressStep
 //= require plugins/jquery.knob
+//= require plugins/Chart
+//= require plugins/Chart.StackedBar
 //= require_tree .
 
 $(function() {
 
-    var chart_data = {
-      labels: ['9月', '10月', '11月'],
-      datasets: [
-          {
-              label: 'りんご',
-              fillColor: 'rgba(255, 0, 0, 0.5)',
-              strokeColor: 'rgba(255, 0, 0, 0.75)',
-              highlightFill: 'rgba(255, 0, 0, 0.75)',
-              highlightStroke: 'rgba(255, 0, 0, 1)',
-              data: [10, 20, 30]
-          },
-          {
-              label: 'バナナ',
-              fillColor: 'rgba(255, 255, 0, 0.5)',
-              strokeColor: 'rgba(255, 255, 0, 0.75)',
-              highlightFill: 'rgba(255, 255, 0, 0.75)',
-              highlightStroke: 'rgba(255, 255, 0, 1)',
-              data: [30, 10, 20]
-          },
-          {
-              label: 'みかん',
-              fillColor: 'rgba(255, 255, 128, 0.5)',
-              strokeColor: 'rgba(255, 255, 128, 0.75)',
-              highlightFill: 'rgba(255, 255, 128, 0.75)',
-              highlightStroke: 'rgba(255, 255, 128, 1)',
-              data: [20, 30, 10]
-          }
-      ]
-  };
-  //alert($('#chart_canvas').attr('width'))
-  var chart_context = $('#chart_canvas')[0].getContext('2d');
-
-  var chart_option = {};
-  //    legendTemplate : "<% for (var i=0; i<datasets.length; i++){%><li><span style=\"color:<%=datasets[i].strokeColor%>\">■</span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%>"
-  //};
-
-  var chart = new Chart(chart_context).Bar({
-      labels: chart_data.labels,
-      datasets: chart_data.datasets
-  }, chart_option);
-
-  for (var i=0; i<chart_data.datasets.length; i++){
-    //alert(chart_data.datasets[i].strokeColor);
-    var legend_tag = "<li><span style=\"color:" + chart_data.datasets[i].strokeColor + "\">■</span>";
-		if(chart_data.datasets[i].label){
-      legend_tag = legend_tag + chart_data.datasets[i].label;
+  // ----------------------------------
+  //     気分の構成割合を表すグラフを描画する
+  // ----------------------------------
+	//////////*Doughnut Chart*///////////
+		var doughnutChartData = [
+		{
+			value: $("#positive_percentage").val(),
+			color: "rgba(151,187,205,1)"
+		},
+		{
+			value : $("#neutral_percentage").val(),
+			color : "rgba(220,220,220,1)"
+		},
+		{
+			value : $("#negative_percentage").val(),
+			color : "rgba(240,73,73,0.8)"
 		}
-    legend_tag = legend_tag + "</li>";
-    $('#chart_legend').append(legend_tag);
+	];
 
+	$('#doughnutChart').waypoint(function() {
+		var barChart = new Chart($("#doughnutChart").get(0).getContext("2d")).Doughnut(doughnutChartData);
+		$('.animated-legend').addClass('fadeInRight');
+	}, { offset: '75%', triggerOnce: true });
+
+  // ----------------------------------
+  //     気分の推移を表す折れ線グラフを描画する
+  // ----------------------------------
+  if ($("#mood_stacked").size() > 0) {
+    // 積み上げ棒グラフのサンプル
+    //var randomScalingFactor = function(){ return Math.round(Math.random()*100);};
+  	//var randomColorFactor = function(){ return Math.round(Math.random()*255);};
+
+  	var barChartData = {
+  		labels : $.map($('input.mood_stacked_datalabel'), function(elem){ return $(elem).val();}),
+  		datasets : [
+
+  			{
+          label : "ポジティブ",
+  				fillColor : "rgba(151,187,205,0)",
+  				strokeColor : "rgba(151,187,205,0.8)",
+  				pointColor : "rgba(151,187,205,1)",
+  				pointStrokeColor : "#fff",
+  				//highlightFill : "rgba(151,187,205,0.75)",
+  				//highlightStroke : "rgba(151,187,205,1)",
+  				data : $.map($("input.positive_datapoint"), function(elem){ return $(elem).val();})
+  			},
+  			{
+          label : "ふつう",
+  				fillColor : "rgba(220,220,220,0)",
+  				strokeColor : "rgba(220,220,220,0.8)",
+  				pointColor : "rgba(220,220,220,1)",
+  				pointStrokeColor : "#fff",
+  				//highlightFill: "rgba(220,220,220,0.75)",
+  				//highlightStroke: "rgba(220,220,220,1)",
+  				data : $.map($("input.neutral_datapoint"), function(elem){ return $(elem).val();})
+  			},
+  			{
+          label : "ネガティブ",
+  				fillColor : "rgba(240,73,73,0)",
+  				strokeColor : "rgba(240,73,73,0.8)",
+  				pointColor : "rgba(240,73,73,1)",
+  				pointStrokeColor : "#fff",
+  				//highlightFill : "rgba(240,73,73,0.75)",
+  				//highlightStroke : "rgba(240,73,73,1)",
+  				data : $.map($("input.negative_datapoint"), function(elem){ return $(elem).val();})
+  			}
+  		]
+  	};
+  	$('#mood_stacked').waypoint(function(data) {
+  		var ctx = $("#mood_stacked").get(0).getContext("2d");
+  		window.moodChart = new Chart(ctx).Line(barChartData, {
+  			responsive : true
+  		});
+    },{
+      offset: '75%',
+      triggerOnce: true
+    });
+
+    for (var i=0; i<barChartData.datasets.length; i++){
+      //alert(barChartData.datasets[i].strokeColor);
+      var legend_tag = "<span style=\"color:" + barChartData.datasets[i].strokeColor + "\">■</span>&nbsp;";
+  		if(barChartData.datasets[i].label){
+        legend_tag = legend_tag + barChartData.datasets[i].label + "&nbsp;&nbsp;";
+  		}
+      //legend_tag = legend_tag + "</li>";
+      $('#mood_chart_legend').append(legend_tag);
+
+    }
   }
+  /* 判例
+
+  */
 
   //$('#chart_legend').html(chart.generateLegend());
 

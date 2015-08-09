@@ -2,9 +2,41 @@ class GivenTimeFeeling < ActiveRecord::Base
   belongs_to :feeling
   belongs_to :situation
   has_one :automatic_thought,  dependent: :destroy
-
+  scope :status_is, ->(status) { where("status = ?", status)}
+  scope :feeling_is, ->(feeling_id) { where("feeling_id = ?", feeling_id)}
   enum status:  { step_1: 0, step_2: 1, step_3: 2, step_4: 3, finished: 4 }
 
+  def self.count_up_feeling(user)
+    all_situation_ids = Situation.where(user_id: user.id).negative.select(:id)
+    feeling_status_counts = {}
+    Feeling.all.each do |_feeling|
+      feeling_status_counts[_feeling.contents] = \
+        self.where(situation_id: all_situation_ids).feeling_is(_feeling.id).count
+    end
+    #種類が多いので
+     feeling_status_counts = feeling_status_counts.sort {|(k1, v1), (k2, v2)| v2 <=> v1 }
+     logger.debug(feeling_status_counts)
+
+     feeling_status_counts
+  end
+
+  def self.count_up_status(user)
+    all_situation_ids = Situation.where(user_id: user.id).select(:id)
+    feeling_status_counts = {}
+    self.statuses.each do |name_s, _value_i|
+      feeling_status_counts[conv_status_jp(name_s)] = \
+        self.where(situation_id: all_situation_ids).status_is(_value_i).count
+    end
+    feeling_status_counts
+  end
+
+  def self.conv_status_jp(name)
+    return 'ステップ1' if name == "step_1"
+    return 'ステップ2' if name == "step_2"
+    return 'ステップ3' if name == "step_3"
+    return 'ステップ4' if name == "step_4"
+    return '完了'     if name == "finished"
+  end
   # 進捗ステータスを日本語で返す
   def status_jp
     return 'ステップ1' if self.step_1?

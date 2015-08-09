@@ -9,7 +9,6 @@ section.page-block
         h3
           i.fa.fa-heart
           | 気分の変化
-
         h4
           = @given_time_feeling.feeling.contents
         = render partial: "shared/one_data_series_bar_chart", locals: {datalabels: @feeling_series_datalabels, datapoints: @feeling_series_datapoints}
