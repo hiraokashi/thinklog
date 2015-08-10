@@ -46,7 +46,7 @@ deploy:
       app-name: $HEROKU_APP_NAME
     - script:
       name: print commnad
-      code: echo "heroku run –-app $HEROKU_APP_NAME rake db:migrate" 
+      code: echo "${ls}" 
     - script:
       name: Update database
       code: heroku run –-app $HEROKU_APP_NAME rake db:migrate
