@@ -46,4 +46,4 @@ deploy:
       app-name: $HEROKU_APP_NAME
     - script:
       name: Update database
-      code: heroku run rake db:migrate
+      code: heroku run rake db:migrate –app $HEROKU_APP_NAME
