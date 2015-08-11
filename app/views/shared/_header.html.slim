@@ -17,10 +17,10 @@ header.stiky-header
       = link_to new_user_session_path, :class => 'btn btn-primary btn-login', data: { no_turbolink: true } do
         i.icon-user
         | ログイン
-    - else
-      = link_to '/situations/add_situation', :class => 'btn btn-success btn-login', data: { no_turbolink: true } do
-        i.icon-user
-        | いやなことあった？
+    /_- else
+    /_  = link_to '/situations/add_situation', :class => 'btn btn-success btn-login', data: { no_turbolink: true } do
+    /_    i.icon-user
+    /_    | いやなことあった？
 
     nav.main-navi
       ul
