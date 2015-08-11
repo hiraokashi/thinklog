@@ -47,11 +47,7 @@ section.page-block
             canvas#mood_stacked[width="550" height="320"]
 
             /ラベル(データ区間の指定)
-            p
-              = Time.now.to_s
             - @mood_stacked_datalabels.each do |value|
-              p
-                = value
               input.mood_stacked_datalabel[type="hidden" name=value value=value]
 
             /データセット
