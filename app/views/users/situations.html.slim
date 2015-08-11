@@ -48,7 +48,7 @@ section.page-block
 
             /ラベル(データ区間の指定)
             p
-              |  データ区間
+              = Time.now.to_s
             - @mood_stacked_datalabels.each do |value|
               p
                 = value
