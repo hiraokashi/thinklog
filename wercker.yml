@@ -49,4 +49,4 @@ deploy:
       code: echo "$(ls)" 
     - script:
       name: Update database
-      code: heroku run –-app $HEROKU_APP_NAME rake db:migrate
+      code: heroku run -a $HEROKU_APP_NAME rake db:migrate
