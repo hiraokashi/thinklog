@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     @mood_stacked_datalabels = @mood_chart_data[0].keys # 全部同じものが入っているので、代表一つからとればいい
     # logger.debug(@mood_stacked_datalabels)
 
-    # 気分の構成比
+    # 気分のうちわけ
     @mood_counts = Situation.mood_counts(@user)
 
     # 実行中のステータス別（棒グラフ）

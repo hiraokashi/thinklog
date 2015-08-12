@@ -64,9 +64,9 @@ section.page-block
       .col-lg-6.col-md-6.col-sm-6.chart
         .group
           h3
-            | 感じた気分の構成(累計)
+            | 感じた気分の内訳
           p
-            = "あなたには解決すべき#{@mood_counts[2]}個のネガティブな気分があります。"
+            = "あなたにはいままで#{@mood_counts[2]}個のネガティブな気分を経験してきました。"
           .pie-chart
             canvas#doughnutChart[width="260" height="260"]
             input#positive_percentage[type="hidden" name="positive_percentage" value=@mood_counts[0]]

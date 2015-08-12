@@ -17,6 +17,13 @@ class GivenTimeFeeling < ActiveRecord::Base
      feeling_status_counts = feeling_status_counts.sort {|(k1, v1), (k2, v2)| v2 <=> v1 }
      logger.debug(feeling_status_counts)
 
+     #7件以上ある場合雨とその他に まーじする　
+    if feeling_status_counts.size > 6
+      #others = feeling_status_counts[5..feeling_status_counts.rindex].inject {|sum, (key, val)| sum + val }
+      #feeling_status_counts.slice!(0, 5)  # 2番目から要素3つ
+      #feeling_status_counts
+    end
+
      feeling_status_counts
   end
 
