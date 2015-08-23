@@ -3,7 +3,7 @@
     - situations.each do |situation|
       .panel
         a.panel-heading[class=accordion_not_collapsed?(situations.first.id.to_i, situation.id.to_i) data-toggle="collapse" data-parent="#situation-list" href="#collapse#{situation.id}"]
-          = "#{situation.occured_time_for_view}のいやな気分"
+          = "#{situation.occured_time_for_view}"
           .indicator
            .icon
              span.hr-line

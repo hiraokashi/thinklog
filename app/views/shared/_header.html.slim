@@ -3,7 +3,7 @@ header.stiky-header
     = link_to :root, class: "logo", data: { no_turbolink: true } do
       img[src="/images/logo.jpg" alt="Thinklog"]
     = link_to :root, class: "logo-mobile", data: { no_turbolink: true } do
-      img[src="/images/logo-mobile.png" alt="ThinkLlg"]
+      img[src="/images/logo-mobile.png" alt="ThinkLlog"]
     .navi-toggle.group
       span.dot
       span.line
@@ -41,11 +41,10 @@ header.stiky-header
                 = link_to '/users/dashboard', :class => '', data: { no_turbolink: true } do
                   | ダッシュボード
               li
-                a[href="#"]
-                  | Submenu Item
+                = link_to '気分モニター', '/users/mood_monitor', :class => 'navbar-link', data: { no_turbolink: true }
               li
-                a[href="#"]
-                  | Submenu Item
+                = link_to 'あなたの感じたネガティブな気分', '/users/situations', :class => 'navbar-link', data: { no_turbolink: true }
+
               li
                 a[href="#"]
                   | Submenu Item
