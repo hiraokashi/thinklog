@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'situations/start_recent_step1' => 'situations#start_recent_step1'
   get 'situations/create_as_empty/:occured_time/:mood_status' => 'situations#create_as_empty'
   get 'users/dashboard' => 'users#dashboard'
+  get 'users/mood_monitor' => 'users#mood_monitor'
   get 'users/situations' => 'users#situations'
   get 'users/given_time_feeling_summary/:id' => 'users#given_time_feeling_summary'
   get 'situations/edit_modal/:id' => 'situations#edit_modal'

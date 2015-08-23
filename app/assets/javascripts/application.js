@@ -24,28 +24,57 @@
 $(function() {
 
   // ----------------------------------
+  //     感情の構成割合を表すグラフを描画する
+  // ----------------------------------
+  //////////*Doughnut Chart*///////////
+  var colors = ["rgba(151,187,205,1)",
+    "rgba(220,220,220,1)",
+    "rgba(240,73,73,0.8)",
+    "rgba(73, 95, 240, 0.8)",
+    "rgba(184, 88, 148, 0.8)",
+    "rgba(117, 166, 123, 0.8)"
+  ];
+
+  var feeling_count_values = $.map($("input.feeling_count_value"), function(elem) {
+		return $(elem).val();
+  });
+
+	var feeling_counts_data = [];
+  $.each(feeling_count_values, function(i, value) {
+    feeling_counts_data.push({value: value, color: colors[i]});
+		//console.log(i);
+  });
+
+  $('#feelingTypeChart').waypoint(function() {
+    var barChart = new Chart($("#feelingTypeChart").get(0).getContext("2d")).Doughnut(feeling_counts_data);
+    $('.animated-legend').addClass('fadeInRight');
+  }, {
+    offset: '75%',
+    triggerOnce: true
+  });
+
+  // ----------------------------------
   //     気分の構成割合を表すグラフを描画する
   // ----------------------------------
-	//////////*Doughnut Chart*///////////
-		var doughnutChartData = [
-		{
-			value: $("#positive_percentage").val(),
-			color: "rgba(151,187,205,1)"
-		},
-		{
-			value : $("#neutral_percentage").val(),
-			color : "rgba(220,220,220,1)"
-		},
-		{
-			value : $("#negative_percentage").val(),
-			color : "rgba(240,73,73,0.8)"
-		}
-	];
+  //////////*Doughnut Chart*///////////
+  var doughnutChartData = [{
+    value: $("#positive_percentage").val(),
+    color: "rgba(151,187,205,1)"
+  }, {
+    value: $("#neutral_percentage").val(),
+    color: "rgba(220,220,220,1)"
+  }, {
+    value: $("#negative_percentage").val(),
+    color: "rgba(240,73,73,0.8)"
+  }];
 
-	$('#doughnutChart').waypoint(function() {
-		var barChart = new Chart($("#doughnutChart").get(0).getContext("2d")).Doughnut(doughnutChartData);
-		$('.animated-legend').addClass('fadeInRight');
-	}, { offset: '75%', triggerOnce: true });
+  $('#moodTypeChart').waypoint(function() {
+    var barChart = new Chart($("#moodTypeChart").get(0).getContext("2d")).Doughnut(doughnutChartData);
+    $('.animated-legend').addClass('fadeInRight');
+  }, {
+    offset: '75%',
+    triggerOnce: true
+  });
 
   // ----------------------------------
   //     気分の推移を表す折れ線グラフを描画する
@@ -53,60 +82,66 @@ $(function() {
   if ($("#mood_stacked").size() > 0) {
     // 積み上げ棒グラフのサンプル
     //var randomScalingFactor = function(){ return Math.round(Math.random()*100);};
-  	//var randomColorFactor = function(){ return Math.round(Math.random()*255);};
+    //var randomColorFactor = function(){ return Math.round(Math.random()*255);};
 
-  	var barChartData = {
-  		labels : $.map($('input.mood_stacked_datalabel'), function(elem){ return $(elem).val();}),
-  		datasets : [
+    var barChartData = {
+      labels: $.map($('input.mood_stacked_datalabel'), function(elem) {
+        return $(elem).val();
+      }),
+      datasets: [
 
-  			{
-          label : "ポジティブ",
-  				fillColor : "rgba(151,187,205,0)",
-  				strokeColor : "rgba(151,187,205,0.8)",
-  				pointColor : "rgba(151,187,205,1)",
-  				pointStrokeColor : "#fff",
-  				//highlightFill : "rgba(151,187,205,0.75)",
-  				//highlightStroke : "rgba(151,187,205,1)",
-  				data : $.map($("input.positive_datapoint"), function(elem){ return $(elem).val();})
-  			},
-  			{
-          label : "ふつう",
-  				fillColor : "rgba(220,220,220,0)",
-  				strokeColor : "rgba(220,220,220,0.8)",
-  				pointColor : "rgba(220,220,220,1)",
-  				pointStrokeColor : "#fff",
-  				//highlightFill: "rgba(220,220,220,0.75)",
-  				//highlightStroke: "rgba(220,220,220,1)",
-  				data : $.map($("input.neutral_datapoint"), function(elem){ return $(elem).val();})
-  			},
-  			{
-          label : "ネガティブ",
-  				fillColor : "rgba(240,73,73,0)",
-  				strokeColor : "rgba(240,73,73,0.8)",
-  				pointColor : "rgba(240,73,73,1)",
-  				pointStrokeColor : "#fff",
-  				//highlightFill : "rgba(240,73,73,0.75)",
-  				//highlightStroke : "rgba(240,73,73,1)",
-  				data : $.map($("input.negative_datapoint"), function(elem){ return $(elem).val();})
-  			}
-  		]
-  	};
-  	$('#mood_stacked').waypoint(function(data) {
-  		var ctx = $("#mood_stacked").get(0).getContext("2d");
-  		window.moodChart = new Chart(ctx).Line(barChartData, {
-  			responsive : true
-  		});
-    },{
+        {
+          label: "ポジティブ",
+          fillColor: "rgba(151,187,205,0)",
+          strokeColor: "rgba(151,187,205,0.8)",
+          pointColor: "rgba(151,187,205,1)",
+          pointStrokeColor: "#fff",
+          //highlightFill : "rgba(151,187,205,0.75)",
+          //highlightStroke : "rgba(151,187,205,1)",
+          data: $.map($("input.positive_datapoint"), function(elem) {
+            return $(elem).val();
+          })
+        }, {
+          label: "ふつう",
+          fillColor: "rgba(220,220,220,0)",
+          strokeColor: "rgba(220,220,220,0.8)",
+          pointColor: "rgba(220,220,220,1)",
+          pointStrokeColor: "#fff",
+          //highlightFill: "rgba(220,220,220,0.75)",
+          //highlightStroke: "rgba(220,220,220,1)",
+          data: $.map($("input.neutral_datapoint"), function(elem) {
+            return $(elem).val();
+          })
+        }, {
+          label: "ネガティブ",
+          fillColor: "rgba(240,73,73,0)",
+          strokeColor: "rgba(240,73,73,0.8)",
+          pointColor: "rgba(240,73,73,1)",
+          pointStrokeColor: "#fff",
+          //highlightFill : "rgba(240,73,73,0.75)",
+          //highlightStroke : "rgba(240,73,73,1)",
+          data: $.map($("input.negative_datapoint"), function(elem) {
+            return $(elem).val();
+          })
+        }
+      ]
+    };
+    $('#mood_stacked').waypoint(function(data) {
+      var ctx = $("#mood_stacked").get(0).getContext("2d");
+      window.moodChart = new Chart(ctx).Line(barChartData, {
+        responsive: true
+      });
+    }, {
       offset: '75%',
       triggerOnce: true
     });
 
-    for (var i=0; i<barChartData.datasets.length; i++){
+    for (var i = 0; i < barChartData.datasets.length; i++) {
       //alert(barChartData.datasets[i].strokeColor);
       var legend_tag = "<span style=\"color:" + barChartData.datasets[i].strokeColor + "\">■</span>&nbsp;";
-  		if(barChartData.datasets[i].label){
+      if (barChartData.datasets[i].label) {
         legend_tag = legend_tag + barChartData.datasets[i].label + "&nbsp;&nbsp;";
-  		}
+      }
       //legend_tag = legend_tag + "</li>";
       $('#mood_chart_legend').append(legend_tag);
 
@@ -121,33 +156,37 @@ $(function() {
 
   // データ系列 1つの場合の棒グラフ描画処理
   //..データ系列 1つの棒グラフに関しては、slim側で書き方を守れば、jsのコードを書く必要なしになるように実装工夫
-  $('.one_data_series_bar_chart').ready(function(){
-      //alert("unkoooooo")
-      $('.one_data_series_bar_chart').each(function(i,elem){
-        var barChartData = {
-          labels: $.map($(elem).find("input.datalabel"), function(elem){ return $(elem).val();}),
-          datasets: [{
-            fillColor: "rgba(255,111,105,0.5)",
-            strokeColor: "rgba(255,111,105,1)",
-            data: $.map($(elem).find("input.datapoint"), function(elem){ return $(elem).val();})
-          }]
-        };
+  $('.one_data_series_bar_chart').ready(function() {
+    //alert("unkoooooo")
+    $('.one_data_series_bar_chart').each(function(i, elem) {
+      var barChartData = {
+        labels: $.map($(elem).find("input.datalabel"), function(elem) {
+          return $(elem).val();
+        }),
+        datasets: [{
+          fillColor: "rgba(255,111,105,0.5)",
+          strokeColor: "rgba(255,111,105,1)",
+          data: $.map($(elem).find("input.datapoint"), function(elem) {
+            return $(elem).val();
+          })
+        }]
+      };
 
-        $(elem).find('canvas').waypoint(function(data) {
-          var option = {
-            scaleOverride : true,
-            // Y 軸の値の始まりの値
-            scaleSteps : 5,
-            scaleStepWidth : 20,
-            // Y 軸の値の始まりの値
-            scaleStartValue : 0
-          };
-          var barChart = new Chart($(elem).find('canvas')[0].getContext("2d")).Bar(barChartData, option);
-        }, {
-          offset: '75%',
-          triggerOnce: true
-        });
+      $(elem).find('canvas').waypoint(function(data) {
+        var option = {
+          scaleOverride: true,
+          // Y 軸の値の始まりの値
+          scaleSteps: 5,
+          scaleStepWidth: 20,
+          // Y 軸の値の始まりの値
+          scaleStartValue: 0
+        };
+        var barChart = new Chart($(elem).find('canvas')[0].getContext("2d")).Bar(barChartData, option);
+      }, {
+        offset: '75%',
+        triggerOnce: true
       });
+    });
   });
 
 

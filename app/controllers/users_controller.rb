@@ -3,12 +3,10 @@ class UsersController < ApplicationController
     @user = current_user
   end
 
-  def situations
+  def mood_monitor
+    #code
     @user = current_user
-    # @situations = Situation.where(user_id: @user.id).order(:updated_at).reverse_order
     @recent_situation = Situation.where(user_id: @user.id).last
-    @situations_negative = Situation.where(user_id: @user.id).negative.order(:updated_at).reverse_order
-
     @situations_today = Situation.where(user_id: @user.id).today.order('updated_at ASC')
     @mood_chart_data = Situation.mood_chart_data(@situations_today)
 
@@ -20,10 +18,19 @@ class UsersController < ApplicationController
     @mood_counts = Situation.mood_counts(@user)
 
     # 実行中のステータス別（棒グラフ）
-    @feeling_status_counts = GivenTimeFeeling.count_up_status(@user)
+    #@feeling_status_counts = GivenTimeFeeling.count_up_status(@user)
 
     # 感情の構成比（パイチャート）
-    @feeling_status_counts = GivenTimeFeeling.count_up_feeling(@user)
+    @feeling_counts = GivenTimeFeeling.count_up_feeling(@user)
+
+
+  end
+
+  def situations
+    @user = current_user
+    # @situations = Situation.where(user_id: @user.id).order(:updated_at).reverse_order
+    @situations_negative = Situation.where(user_id: @user.id).negative.order(:updated_at).reverse_order
+
 
   end
 
