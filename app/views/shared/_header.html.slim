@@ -38,16 +38,11 @@ header.stiky-header
               i.fa.fa-caret-down
             ul.dropdown
               li
-                = link_to '/users/dashboard', :class => '', data: { no_turbolink: true } do
-                  | ダッシュボード
+                = link_to 'ダッシュボード', '/users/dashboard', :class => '', data: { no_turbolink: true } 
               li
                 = link_to '気分モニター', '/users/mood_monitor', :class => 'navbar-link', data: { no_turbolink: true }
               li
-                = link_to 'あなたの感じたネガティブな気分', '/users/situations', :class => 'navbar-link', data: { no_turbolink: true }
-
-              li
-                a[href="#"]
-                  | Submenu Item
+                = link_to 'ネガティブな気分', '/users/situations', :class => 'navbar-link', data: { no_turbolink: true }
 
 
 
