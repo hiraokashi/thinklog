@@ -12,8 +12,9 @@
           .panel-body
             p
               = situation.toSentence
+            = link_to 'ステップ1に取り組む', "/situations/edit_for_app/#{situation.id}",  data: { no_turbolink: true }
             - arranged_by_columns(situation.given_time_feelings, 4).each do |row, cols|
-              .row[style="padding-top:0px;"]
+              .row[style="padding-top:10px;"]
                 - cols.each do |col_num, given_time_feeling|
                   .col-lg-3.col-md-3.col-sm-3
                     .btn-group[style="margin:0px auto;"]
@@ -30,8 +31,8 @@
                         - (1..given_time_feeling.executable_steps).each do |step|
                           li
                             a[href=step_path(given_time_feeling, "step_#{step}") data-no-turbolink="true"]
-                              = "ステップ#{step}を実行する"
+                              = "ステップ#{step}に取り組む"
                         li.divider[role="separator"]
-                        li
-                          a[href="/users/given_time_feeling_summary/#{given_time_feeling.id}" data-no-turbolink="true"]
-                            | 進捗状況の詳細の確認
+                        /li
+                        /  a[href="/users/given_time_feeling_summary/#{given_time_feeling.id}" data-no-turbolink="true"]
+                        /    | 進捗状況の詳細の確認

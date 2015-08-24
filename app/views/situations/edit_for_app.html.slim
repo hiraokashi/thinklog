@@ -3,22 +3,22 @@ section.page-block
     .row
       #progressBar
       #step1_situation
-    .row.page-header
-      h3
-        | Step1: 状況を記録しよう
+    center
+      .row
+        h3
+          = @situation.occured_time_for_view + " におきた出来事"
     .row
-
       = form_tag(path_for_modal_form('patch', @situation), :role=> 'form', :method => 'patch') do
-        .form-group
-          input.form-control[type="text" name="situation[when]" placeholder="いつ？" required value=@situation.when]
         .form-group
           input.form-control[type="text" name="situation[where]" placeholder="どこで？" required value=@situation.where]
         .form-group
           input.form-control[type="text" name="situation[with_whom]" placeholder="だれと？" value=@situation.with_whom]
         .form-group
           input.form-control[type="text" name="situation[what_have_you_been_doing]" placeholder="何をしていたとき？" value=@situation.what_have_you_been_doing]
-        h5
-          |そのときの気持ちと程度（0-100%）を選択してください
+
+        center
+          h3
+            | そのときの感情（複数選択可）
         - @feelings.each do |feeling|
           - if disabled(feeling.id, @feeling_ids)
             a.btn.btn-default.btn-xs.feeling_selecter[id="feeling_id_#{feeling.id}"]
@@ -31,8 +31,8 @@ section.page-block
             - @situation.given_time_feelings.each do |given_time_feeling|
 
               = render partial: "shared/feeling", locals: {feeling: given_time_feeling.feeling, percentage: given_time_feeling.step1_percentage, read_only: nil}
-              div[style="margin: 0 auto; width:150px;background-color: yellow;float:left;" id="go_step2_feeling#{given_time_feeling.feeling.id}"]
-                a.btn.btn-primary.btn-xs.go_next_step.save_therapy_data[href="/automatic_thoughts/think/#{given_time_feeling.automatic_thought.id}" data-no-turbolink="true"]
+              div[style="margin: 0 auto; width:150px; float:left;" id="go_step2_feeling#{given_time_feeling.feeling.id}"]
+                a.btn.btn-success.btn-sm.go_next_step.save_therapy_data[style="width:160px; margin-top:65px;"href="/automatic_thoughts/think/#{given_time_feeling.automatic_thought.id}" data-no-turbolink="true"]
                   i.fa.fa-caret-right
                   | ステップ2へ進む
               div[style="clear:both;"]
@@ -40,5 +40,5 @@ section.page-block
         hr
 
 
-        button.btn.btn-primary[type="submit"]
+        button.btn.btn-success.btn-xs.save_therapy_data[style="position: fixed; top: 250px; right: 0px; z-index:10;" type="submit"]
           | 保存する

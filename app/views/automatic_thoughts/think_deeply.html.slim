@@ -9,10 +9,10 @@ section#faq.page-block.faq
 
       .row
         .col-lg-12.col-md-12.col-sm-12
-          a.btn.btn-default.btn-xs[href="/automatic_thoughts/think/#{@automatic_thought.id}" data-no-turbolink="true"]
+          a.btn.btn-success.btn-xs.go_next_step.save_therapy_data[style="margin-left:10px;position: fixed; top: 250px; left: 0px; z-index:10;" href="/automatic_thoughts/think/#{@automatic_thought.id}" data-no-turbolink="true"]
             i.fa.fa-caret-left
             | 前のステップ
-          a.btn.btn-default.btn-xs[href="/automatic_thoughts/think_adaptively/#{@automatic_thought.id}" data-no-turbolink="true"]
+          a.btn.btn-success.btn-xs.go_next_step.save_therapy_data[style="position: fixed; top: 250px; right: 0px; z-index:10;" href="/automatic_thoughts/think_adaptively/#{@automatic_thought.id}" data-no-turbolink="true"]
             i.fa.fa-caret-right
             | 次のステップ
 
@@ -59,7 +59,7 @@ section#faq.page-block.faq
                   | 気持ちは軽くなりましたか？
                 = render partial: "shared/feeling", locals: {feeling: @automatic_thought.given_time_feeling.feeling, percentage: percentage, read_only: nil}
 
-          button.btn.btn-primary.save_therapy_data[type="submit"]
+          button.btn.btn-success.btn-xs.save_therapy_data[style="position: fixed; top: 300px; right: 0px;" type="submit"]
             | 保存する
-          a.btn.btn-primary.go_next_step.save_therapy_data[href="/automatic_thoughts/think_adaptively/#{@automatic_thought.id}" data-no-turbolink="true"]
-            | ステップ4へ進む
+          /a.btn.btn-primary.go_next_step.save_therapy_data[href="/automatic_thoughts/think_adaptively/#{@automatic_thought.id}" data-no-turbolink="true"]
+          /  | ステップ4へ進む
