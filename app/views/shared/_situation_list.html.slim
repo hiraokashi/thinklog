@@ -19,7 +19,7 @@
                   .col-lg-3.col-md-3.col-sm-3
                     .btn-group[style="margin:0px auto;"]
                       a.btn.btn-danger[style="margin-right:0px;margin-bottom:2px;" type="button" href=step_path(given_time_feeling, given_time_feeling.status) data-no-turbolink="true"]
-                        = "#{given_time_feeling.feeling.contents }(#{given_time_feeling.current_percentage.to_s}%)"
+                        = "#{given_time_feeling.feeling.contents }(#{given_time_feeling.percentage.to_s}%)"
 
                       button.btn.btn-danger.dropdown-toggle[style="margin-bottom:2px;padding-left:10px;width:20px;" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"]
                         span.caret

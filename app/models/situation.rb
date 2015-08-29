@@ -55,7 +55,6 @@ class Situation < ActiveRecord::Base
   end
 
   def set_empty(occured_time, user)
-    self.when = ''
     self.where = ''
     self.with_whom = ''
     self.what_have_you_been_doing = ''
@@ -92,10 +91,7 @@ class Situation < ActiveRecord::Base
       if feelings_hash.key?(feeling_id)
         # DBにも、フォームにも存在する→データを更新する
         logger.debug("DBにも、フォームにも存在する→データを更新する => #{feeling_id}")
-        given_time_feeling.step1_percentage = feelings_hash[feeling_id]
-        given_time_feeling.step2_percentage = feelings_hash[feeling_id]
-        given_time_feeling.step3_percentage = feelings_hash[feeling_id]
-        given_time_feeling.step4_percentage = feelings_hash[feeling_id]
+        given_time_feeling.percentage = feelings_hash[feeling_id]
         given_time_feeling.save
       else
         # DBに存在するがフォームでは存在しない→削除する
@@ -109,7 +105,7 @@ class Situation < ActiveRecord::Base
     logger.debug('未処理の感情ID =>  新規追加扱い' + feeling_ids.to_s)
     # ここは、DBになくてフォームに存在する→今の気持ちを新規追加する
     feeling_ids.each do |feeling_id|
-      given_time_feelings.build(step1_percentage: feelings_hash[feeling_id], step2_percentage: feelings_hash[feeling_id], step3_percentage: feelings_hash[feeling_id], step4_percentage: feelings_hash[feeling_id], feeling: Feeling.find(feeling_id))
+      given_time_feelings.build(percentage: feelings_hash[feeling_id],  feeling: Feeling.find(feeling_id))
       save
     end
 

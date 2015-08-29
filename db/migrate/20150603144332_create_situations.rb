@@ -1,7 +1,6 @@
 class CreateSituations < ActiveRecord::Migration
   def change
     create_table :situations do |t|
-      t.text :when
       t.text :where
       t.text :with_whom
       t.text :what_have_you_been_doing

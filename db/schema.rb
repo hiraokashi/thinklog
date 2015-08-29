@@ -90,13 +90,10 @@ ActiveRecord::Schema.define(version: 20150603144746) do
   create_table "given_time_feelings", force: :cascade do |t|
     t.integer  "feeling_id"
     t.integer  "situation_id"
-    t.integer  "step1_percentage"
-    t.integer  "step2_percentage"
-    t.integer  "step3_percentage"
-    t.integer  "step4_percentage"
-    t.integer  "status",           default: 0, null: false
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.integer  "percentage"
+    t.integer  "status",       default: 0, null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   add_index "given_time_feelings", ["feeling_id"], name: "index_given_time_feelings_on_feeling_id", using: :btree
@@ -112,7 +109,6 @@ ActiveRecord::Schema.define(version: 20150603144746) do
   add_index "rebuttals", ["automatic_thought_id"], name: "index_rebuttals_on_automatic_thought_id", using: :btree
 
   create_table "situations", force: :cascade do |t|
-    t.text     "when"
     t.text     "where"
     t.text     "with_whom"
     t.text     "what_have_you_been_doing"

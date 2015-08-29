@@ -60,36 +60,8 @@ class GivenTimeFeeling < ActiveRecord::Base
     # code
   end
 
-  def current_percentage
-    return step1_percentage if self.step_1?
-    return step2_percentage if self.step_2?
-    return step3_percentage if self.step_3?
-    return step4_percentage if self.step_4?
-    return step4_percentage if self.finished?
-  end
-
   def update_percentage(percentage_s)
-    if self.step_1?
-      self.step1_percentage = percentage_s[feeling.id.to_s].to_i
-      self.step2_percentage = percentage_s[feeling.id.to_s].to_i
-      self.step3_percentage = percentage_s[feeli.id.to_s].to_i
-      self.step4_percentage = percentage_s[feeling.id.to_s].to_i
-    elsif self.step_2?
-      self.step2_percentage = percentage_s[feeling.id.to_s].to_i
-      self.step3_percentage = percentage_s[feeling.id.to_s].to_i
-      self.step4_percentage = percentage_s[feeling.id.to_s].to_i
-    elsif self.step_3?
-      self.step3_percentage = percentage_s[feeling.id.to_s].to_i
-      self.step4_percentage = percentage_s[feeling.id.to_s].to_i
-    elsif self.step_4?
-      self.step4_percentage = percentage_s[feeling.id.to_s].to_i
-    elsif self.finished?
-      logger.info('思考記録が終了している。更新は行わない')
-    else
-      logger.info('想定していないパス')
-      # do Nothing
-    end
-
+    self.percentage = percentage_s[feeling.id.to_s].to_i
     save
   end
 
