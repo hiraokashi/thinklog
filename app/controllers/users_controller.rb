@@ -29,7 +29,7 @@ class UsersController < ApplicationController
   def situations
     @user = current_user
     # @situations = Situation.where(user_id: @user.id).order(:updated_at).reverse_order
-    @situations_negative = Situation.where(user_id: @user.id).negative.order(:updated_at).reverse_order
+    @situations_negative = Situation.where(user_id: @user.id).negative.order(:created_at).reverse_order
 
 
   end

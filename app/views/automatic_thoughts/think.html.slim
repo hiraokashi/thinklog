@@ -37,7 +37,7 @@ section.page-block
         p
           | 感情
         a.btn.btn-primary.btn-block
-          = @automatic_thought.given_time_feeling.feeling.contents + "(" + @automatic_thought.given_time_feeling.current_percentage.to_s + "%)"
+          = @automatic_thought.given_time_feeling.feeling.contents + "(" + @automatic_thought.given_time_feeling.percentage.to_s + "%)"
         p
           | 自動思考の発見
         = form_tag("/automatic_thoughts/#{@automatic_thought.id}" , :role=> 'form', :method => 'patch', :class =>"") do
