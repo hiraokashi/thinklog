@@ -173,5 +173,7 @@ $ ->
 
         error: () ->
           alert("データの保存に失敗しました")
+          $button.attr('disabled', false)
+          $button.text(button_name)
 
       false

@@ -58,6 +58,7 @@ class SituationsController < ApplicationController
   def update
     respond_to do |format|
       if @situation.update(situation_params)
+
         @situation.update_feeling_before(params[:feelings])
         format.html { redirect_to "/situations/edit_for_app/#{@situation.id}", notice: 'Situation was successfully created.' }
         # format.html { redirect_to @situation, notice: 'Situation was successfully updated.' }

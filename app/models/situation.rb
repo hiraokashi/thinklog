@@ -82,6 +82,12 @@ class Situation < ActiveRecord::Base
 
   # 今の気持ちを更新する
   def update_feeling_before(feelings_hash)
+    if feelings_hash.nil?
+      self.given_time_feelings.each do |gtf|
+        gtf.destroy
+      end
+      return
+    end
     feeling_ids = feelings_hash.keys
 
     logger.debug("feeling_ids => #{feeling_ids}")
