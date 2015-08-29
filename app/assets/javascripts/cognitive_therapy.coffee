@@ -28,7 +28,7 @@ $ ->
 
       return  [y, m, d, w, wNames[w], h, min, sec]
 
-
+    $(".mood_button").unbind('click')
     $('.mood_button').click ->
 
       # 前回の記録から5分以上たってなければやめる。
@@ -91,6 +91,7 @@ $ ->
       $(".countdown").text(str_occured_time)
     , 1000
 
+    $(".finish_therapy").unbind('click')
     $('.finish_therapy').click ->
       # 操作対象のフォーム要素を取得
 
@@ -104,7 +105,7 @@ $ ->
           $link.attr('disabled', true);
           $link.text('保存中')
         success: () ->
-          alert("進捗を更新しました！")
+          alert("完了しました！おつかれさまでした！。気分は軽くなりましたか？")
         error: () ->
           alert("データの保存に失敗しました")
         complete: () ->
@@ -114,12 +115,36 @@ $ ->
       false
 
     #保存する(step2以降)
+    $(".save_therapy_data").unbind('click')
     $('.save_therapy_data').click ->
       #codes...
       $button = $(this)
       go_next_step = $(this).hasClass('go_next_step')
-      next_step = "#"
-      next_step = $(this).attr('href') if go_next_step == true
+      go_previous_step = $(this).hasClass('go_previous_step')
+      go_to_link = go_next_step is true or go_previous_step is true
+      next_link = "#"
+      next_link = $(this).attr('href') if go_to_link == true
+
+      $do_save = true
+      if go_next_step is true
+        #入力チェックを行う。
+        $("input[type='text']:not(input.dial)").each ->
+          #console.log($(this).attr('name'))
+          if $(this).val().replace(/[\s　]/g, "") is ""
+            alert("未入力項目があります。")
+            $(this).focus()
+            $do_save = false #このコードでreturn $do_save = false が生成され、ループが抜ける
+
+        return false if $do_save is false
+
+        $("textarea").each ->
+          #console.log($(this).attr('name'))
+          if $(this).val().replace(/[\s　]/g, "") is ""
+            alert("未入力項目があります。")
+            $(this).focus()
+            $do_save = false #このコードでreturn $do_save = false が生成され、ループが抜ける
+
+        return false if $do_save is false
 
 
       # 操作対象のフォーム要素を取得
@@ -136,8 +161,16 @@ $ ->
         success: () ->
           $button.attr('disabled', false)
           $button.text(button_name)
-          location.href = next_step if go_next_step == true
-          alert("保存しました！") if go_next_step == false
+          location.href = next_link if go_to_link is true
+          alert("保存しました！") if go_to_link is false
+
+          #保存のみかつステップ１であれば感情を更新する
+          if $('.feeling_select').size() > 0
+            $situation_id = $('.feeling_select').attr('id').replace(/situation_id_for_feeling_list/g,"")
+            console.log($situation_id)
+            $('.feeling_select').load("/situations/update_feeling_list/" + $situation_id)
+
+
         error: () ->
           alert("データの保存に失敗しました")
 

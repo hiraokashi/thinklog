@@ -5,7 +5,7 @@ class Situation < ActiveRecord::Base
   scope :neutral, -> { where(mood_status: 1) }
   scope :positive, -> { where(mood_status: 0) }
   scope :today, -> { where("occured_time like \'#{Date.today.to_s.gsub(/-/, '')}%\'") }
-  has_many :given_time_feelings, dependent: :delete_all
+  has_many :given_time_feelings, ->{order 'created_at DESC' }, dependent: :delete_all
 
 
 
@@ -78,7 +78,7 @@ class Situation < ActiveRecord::Base
   end
 
   def toSentence
-    self.when + ', ' + where + ', ' + with_whom + ', ' + what_have_you_been_doing
+    where + ', ' + with_whom + ', ' + what_have_you_been_doing
   end
 
   # 今の気持ちを更新する

@@ -1,0 +1,9 @@
+- unless situation.given_time_feelings.nil?
+  - situation.given_time_feelings.each do |given_time_feeling|
+
+    = render partial: "shared/feeling", locals: {feeling: given_time_feeling.feeling, percentage: given_time_feeling.step1_percentage, read_only: nil}
+    div[style="margin: 0 auto; width:150px; float:left;" id="go_step2_feeling#{given_time_feeling.feeling.id}"]
+      a.btn.btn-success.btn-sm.go_next_step.save_therapy_data[style="width:160px; margin-top:65px;"href="/automatic_thoughts/think/#{given_time_feeling.automatic_thought.id}" data-no-turbolink="true"]
+        i.fa.fa-caret-right
+        | ステップ2へ進む
+    div[style="clear:both;"]

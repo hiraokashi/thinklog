@@ -1,63 +1,103 @@
 - percentage = @automatic_thought.given_time_feeling.step2_percentage.to_s
 
-
-
 section.page-block
   .container
     .row
-      #progressBar
-      #step2_find_automatic_thought
-    .row.page-header
-
       .col-lg-12.col-md-12.col-sm-12
-        a.btn.btn-success.btn-xs.go_next_step.save_therapy_data[style="margin-left:10px;position: fixed; top: 250px; left: 0px; z-index:10;" href="/situations/edit_for_app/#{@automatic_thought.given_time_feeling.situation.id}" data-no-turbolink="true"]
+        a.btn.btn-success.btn-xs.go_previous_step.save_therapy_data[style="margin-left:10px;position: fixed; top: 180px; left: 0px; z-index:10;" href="/situations/edit_for_app/#{@automatic_thought.given_time_feeling.situation.id}" data-no-turbolink="true"]
           i.fa.fa-caret-left
           | 前のステップ
-        a.btn.btn-success.btn-xs.go_next_step.save_therapy_data[style="position: fixed; top: 250px; right: 0px; z-index:10;" href="/automatic_thoughts/think_deeply/#{@automatic_thought.id}" data-no-turbolink="true"]
+        a.btn.btn-success.btn-xs.go_next_step.save_therapy_data[style="position: fixed; top: 180px; right: 0px; z-index:10;" href="/automatic_thoughts/think_deeply/#{@automatic_thought.id}" data-no-turbolink="true"]
           i.fa.fa-caret-right
           | 次のステップ
-        h3
-          | 自動思考を捕まえよう
+
+    .row.page-header
+      h4
+        = @automatic_thought.given_time_feeling.situation.occured_time_for_view + " のネガティブな気分に取り組もう"
+
+    .row
+      #progressBar
+      #step2_find_automatic_thought
+
+    .row
+      center
+        h4
+          span[style="color:#ff6f69;"]
+            = "#{@automatic_thought.given_time_feeling.feeling.contents}"
+
+          | を感じたときの自動思考について考えよう
 
     .row
       .col-lg-12.col-md-12.col-sm-12
-        a.btn.btn-default.btn-xs.tooltipped[data-toggle="tooltip" data-placement="bottom" title=@automatic_thought.given_time_feeling.situation.when]
-          | いつ？
-        a.btn.btn-default.btn-xs.tooltipped[data-toggle="tooltip" data-placement="bottom" title=@automatic_thought.given_time_feeling.situation.where]
-          | どこで？
-        a.btn.btn-default.btn-xs.tooltipped[data-toggle="tooltip" data-placement="bottom" title=@automatic_thought.given_time_feeling.situation.with_whom]
-          | だれと？
-        a.btn.btn-default.btn-xs.tooltipped[data-toggle="tooltip" data-placement="bottom" title=@automatic_thought.given_time_feeling.situation.what_have_you_been_doing]
-          | 何をしているとき？
+        p
+          | 状況の記録
+        a.btn.btn-primary.btn-block
+          = @automatic_thought.given_time_feeling.situation.toSentence
 
+        p
+          | 感情
+        a.btn.btn-primary.btn-block
+          = @automatic_thought.given_time_feeling.feeling.contents + "(" + @automatic_thought.given_time_feeling.current_percentage.to_s + "%)"
+        p
+          | 自動思考の発見
         = form_tag("/automatic_thoughts/#{@automatic_thought.id}" , :role=> 'form', :method => 'patch', :class =>"") do
           .form-group
-            textarea.form-control[rows="3" name="automatic_thought[contents]" placeholder="そのとき頭に浮かんだ考えは？" value=@automatic_thought.contents required]
+            textarea.form-control[rows="3" name="automatic_thought[contents]" placeholder="そのとき、瞬時にどのような考えが浮かびましたか？" value=@automatic_thought.contents required]
               = @automatic_thought.contents
 
           .form-group
-            h5
-              |自動思考のパターンを選択しよう(複数選択可)
-            - @cognitive_distortions .each do |cognitive_distortion|
+            p.text-justify[style="margin-bottom:5px;"]
+              |浮かんだ考えはどのようなパターン(認知の歪み)にあてはまるでしょうか？(複数選択可)
+            div[style="font-size:12px; margin-bottom:0px;"]
+              a[style="vertical-align:top;" href="#" data-toggle="modal" data-target="#modalLight"]
+                | ▶︎認知の歪みの説明
+            br
+            - @cognitive_distortions.each do |cognitive_distortion|
               - if disabled(cognitive_distortion.id, @distortion_ids)
-                a.btn.btn-default.btn-xs.cognitive_distortion_selecter.tooltipped[id="cognitive_distortion_#{cognitive_distortion.id}" data-toggle="tooltip" data-placement="bottom" title=cognitive_distortion.discription]
+                a.btn.btn-default.btn-xs.cognitive_distortion_selecter[id="cognitive_distortion_#{cognitive_distortion.id}"]
                   = cognitive_distortion.name
               - else
-                a.btn.btn-primary.btn-xs.cognitive_distortion_selecter.tooltipped[id="cognitive_distortion_#{cognitive_distortion.id}"  data-toggle="tooltip" data-placement="bottom" title=cognitive_distortion.discription]
+                a.btn.btn-primary.btn-xs.cognitive_distortion_selecter[id="cognitive_distortion_#{cognitive_distortion.id}"]
                   = cognitive_distortion.name
 
           .form-group
-            label[for="feelings_after[#{@automatic_thought.given_time_feeling.feeling.id}]"]
-              | 気持ちに変化があったら更新しよう
+            h5
+              label[for="feelings_after[#{@automatic_thought.given_time_feeling.feeling.id}]"]
+                | 振り返ってみて、感情に変化はありましたか？
             = render partial: "shared/feeling", locals: {feeling: @automatic_thought.given_time_feeling.feeling, percentage: percentage, read_only: nil}
           div[style="clear:both;;"]
           #distortion_selecter
             - @automatic_thought.distortion_patterns.each do |distortion_pattern|
               input[type="hidden" name="distortion_pattern[#{distortion_pattern.cognitive_distortion.id}]" value=distortion_pattern.cognitive_distortion.id]
 
-          button.btn.btn-success.btn-xs.save_therapy_data[style="position: fixed; top: 300px; right: 0px; z-index:10;" type="submit"]
+          button.btn.btn-success.btn-xs.save_therapy_data[style="position: fixed; top: 180px; right: 125px; z-index:10;" type="submit"]
             | 保存する
+
+          h5
+            | ここまでできたら、ステップ2は終了です。おつかれさまです。
           /a.btn.btn-primary.go_next_step.save_therapy_data[href="/automatic_thoughts/think_deeply/#{@automatic_thought.id}" data-no-turbolink="true"]
           /  i.fa.fa-caret-right
           /  | ステップ3へ進む
           input[type="hidden" name="automatic_thought[given_time_feeling_id]" value=@automatic_thought.given_time_feeling.id]
+
+.light-skin.modal.fade#modalLight[tabindex="-1" role="dialog" aria-hidden="true"]
+  .modal-dialog
+        .modal-content
+          .modal-header
+            button.close[type="button" data-dismiss="modal" aria-hidden="true"]
+              | &times;
+            h4.modal-title
+              | 認知の歪みとは
+          .modal-body
+            p.text-justify
+              | 自動思考の背景には、みなさんが持っている考え方のクセ（パターンが）存在します。ネガティブな気持ちになるとき、そのクセは極端なものである（歪んでしまっている）場合があります。それらを客観的に評価することで気持ちを軽くすることができます。代表的なものを紹介します。
+
+              - @cognitive_distortions.each do |cognitive_distortion|
+                  p.text-justify
+                    span[style="color:#ff6f69;"]
+                      = cognitive_distortion.name + ":"
+                    = cognitive_distortion.discription
+          .modal-footer
+            button.btn.btn-default.btn.btn-sm[type="button" data-dismiss="modal"]
+              i.icon-close
+              | 閉じる

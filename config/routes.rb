@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
 
+  get 'situations/update_feeling_list/:id' => 'situations#update_feeling_list'
   get 'situations/start_recent_step1' => 'situations#start_recent_step1'
   get 'situations/create_as_empty/:occured_time/:mood_status' => 'situations#create_as_empty'
   get 'users/dashboard' => 'users#dashboard'

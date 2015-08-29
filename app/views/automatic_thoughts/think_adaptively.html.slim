@@ -1,57 +1,85 @@
-- percentage = @automatic_thought.given_time_feeling.step4_percentage.to_s
+- percentage = @automatic_thought.given_time_feeling.current_percentage.to_s
 
 section#faq.page-block
   .container
+    .row
+      .col-lg-12.col-md-12.col-sm-12
+        a.btn.btn-success.btn-xs.go_previous_step.save_therapy_data[style="margin-left:10px;position: fixed; top: 180px; left: 0px; z-index:10;" href="/automatic_thoughts/think_deeply/#{@automatic_thought.id}" data-no-turbolink="true"]
+          i.fa.fa-caret-left
+          | 前のステップ
+
+    .row.page-header
+      h4
+        = @automatic_thought.given_time_feeling.situation.occured_time_for_view + " のネガティブな気分に取り組もう"
+
     .row
       #progressBar
       - if @automatic_thought.given_time_feeling.step_4?
         #step4_think_adaptively
       - if @automatic_thought.given_time_feeling.finished?
         #therapy_finished
-    .row.page-header
-      .row
-        .col-lg-12.col-md-12.col-sm-12
-          a.btn.btn-success.btn-xs.go_next_step.save_therapy_data[style="margin-left:10px;position: fixed; top: 250px; left: 0px; z-index:10;" href="/automatic_thoughts/think_deeply/#{@automatic_thought.id}" data-no-turbolink="true"]
-            i.fa.fa-caret-left
-            | 前のステップ
-      h3
-        | 自動思考を適応的な考え方に変化させよう
+    .row
+      center
+        h4
+          span[style="color:#ff6f69;"]
+            = "#{@automatic_thought.given_time_feeling.feeling.contents}"
 
+          | を感じたときの自動思考から、適応的な考え方を導こう
     .row
       .col-lg-12.col-md-12.col-sm-12
+        p
+          | 状況の記録
+        a.btn.btn-primary.btn-block
+          = @automatic_thought.given_time_feeling.situation.toSentence
 
-        a.btn.btn-default.btn-xs.tooltipped[data-toggle="tooltip" data-placement="bottom" title=@automatic_thought.given_time_feeling.situation.when]
-          | いつ？
-        a.btn.btn-default.btn-xs.tooltipped[data-toggle="tooltip" data-placement="bottom" title=@automatic_thought.given_time_feeling.situation.where]
-          | どこで？
-        a.btn.btn-default.btn-xs.tooltipped[data-toggle="tooltip" data-placement="bottom" title=@automatic_thought.given_time_feeling.situation.with_whom]
-          | だれと？
-        a.btn.btn-default.btn-xs.tooltipped[data-toggle="tooltip" data-placement="bottom" title=@automatic_thought.given_time_feeling.situation.what_have_you_been_doing]
-          | 何をしているとき？
-        a.btn.btn-default.btn-xs.tooltipped[data-toggle="tooltip" data-placement="bottom" title=@automatic_thought.contents]
-          | 自動思考
+        p
+          | 感情
+        a.btn.btn-primary.btn-block
+          = @automatic_thought.given_time_feeling.feeling.contents + "(" + @automatic_thought.given_time_feeling.current_percentage.to_s + "%)"
+        p
+          | 発見した自動思考
+        a.btn.btn-primary.btn-block
+          = @automatic_thought.contents
+
+        p
+          | あてはまる認知の歪み
+          small
+            |  タップ（マウスオーバー)すると説明が表示されます
         - @automatic_thought.distortion_patterns.each do |distortion_pattern|
-          a.btn.btn-success.tooltipped[data-toggle="tooltip" data-placement="bottom" title="#{distortion_pattern.cognitive_distortion.discription}"]
+          a.btn.btn-primary.btn-sm.tooltipped[data-toggle="tooltip" data-placement="bottom" title="#{distortion_pattern.cognitive_distortion.discription}"]
             = distortion_pattern.cognitive_distortion.name
-        a.btn.btn-default.btn-xs.tooltipped[data-toggle="tooltip" data-placement="bottom" title=@automatic_thought.bases[0].contents]
-          | 根拠
-        a.btn.btn-default.btn-xs.tooltipped[data-toggle="tooltip" data-placement="bottom" title=@automatic_thought.rebuttals[0].contents]
-          | 反証
+        - if @automatic_thought.distortion_patterns.size == 0
+          small
+            | 認知の歪みは選択されていません。
+        p
+          | 根拠（自動思考がその通りだと思う理由）
+        a.btn.btn-primary.btn-block
+          = @automatic_thought.bases[0].contents
+
+        p
+          | 反証（自動思考と矛盾する事実）
+        a.btn.btn-primary.btn-block
+          = @automatic_thought.rebuttals[0].contents
+
+
         = form_tag("/automatic_thoughts/update_adaptive_thought/#{@automatic_thought.id}" , :role=> 'form', :method => 'patch', :id =>"", :class =>"") do
           .row
             .col-lg-12.col-md-12.col-sm-12
               .form-group
                 label.control-label[for="basis[contents]"]
-                  | 適応的思考
+                  | 気持ちが楽になる適応的な考え方を考えよう
                 textarea.form-control[rows="6" name="adaptive_thought[contents]" placeholder="根拠、反証を合わせて適応的な思考を導こう" value=@automatic_thought.adaptive_thoughts[0].contents required]
                   = @automatic_thought.adaptive_thoughts[0].contents
 
           .form-group
-            label[for="feelings_after[#{@automatic_thought.given_time_feeling.feeling.id}]"]
-              | 気持ちに変化があったら更新しよう
+            h5
+              label[for="feelings_after[#{@automatic_thought.given_time_feeling.feeling.id}]"]
+                | 気持ちに変化があったら更新しよう
             = render partial: "shared/feeling", locals: {feeling: @automatic_thought.given_time_feeling.feeling, percentage: percentage, read_only: nil}
 
-          button.btn.btn-success.btn-xs.save_therapy_data[style="position: fixed; top: 300px; right: 0px; z-index:10;" type="submit"]
+          button.btn.btn-success.btn-xs.save_therapy_data[style="position: fixed; top: 180px; right: 125px; z-index:10;" type="submit"]
             | 保存する
-          a.btn.btn-success.btn-xs.finish_therapy[style="position: fixed; top: 250px; right: 0px; z-index:10;" href="/automatic_thoughts/progress_finished/#{@automatic_thought.id}"]
+          a.btn.btn-success.btn-xs.finish_therapy[style="position: fixed; top: 180px; right: 0px; z-index:10;" href="/automatic_thoughts/progress_finished/#{@automatic_thought.id}"]
             | 完了する
+          h5
+            | これで思考記録終了です。おつかれさました。

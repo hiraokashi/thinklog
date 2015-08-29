@@ -1,5 +1,5 @@
 class SituationsController < ApplicationController
-  before_action :set_situation, only: [:show, :edit, :update, :destroy, :edit_modal, :edit_for_app]
+  before_action :set_situation, only: [:show, :edit, :update, :destroy, :edit_modal, :edit_for_app, :update_feeling_list]
 
   # GET /situations
   # GET /situations.json
@@ -80,6 +80,7 @@ class SituationsController < ApplicationController
   end
 
 
+  #ステップ１を新規で実行
   def add_situation
     @user = current_user
     @situation = Situation.new
@@ -87,7 +88,7 @@ class SituationsController < ApplicationController
     @feeling_ids = []
   end
 
-  #step1を実行
+  #step1を編集で実行
   def edit_for_app
     # ajaxでモーダルフォームをロードする
     @user = current_user
@@ -116,6 +117,12 @@ class SituationsController < ApplicationController
     @feelings = Feeling.all
     @feeling_ids = @situation.given_time_feelings.map { |given_time_feeling| given_time_feeling.feeling.id }
     render "edit_for_app"
+  end
+
+  def update_feeling_list
+    #code
+    @user = current_user
+    render layout: false # レイアウトをなしにする場合
   end
 
   private
