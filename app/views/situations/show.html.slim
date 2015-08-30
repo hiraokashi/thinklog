@@ -2,10 +2,6 @@ p#notice
   = notice
 p
   strong
-    | When:
-  = @situation.when
-p
-  strong
     | Where:
   = @situation.where
 p
@@ -16,10 +12,7 @@ p
   strong
     | What have you been doing:
   = @situation.what_have_you_been_doing
-p
-  strong
-    | User:
-  = @situation.user.name
+
 = link_to 'Edit', edit_situation_path(@situation)
 |  |
 = link_to 'Back', situations_path

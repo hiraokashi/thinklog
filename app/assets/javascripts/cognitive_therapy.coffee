@@ -13,14 +13,20 @@ $ ->
         beforeSend: () ->
         success: (data) ->
           #console.log(data)
-          #今日の気分
+
+          ########     今日の気分    ##########################
           window.moodChart.scale.xLabels = data.mood_stacked_datalabels
-          $.each data.mood_chart_data, (index, value) ->
-            $.each data.mood_stacked_datalabels, (index2, point) ->
-              if window.moodChart.datasets[index].points.length >= data.mood_stacked_datalabels.length
-                window.moodChart.datasets[index].points[index2].value = value[index2]
-              else
-                window.moodChart.datasets[index].points.push(value[index2])
+          $.each data.mood_stacked_datalabels, (index, label_name) ->
+            #新しいX軸の場合
+            if (index + 1) > window.moodChart.datasets[0].points.length
+              add_data = []
+              $.each data.mood_chart_data, (data_line_index, points) ->
+                add_data.push(points[index])
+              window.moodChart.addData(add_data, label_name)
+            else
+              $.each data.mood_chart_data, (data_line_index, points) ->
+                window.moodChart.datasets[data_line_index].points[index].value = points[index]
+
           window.moodChart.update()
 
           #気分の構成割合を更新

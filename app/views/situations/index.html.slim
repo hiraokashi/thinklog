@@ -8,27 +8,20 @@ table
       th
         | When
       th
-        | Where
-      th
         | With whom
       th
         | What have you been doing
-      th
-        | User
       th[colspan="3"]
   tbody
     - @situations.each do |situation|
       tr
-        td
-          = situation.when
         td
           = situation.where
         td
           = situation.with_whom
         td
           = situation.what_have_you_been_doing
-        td
-          = situation.user.name
+
         td
           = link_to 'Show', situation
         td
