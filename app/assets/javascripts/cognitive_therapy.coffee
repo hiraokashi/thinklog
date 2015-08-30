@@ -17,7 +17,7 @@ $ ->
           window.moodChart.scale.xLabels = data.mood_stacked_datalabels
           $.each data.mood_chart_data, (index, value) ->
             $.each data.mood_stacked_datalabels, (index2, point) ->
-              if window.moodChart.datasets[index].points.length > index2
+              if window.moodChart.datasets[index].points.length >= data.mood_stacked_datalabels.length
                 window.moodChart.datasets[index].points[index2].value = value[index2]
               else
                 window.moodChart.datasets[index].points.push(value[index2])
