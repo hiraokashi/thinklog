@@ -12,13 +12,15 @@ $ ->
         timeout:10000
         beforeSend: () ->
         success: (data) ->
-          console.log(data)
+          #console.log(data)
           #今日の気分
           window.moodChart.scale.xLabels = data.mood_stacked_datalabels
           $.each data.mood_chart_data, (index, value) ->
             $.each data.mood_stacked_datalabels, (index2, point) ->
-              window.moodChart.datasets[index].points[index2].value = value[index2]
-
+              if window.moodChart.datasets[index].points.length > index2
+                window.moodChart.datasets[index].points[index2].value = value[index2]
+              else
+                window.moodChart.datasets[index].points.push(value[index2])
           window.moodChart.update()
 
           #気分の構成割合を更新
