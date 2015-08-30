@@ -13,7 +13,7 @@ section#faq.page-block
 
     .row
       #progressBar
-      - if @automatic_thought.given_time_feeling.step_4?
+      - if @automatic_thought.given_time_feeling.executed_step4?
         #step4_think_adaptively
       - if @automatic_thought.given_time_feeling.finished?
         #therapy_finished

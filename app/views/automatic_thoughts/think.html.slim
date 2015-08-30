@@ -15,8 +15,10 @@ section.page-block
 
     .row
       #progressBar
-      #step2_find_automatic_thought
-
+      - if @automatic_thought.given_time_feeling.finished?
+        #therapy_finished
+      - else
+        #step2_find_automatic_thought
     .row
       center
         h4

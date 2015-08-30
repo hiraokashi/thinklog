@@ -95,6 +95,16 @@ $ ->
     $('.finish_therapy').click ->
       # 操作対象のフォーム要素を取得
 
+      $do_save = true
+      $("textarea").each ->
+        #console.log($(this).attr('name'))
+        if $(this).val().replace(/[\s　]/g, "") is ""
+          alert("未入力項目があります。")
+          $(this).focus()
+          $do_save = false #このコードでreturn $do_save = false が生成され、ループが抜ける
+
+      return false if $do_save is false
+
       $link = $(this)
       button_name = $link.text()
       $.ajax
