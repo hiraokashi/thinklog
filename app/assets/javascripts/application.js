@@ -45,13 +45,13 @@ $(function() {
 		//console.log(i);
   });
 
-  $('#feelingTypeChart').waypoint(function() {
+  //$('#feelingTypeChart').waypoint(function() {
     var barChart = new Chart($("#feelingTypeChart").get(0).getContext("2d")).Doughnut(feeling_counts_data);
     $('.animated-legend').addClass('fadeInRight');
-  }, {
-    offset: '75%',
-    triggerOnce: true
-  });
+  //}, {
+  //  offset: '75%',
+  //  triggerOnce: true
+  //});
 
   // ----------------------------------
   //     気分の構成割合を表すグラフを描画する
@@ -68,13 +68,13 @@ $(function() {
     color: "rgba(240,73,73,0.8)"
   }];
 
-  $('#moodTypeChart').waypoint(function() {
-    var barChart = new Chart($("#moodTypeChart").get(0).getContext("2d")).Doughnut(doughnutChartData);
+  //$('#moodTypeChart').waypoint(function() {
+    window.moodTypeChartObj = new Chart($("#moodTypeChart").get(0).getContext("2d")).Doughnut(doughnutChartData);
     $('.animated-legend').addClass('fadeInRight');
-  }, {
-    offset: '75%',
-    triggerOnce: true
-  });
+  //}, {
+  //  offset: '75%',
+  //  triggerOnce: true
+  //});
 
   // ----------------------------------
   //     気分の推移を表す折れ線グラフを描画する
@@ -126,15 +126,15 @@ $(function() {
         }
       ]
     };
-    $('#mood_stacked').waypoint(function(data) {
+    //$('#mood_stacked').waypoint(function(data) {
       var ctx = $("#mood_stacked").get(0).getContext("2d");
       window.moodChart = new Chart(ctx).Line(barChartData, {
         responsive: true
       });
-    }, {
-      offset: '75%',
-      triggerOnce: true
-    });
+    //}, {
+    //  offset: '75%',
+    //  triggerOnce: true
+    //});
 
     for (var i = 0; i < barChartData.datasets.length; i++) {
       //alert(barChartData.datasets[i].strokeColor);

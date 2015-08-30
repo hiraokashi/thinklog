@@ -26,6 +26,25 @@ class UsersController < ApplicationController
 
   end
 
+  #気分が登録されたらグラフを更新する
+  def update_monitor_chart
+    @user = current_user
+    mood_count =  Situation.mood_counts(@user)
+
+    situations_today = Situation.where(user_id: @user.id).today.order('updated_at ASC')
+    mood_chart_data = Situation.mood_chart_data(situations_today)
+    mood_stacked_datalabels =mood_chart_data[0].keys
+    mood_chart_data.map!{|datapoints| datapoints.values}
+
+    update_data = {mood_count: mood_count,
+                   mood_chart_data: mood_chart_data,
+                   mood_stacked_datalabels: mood_stacked_datalabels
+                  }
+
+    render :json => update_data
+
+  end
+
   def situations
     @user = current_user
     # @situations = Situation.where(user_id: @user.id).order(:updated_at).reverse_order

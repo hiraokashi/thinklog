@@ -68,7 +68,11 @@ section.page-block
           h3
             | 感じた気分の内訳
           p
-            = "あなたにはいままで#{@mood_counts[2]}個のネガティブな気分を経験してきました。"
+            | あなたにはいままで
+            span#mood_count_messeage
+              = @mood_counts[2]
+
+            | 個のネガティブな気分を経験してきました。"
 
           div
             = link_to 'ネガティブな気分に取り組む', '/users/situations', :class => 'navbar-link', data: { no_turbolink: true }

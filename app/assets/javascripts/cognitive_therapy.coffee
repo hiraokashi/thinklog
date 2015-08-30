@@ -3,6 +3,37 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $ ->
+    #気分のグラフを更新する関数
+    update_monitor_chart = ->
+      console.log("update_monitor_chart")
+      $.ajax
+        url: '/users/update_monitor_chart'
+        type: 'get'
+        timeout:10000
+        beforeSend: () ->
+        success: (data) ->
+          console.log(data)
+          #今日の気分
+          window.moodChart.scale.xLabels = data.mood_stacked_datalabels
+          $.each data.mood_chart_data, (index, value) ->
+            $.each data.mood_stacked_datalabels, (index2, point) ->
+              window.moodChart.datasets[index].points[index2].value = value[index2]
+
+          window.moodChart.update()
+
+          #気分の構成割合を更新
+          $.each data.mood_count, (index, value) ->
+            window.moodTypeChartObj.segments[index].value = data.mood_count[index]
+            $('.pie-chart-legend.animated-legend > .label > span:eq(' + index + ')').text(data.mood_count[index])
+          window.moodTypeChartObj.update()
+          $('span#mood_count_messeage').text(data.mood_count[2])
+
+        error: () ->
+        complete: () ->
+
+      false
+
+
 
     #現在時刻を文字列で返す関数
     occured_time =  ->
@@ -66,10 +97,13 @@ $ ->
           $('.goto_record_situation').hide() if mood_status is 1
           alert($mood_name + "な気分を登録しました。")
 
-          # グラフの更新
+
           # negativeの場合、step1へいくためのダイアログを立ち上げる
           $('.situation-unit').html(data)
           $('.goto_record_situation').show().attr('href', "/situations/start_recent_step1") if mood_status is 2
+
+          # グラフの更新
+          update_monitor_chart()
 
         error: () ->
           alert("データの保存に失敗しました")
