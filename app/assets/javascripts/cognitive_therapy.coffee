@@ -103,14 +103,14 @@ $ ->
         timeout:10000
         beforeSend: () ->
           $link.attr('disabled', true);
-          $link.text('保存中')
+          #$link.text('保存中')
         success: () ->
           alert("完了しました！おつかれさまでした！。気分は軽くなりましたか？")
         error: () ->
           alert("データの保存に失敗しました")
         complete: () ->
           $link.attr('disabled', false)
-          $link.text(button_name)
+          #$link.text(button_name)
 
       false
 
@@ -157,10 +157,10 @@ $ ->
         timeout:10000
         beforeSend: () ->
           $button.attr('disabled', true);
-          $button.text('保存中')
+          #$button.text('保存中')
         success: () ->
           $button.attr('disabled', false)
-          $button.text(button_name)
+          #$button.text(button_name)
           location.href = next_link if go_to_link is true
           alert("保存しました！") if go_to_link is false
 
@@ -174,6 +174,6 @@ $ ->
         error: () ->
           alert("データの保存に失敗しました")
           $button.attr('disabled', false)
-          $button.text(button_name)
+          #$button.text(button_name)
 
       false
