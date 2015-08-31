@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
 
+  get 'top/developers_and_contact' => 'top#developers_and_contact'
+  get 'top/privacy_policy' => 'top#privacy_policy'
+  get 'top/user_agreement' => 'top#user_agreement'
+  get 'top/about' => 'top#about'
   get 'users/update_monitor_chart' => 'users#update_monitor_chart'
   get 'situations/update_feeling_list/:id' => 'situations#update_feeling_list'
   get 'situations/start_recent_step1' => 'situations#start_recent_step1'

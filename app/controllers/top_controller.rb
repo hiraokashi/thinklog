@@ -1,6 +1,6 @@
 class TopController < ApplicationController
   def index
-    logger.debug('ようこそ！')
+    @home = true
     @cognitive_distortions = CognitiveDistortion.all
     @feelings = Feeling.all
 

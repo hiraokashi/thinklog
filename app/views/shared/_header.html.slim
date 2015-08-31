@@ -24,13 +24,10 @@ header.stiky-header
 
     nav.main-navi
       ul
-        li.active
-          a.scroll-up[href="#"]
-            | ホーム
-        - if user_signed_in?
-          li
-            a.navbar-link[href="/users/sign_out" data-no-turbolink="true" rel="nofollow" data-method="delete" ]
-              | ログアウト
+        /li[class=is_home(@home)]
+        /  a.scroll-up[href="#"]
+        /    | ホーム
+
         - if user_signed_in?
           li.has-dropdown
             a.scroll[href="#"]
@@ -38,12 +35,26 @@ header.stiky-header
               i.fa.fa-caret-down
             ul.dropdown
               li
-                = link_to 'ダッシュボード', '/users/dashboard', :class => '', data: { no_turbolink: true } 
+                = link_to  '/users/mood_monitor', :class => 'navbar-link', data: { no_turbolink: true } do
+                  i.icon-stats
+                  | &nbsp;&nbsp;
+                  | 気分モニタ
               li
-                = link_to '気分モニター', '/users/mood_monitor', :class => 'navbar-link', data: { no_turbolink: true }
+                = link_to  '/users/situations', :class => 'navbar-link', data: { no_turbolink: true } do
+                  i.icon-list
+                  | &nbsp;&nbsp;
+                  | あなたの課題一覧
               li
-                = link_to 'ネガティブな気分', '/users/situations', :class => 'navbar-link', data: { no_turbolink: true }
-
+                = link_to '/users/dashboard', :class => '', data: { no_turbolink: true } do
+                  i.icon-dashboard
+                  | &nbsp;&nbsp;
+                  | ダッシュボード
+              - if user_signed_in?
+                li
+                  a.navbar-link[href="/users/sign_out" data-no-turbolink="true" rel="nofollow" data-method="delete" ]
+                    i.fa.fa-sign-out
+                    | &nbsp;&nbsp;                  
+                    | ログアウト
 
 
 .[style="margin-top: 65px;"]

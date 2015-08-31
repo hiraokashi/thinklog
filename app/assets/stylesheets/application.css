@@ -45,10 +45,10 @@
 
 }
 
-.footer p.contents-link a {
+p.contents-link a {
 	color: #ffffff;
 	text-decoration: none;
 }
-.footer p.contents-link a:hover {
+p.contents-link a:hover {
 	text-decoration: underline;
 }

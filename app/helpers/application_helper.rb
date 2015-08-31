@@ -1,4 +1,11 @@
 module ApplicationHelper
+
+  def is_home(home)
+    #code
+    return "active" if home == true
+    ""
+  end
+
   # 複数列対応用に配列を再構築する
   def arranged_by_columns(model_list, col_num)
     # グリッドシステムは12なので
