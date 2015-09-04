@@ -81,7 +81,7 @@ class Situation < ActiveRecord::Base
   end
 
   # 今の気持ちを更新する
-  def update_feeling_before(feelings_hash)
+  def update_feeling_start(feelings_hash)
     if feelings_hash.nil?
       self.given_time_feelings.each do |gtf|
         gtf.destroy
@@ -97,6 +97,7 @@ class Situation < ActiveRecord::Base
       if feelings_hash.key?(feeling_id)
         # DBにも、フォームにも存在する→データを更新する
         logger.debug("DBにも、フォームにも存在する→データを更新する => #{feeling_id}")
+        given_time_feeling.start_percentage = feelings_hash[feeling_id]
         given_time_feeling.percentage = feelings_hash[feeling_id]
         given_time_feeling.save
       else
@@ -111,7 +112,7 @@ class Situation < ActiveRecord::Base
     logger.debug('未処理の感情ID =>  新規追加扱い' + feeling_ids.to_s)
     # ここは、DBになくてフォームに存在する→今の気持ちを新規追加する
     feeling_ids.each do |feeling_id|
-      given_time_feelings.build(percentage: feelings_hash[feeling_id],  feeling: Feeling.find(feeling_id))
+      given_time_feelings.build(start_percentage: feelings_hash[feeling_id],percentage: feelings_hash[feeling_id],  feeling: Feeling.find(feeling_id))
       save
     end
 

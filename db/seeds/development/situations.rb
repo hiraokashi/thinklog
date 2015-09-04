@@ -9,7 +9,7 @@ situation = Situation.find(1)
 
 
 #そのときの気持ちid=1 #####################################################
-GivenTimeFeeling.create({:feeling=>Feeling.find(2), :situation=>Situation.find(1), :percentage=>80})
+GivenTimeFeeling.create({:feeling=>Feeling.find(2), :situation=>Situation.find(1), :percentage=>80, :start_percentage=>80})
 geiven_time_feeling1 = GivenTimeFeeling.find(1)
 
 #自動思考
@@ -27,7 +27,7 @@ AdaptiveThought.create({:automatic_thought=>automatic_thought1, :contents=>"ど�
 
 #そのときの気持ち　id=2####################################################
 
-GivenTimeFeeling.create({:feeling=>Feeling.find(5), :situation=>Situation.find(1),  :percentage=>60})
+GivenTimeFeeling.create({:feeling=>Feeling.find(5), :situation=>Situation.find(1),  :percentage=>60, :start_percentage=>60})
 geiven_time_feeling2 = GivenTimeFeeling.find(2)
 
 #自動思考

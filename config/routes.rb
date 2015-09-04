@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
 
+  get 'automatic_thoughts/think_unknown/:situation_id/:feeling_id/:percentage' => 'automatic_thoughts#think_unknown'
   get 'top/developers_and_contact' => 'top#developers_and_contact'
   get 'top/privacy_policy' => 'top#privacy_policy'
   get 'top/user_agreement' => 'top#user_agreement'
@@ -42,7 +43,7 @@ Rails.application.routes.draw do
 
   resource :cognitive_therapy do
     get 'therapy_start/:id' => 'cognitive_therapy#therapy_start'
-    get 'add_feeling/:id' => 'cognitive_therapy#add_feeling'
+    get 'add_feeling/:id/:situation_id' => 'cognitive_therapy#add_feeling'
     get 'add_automatic_thought/:given_time_feeling_id' => 'cognitive_therapy#add_automatic_thought'
     post 'save_data' => 'cognitive_therapy#save_data'
   end

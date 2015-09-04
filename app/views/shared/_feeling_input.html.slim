@@ -1,0 +1,14 @@
+
+div[style="width:150px;float:left;"]
+  .row.feeling-input[id="selected_feeling#{given_time_feeling.feeling.id}"]
+    .col-lg-12.col-md-12.col-sm-12.feeling_name
+      span.devider
+      div[style="width:80px; height:120px;margin: 0px auto;"]
+        h4[style="color:#ff6f69; text-align:center"]
+          = given_time_feeling.feeling.contents
+
+        - if read_only.nil?
+          input.dial[type="text" name="feelings[#{given_time_feeling.feeling.id}]" data-width="80" value=percentage]
+
+        - else
+          input.dial_ro[type="text" name="feelings[#{given_time_feeling.feeling.id}]" data-width="80" value=percentage]

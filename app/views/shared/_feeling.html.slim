@@ -1,14 +1,11 @@
-
-div[style="width:150px;float:left;"]
-  .row.feeling-input[id="selected_feeling#{feeling.id}"]
-    .col-lg-12.col-md-12.col-sm-12.feeling_name
-      span.devider
-      div[style="width:80px; height:120px;margin: 0px auto;"]
-        h4[style="color:#ff6f69; text-align:center"]
-          = feeling.contents
-
-        - if read_only.nil?
-          input.dial[type="text" name="feelings[#{feeling.id}]" data-width="80" value=percentage]
-
-        - else
-          input.dial_ro[type="text" name="feelings[#{feeling.id}]" data-width="80" value=percentage]
+= render partial: "shared/feeling_input", locals: {given_time_feeling: given_time_feeling, percentage: percentage, read_only: read_only}
+/ DBに存在するgiven_time_feelingかどうかで判断する
+- unless given_time_feeling.id.nil?
+  div[style="margin: 0 auto; width:50px; float:left;" id="go_step2_feeling#{given_time_feeling.feeling.id}"]
+    a.btn.btn-success.btn-xs.go_next_step.save_therapy_data[style="width:50px; margin-top:65px;"href="/automatic_thoughts/think/#{given_time_feeling.automatic_thought.id}" data-no-turbolink="true"]
+      i.fa.icon-arrow-right[style="text-align:center;font-size:20px;"]
+- else
+  div[style="margin: 0 auto; width:50px; float:left;"]
+    a.btn.btn-success.btn-xs.unknown_feeling_step2[id="unknown_feeling_step2#{given_time_feeling.feeling.id}" style="width:50px; margin-top:65px;"href="/automatic_thoughts/think_unknown/#{given_time_feeling.situation.id}/#{given_time_feeling.feeling.id}" data-no-turbolink="true"]
+      i.fa.icon-arrow-right[style="text-align:center;font-size:20px;"]
+div[style="clear:both;"]

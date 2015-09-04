@@ -1,3 +1,4 @@
-= render partial: "shared/feeling", locals: {feeling: @feeling,  percentage: '25', read_only: nil}
+= render partial: "shared/feeling", locals: {given_time_feeling: @given_time_feeling,  percentage: '25', read_only: nil}
 div[style="clear:both;"]
 = javascript_include_tag 'feeling_knob'
+= javascript_include_tag 'feeling_operation'

@@ -90,10 +90,11 @@ ActiveRecord::Schema.define(version: 20150603144746) do
   create_table "given_time_feelings", force: :cascade do |t|
     t.integer  "feeling_id"
     t.integer  "situation_id"
+    t.integer  "start_percentage"
     t.integer  "percentage"
-    t.integer  "status",       default: 0, null: false
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.integer  "status",           default: 0, null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   add_index "given_time_feelings", ["feeling_id"], name: "index_given_time_feelings_on_feeling_id", using: :btree

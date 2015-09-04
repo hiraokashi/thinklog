@@ -43,7 +43,7 @@ class AutomaticThoughtsController < ApplicationController
     respond_to do |format|
       if @automatic_thought.update(automatic_thought_params)
         @automatic_thought.update_distortion(params[:distortion_pattern])
-        @automatic_thought.given_time_feeling.update_percentage(params[:feelings])
+        #@automatic_thought.given_time_feeling.update_percentage(params[:feelings])
         format.html { redirect_to @automatic_thought, notice: 'Automatic thought was successfully updated.' }
         format.json { render :show, status: :ok, location: @automatic_thought }
       else
@@ -57,7 +57,7 @@ class AutomaticThoughtsController < ApplicationController
   def update_basis_and_rebuttal
     respond_to do |format|
       if @automatic_thought.update_basis_and_rebuttal(params[:basis], params[:rebuttal])
-        @automatic_thought.given_time_feeling.update_percentage(params[:feelings])
+        #@automatic_thought.given_time_feeling.update_percentage(params[:feelings])
         format.html { redirect_to @automatic_thought, notice: 'Automatic thought was successfully updated.' }
         format.json { render :show, status: :ok, location: @automatic_thought }
       else
@@ -100,6 +100,18 @@ class AutomaticThoughtsController < ApplicationController
     @distortion_ids = @automatic_thought.distortion_patterns.map {|distortion_pattern| distortion_pattern.cognitive_distortion.id}
     @automatic_thought.given_time_feeling.progress_step_2() #状態管理
 
+  end
+
+  #まだ登録されてない感情を保存して実行する
+  def think_unknown
+    #code
+    @user = current_user
+    feeling_id = params[:feeling_id]
+    percentage = params[:percentage]
+    @situation = Situation.find(params[:situation_id])
+    @given_time_feelings = @situation.given_time_feelings.build(start_percentage: percentage, percentage: percentage, feeling: Feeling.find(feeling_id), status: :step_2)
+    @situation.given_time_feelings << @given_time_feelings
+    redirect_to  action: 'think', id: @given_time_feelings.automatic_thought.id
   end
 
   #GET
