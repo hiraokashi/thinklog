@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   get 'automatic_thoughts/think_unknown/:situation_id/:feeling_id/:percentage' => 'automatic_thoughts#think_unknown'
   get 'top/developers_and_contact' => 'top#developers_and_contact'
+  get 'top/notation_based_on_trade_law' => 'top#notation_based_on_trade_law'
   get 'top/privacy_policy' => 'top#privacy_policy'
   get 'top/user_agreement' => 'top#user_agreement'
   get 'top/about' => 'top#about'

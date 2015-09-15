@@ -36,7 +36,7 @@ section#faq.page-block
         p
           | 感情
         a.btn.btn-primary.btn-block
-          = @automatic_thought.given_time_feeling.feeling.contents + "(" + @automatic_thought.given_time_feeling.percentage.to_s + "%)"
+          = @automatic_thought.given_time_feeling.feeling.contents + "(" + @automatic_thought.given_time_feeling.start_percentage.to_s + "%)"
         p
           | 発見した自動思考
         a.btn.btn-primary.btn-block
