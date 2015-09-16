@@ -40,6 +40,7 @@ class Situation < ActiveRecord::Base
       neutral_count[_hour] = (neutral_situations.select{|_situation| _situation.occured_time[9..10] == _hour}).size
       negative_count[_hour] = (negative_situations.select{|_situation| _situation.occured_time[9..10] == _hour}).size
     end
+
     collected.push(positive_count)
     collected.push(neutral_count)
     collected.push(negative_count)

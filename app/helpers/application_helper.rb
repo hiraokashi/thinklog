@@ -61,12 +61,13 @@ module ApplicationHelper
   end
 
   def current_mood(situation, status_i)
+    return "" if situation.nil?
     return "current_mood" if situation.mood_status == status_i
     return ""
   end
 
   def mood_face_size(situation, status_name)
-    logger.debug("situation.mood_status = " + situation.mood_status)
+    return "fa-4x" if situation.nil?
     return "fa-5x" if situation.mood_status == status_name
     return "fa-4x"
   end
