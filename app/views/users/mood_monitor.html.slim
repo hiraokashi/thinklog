@@ -33,7 +33,7 @@ section.page-block.color[style="margin-top: 50px;"]
 
 
           a.btn.btn-success.goto_record_situation[style=style_goto_record_situation_button(@recent_situation) href=link_goto_record_situation_button(@recent_situation) data-no-turbolink="true"]
-            | 出来事を記録する
+            | 思考を記録する
 
 section.page-block
   .container
@@ -75,7 +75,7 @@ section.page-block
             | 個のネガティブな気分を経験してきました。
 
           div
-            = link_to 'ネガティブな気分に取り組む', '/users/situations', :class => 'navbar-link', data: { no_turbolink: true }
+            = link_to 'ネガティブな気分のときの思考を記録する', '/users/situations', :class => 'navbar-link', data: { no_turbolink: true }
           .pie-chart
             canvas#moodTypeChart[width="260" height="260"]
             input#positive_percentage[type="hidden" name="positive_percentage" value=@mood_counts[0]]
@@ -100,7 +100,7 @@ section.page-block
           h3
             | ネガティブな気分の内訳
           div
-              = link_to 'ネガティブな気分に取り組む', '/users/situations', :class => 'navbar-link', data: { no_turbolink: true }
+              = link_to 'ネガティブな気分のときの思考を記録する', '/users/situations', :class => 'navbar-link', data: { no_turbolink: true }
           .pie-chart
             canvas#feelingTypeChart[width="260" height="260"]
 
